@@ -56,3 +56,73 @@ flight_data_master = flight_data_master[,-which(stringr::str_detect(colnames(fli
 save(flight_data_master, file = "data/flight_data_master.Rdata")
 save(interview_data_master, file = "data/interview_data_master.Rdata")
 
+##### PART 2: OBTAIN HARVEST AND EFFORT ESTIMATES
+
+# extract the unique dates of all openers
+u_dates = unique(lubridate::date(flight_data_master$start_time))
+
+# print a message
+cat("\nEstimating Harvest and Effort Estimates from Master Data Sets\n")
+cat("(This will take several minutes to run)\n")
+
+# containers
+effort_estimate_master = NULL
+harvest_estimate_master = NULL
+
+# loop through openers and generate harvest and effort estimates for each
+starttime = Sys.time()
+for (i in 1:length(u_dates)) {
+
+  # print a progress message
+  cat("\rOpener: ", as.character(u_dates[i]), " (", stringr::str_pad(i, width = nchar(length(u_dates)), pad = " "), "/", length(dirs), ")", sep = "")
+
+  # subset flight/interview data for this opener
+  flight_data_sub = subset(flight_data_master, lubridate::date(start_time) == u_dates[i])
+  interview_data_sub = subset(interview_data_master, lubridate::date(trip_start) == u_dates[i])
+
+  # produce effort estimate for this opener
+  effort_info = KuskoHarvEst::estimate_effort(
+    interview_data = interview_data_sub,
+    flight_data = flight_data_sub,
+    gear = "drift", method = "dbl_exp"
+  )
+
+  # combine effort estimates with those from other openers
+  tmp = c(effort_info$effort_est_stratum, total = effort_info$effort_est_total)
+  tmp = data.frame(date = u_dates[i], stratum = names(tmp), estimate = unname(tmp))
+  effort_estimate_master = rbind(effort_estimate_master, tmp); rm(tmp)
+
+  # obtain bootstrap harvest estimates
+  boot_out = KuskoHarvEst::bootstrap_harvest(
+    interview_data = interview_data_sub,
+    effort_info = effort_info,
+    gear = "drift",
+    n_boot = 1000,
+    stratify_interviews = TRUE
+  )
+
+  # summarize bootstrap samples by species and stratum
+  for (spp in c("chinook", "chum", "sockeye", "total")) {
+    for (strat in c("A", "B", "C", "D1", "total")) {
+      # extract the bootstrap samples for this species/stratum combo
+      boot_samples = subset(boot_out, stratum == strat)[,spp]
+
+      # calculate and round the summaries
+      tmp = c(mean = mean(boot_samples, na.rm = TRUE), sd = sd(boot_samples, na.rm = TRUE),
+              lwr95 = unname(quantile(boot_samples, 0.025, na.rm = TRUE)), upr95 = unname(quantile(boot_samples, 0.975, na.rm = TRUE)))
+      tmp[tmp == "NaN"] = NA
+      tmp = round(tmp)
+
+      # build data frame and combine with other estimates
+      tmp = data.frame(date = u_dates[i], species = spp, stratum = strat, quantity = names(tmp), estimate = unname(tmp))
+      harvest_estimate_master = rbind(harvest_estimate_master, tmp); rm(tmp)
+    }
+  }
+}
+stoptime = Sys.time()
+cat("\nEstimation Time Elapsed:", format(round(stoptime - starttime, 2)))
+
+# export these data objects
+# when package is installed, these are accessible using e.g., data(flight_data_master)
+save(effort_estimate_master, file = "data/effort_estimate_master.Rdata")
+save(harvest_estimate_master, file = "data/harvest_estimate_master.Rdata")
