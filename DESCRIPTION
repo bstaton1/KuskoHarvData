@@ -1,15 +1,26 @@
 Package: KuskoHarvData
-Title: What the Package Does (One Line, Title Case)
+Title: Data Collected by the Kuskokwim River In-season Harvest Monitoring Program
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Ben",
+           family = "Staton",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+           email = "bstaton.qes@gmail.com",
+           comment = c(ORCID = "0000-0002-2342-3482"))
+Description: Contains data collected by the Kuskokwim River 
+    in-season subsistence salmon harvest monitoring program. Included are 
+    data sets that contain raw interview and flight data and compiled estimates
+    of harvest and effort as well as meta-data for each subsistence fishing opportunity.
+    Data and estimates are included for drift net opportunities and interviews/aerial counts only
+    (set net data are omitted).
+License: MIT + file LICENSE
+Depends:
+    R (>= 3.5)
+Imports:
+    stringr (>= 1.3.1)
+    lubridate
+Remotes:
+    bstaton1/KuskoHarvEst
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
