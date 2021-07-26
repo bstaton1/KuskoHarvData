@@ -1,3 +1,8 @@
+# THIS SCRIPT COMBINES ALL RAW DATA FILES INTO MASTER DATA SETS AND PRODUCES HARVEST/EFFORT ESTIMATES
+# FOUR FILES TOTAL:
+# interview_data_master, flight_data_master
+# harvest_estimate_master, effort_estimate_master
+
 # clear the workspace
 rm(list = ls(all = TRUE))
 
