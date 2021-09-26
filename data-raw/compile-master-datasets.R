@@ -58,8 +58,8 @@ flight_data_master = flight_data_master[,-which(stringr::str_detect(colnames(fli
 
 # export these data objects
 # when package is installed, these are accessible using e.g., data(flight_data_master)
-save(flight_data_master, file = "data/flight_data_master.RData")
-save(interview_data_master, file = "data/interview_data_master.RData")
+save(flight_data_master, file = "data/flight_data_master.rda")
+save(interview_data_master, file = "data/interview_data_master.rda")
 
 ##### PART 2: OBTAIN HARVEST AND EFFORT ESTIMATES
 
@@ -129,5 +129,5 @@ cat("\nEstimation Time Elapsed:", format(round(stoptime - starttime, 2)))
 
 # export these data objects
 # when package is installed, these are accessible using e.g., data(flight_data_master)
-save(effort_estimate_master, file = "data/effort_estimate_master.RData")
-save(harvest_estimate_master, file = "data/harvest_estimate_master.RData")
+save(effort_estimate_master, file = "data/effort_estimate_master.rda")
+save(harvest_estimate_master, file = "data/harvest_estimate_master.rda")
