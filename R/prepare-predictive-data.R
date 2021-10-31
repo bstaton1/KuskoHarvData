@@ -95,8 +95,7 @@ prepare_predictor_vars = function(dates = NULL) {
   out$year = lubridate::year(out$date)
 
   # determine days past may 31st
-  ref_date = lubridate::as_datetime(paste0(lubridate::year(out$date), "-05-31"))
-  out$day = floor(as.numeric(lubridate::as.period(lubridate::interval(ref_date, out$date)), units = "day"))
+  out$day = to_days_past_may31(out$date)
 
   # determine the duration of allowed fishing that day
   out$hours_open = ceiling(as.numeric(lubridate::as.period(lubridate::interval(meta$start, meta$end)), units = "hours"))
