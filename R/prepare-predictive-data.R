@@ -79,6 +79,9 @@ prepare_response_vars = function(dates = NULL, comp_species = "chinook", cpt_spe
 #'   * `p_before_noon`: fraction of the allowed fishing hours that occurred before noon that day
 #'   * `total_btf_cpue`: daily catch-per-unit-effort from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
 #'   * `chinook_btf_comp`: daily proportional composition of Chinook salmon from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
+#'   * `mean_temp`: daily average air temperature, in degrees Fahrenheit
+#'   * `mean_relh`: daily average percent relative humidity
+#'   * `precip`: total daily precipitation, in inches
 #' @export
 
 prepare_predictor_vars = function(dates = NULL) {
@@ -122,7 +125,19 @@ prepare_predictor_vars = function(dates = NULL) {
   out$total_btf_cpue = sapply(out$date, function(d) summarize_btf(d, "total_cpue", plus_minus = 1))
   out$chinook_btf_comp = sapply(out$date, function(d) summarize_btf(d, "chinook_comp", plus_minus = 1))
 
-  ### PREDICTOR DATA TYPE #3: WEATHER-BASED QUANTITIES? ###
+  ### PREDICTOR DATA TYPE #3: WEATHER-BASED QUANTITIES ###
+
+  # load the weather data
+  data("weather_data_master", package = "KuskoHarvData", envir = environment())
+
+  # keep only dates that are within the harvest data
+  weather_dat = weather_data_master[weather_data_master$date %in% out$date,]
+
+  # keep only the average temperature, relh, and precipitation
+  weather_dat = weather_dat[,c("date", "mean_temp", "mean_relh", "precip")]
+
+  # combine with other variables
+  out = merge(out, weather_dat, by = "date")
 
   ### RETURN ONLY REQUESTED DATES
   if (is.null(dates)) {

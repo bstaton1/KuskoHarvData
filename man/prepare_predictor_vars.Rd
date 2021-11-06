@@ -22,6 +22,9 @@ A data frame with rows for individual dates and columns for:
 \item \code{p_before_noon}: fraction of the allowed fishing hours that occurred before noon that day
 \item \code{total_btf_cpue}: daily catch-per-unit-effort from the Bethel Test Fishery, averaged over a three day period where \code{date} is the second day
 \item \code{chinook_btf_comp}: daily proportional composition of Chinook salmon from the Bethel Test Fishery, averaged over a three day period where \code{date} is the second day
+\item \code{mean_temp}: daily average air temperature, in degrees Fahrenheit
+\item \code{mean_relh}: daily average percent relative humidity
+\item \code{precip}: total daily precipitation, in inches
 }
 }
 \description{
