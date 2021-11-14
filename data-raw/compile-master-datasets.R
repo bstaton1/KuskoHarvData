@@ -38,6 +38,9 @@ for (i in 1:length(dirs)) {
   # prepare raw interview data files for this opener
   interview_data = suppressWarnings(KuskoHarvEst::prepare_interviews(interview_files))
 
+  # add a UID variable to identify which opener the data came from
+  interview_data = cbind(UID = basename(dirs[i]), interview_data)
+
   # prepare raw flight data files for this opener: treat a bit different if missing
   flight_raw = read.csv(flight_file)
   if (all(is.na(flight_raw$start))) {
@@ -46,6 +49,9 @@ for (i in 1:length(dirs)) {
   } else {
     flight_data = KuskoHarvEst::prepare_flights(flight_file)
   }
+
+  # add a UID variable to identify which opener the data came from
+  flight_data = cbind(UID = basename(dirs[i]), flight_data)
 
   # combine prepared data for this opener with data from other openers
   interview_data_master = rbind(interview_data_master, interview_data)
@@ -63,8 +69,8 @@ save(interview_data_master, file = "data/interview_data_master.rda")
 
 ##### PART 2: OBTAIN HARVEST AND EFFORT ESTIMATES
 
-# extract the unique dates of all openers
-u_dates = unique(lubridate::date(flight_data_master$start_time))
+# extract the unique IDs of all openers
+UIDs = unique(interview_data_master$UID)
 
 # print a message
 cat("\nEstimating Harvest and Effort Estimates from Master Data Sets\n")
@@ -76,14 +82,14 @@ harvest_estimate_master = NULL
 
 # loop through openers and generate harvest and effort estimates for each
 starttime = Sys.time()
-for (i in 1:length(u_dates)) {
+for (i in 1:length(UIDs)) {
 
   # print a progress message
-  cat("\rOpener: ", as.character(u_dates[i]), " (", stringr::str_pad(i, width = nchar(length(u_dates)), pad = " "), "/", length(dirs), ")", sep = "")
+  cat("\rOpener: ", UIDs[i], " (", stringr::str_pad(i, width = nchar(length(UIDs)), pad = " "), "/", length(UIDs), ")", sep = "")
 
   # subset flight/interview data for this opener
-  flight_data_sub = subset(flight_data_master, lubridate::date(start_time) == u_dates[i])
-  interview_data_sub = subset(interview_data_master, lubridate::date(trip_start) == u_dates[i])
+  flight_data_sub = subset(flight_data_master, UID == UIDs[i])
+  interview_data_sub = subset(interview_data_master, UID == UIDs[i])
 
   # produce effort estimate for this opener
   effort_info = KuskoHarvEst::estimate_effort(
@@ -94,7 +100,7 @@ for (i in 1:length(u_dates)) {
 
   # combine effort estimates with those from other openers
   tmp = c(effort_info$effort_est_stratum, total = effort_info$effort_est_total)
-  tmp = data.frame(date = u_dates[i], stratum = names(tmp), estimate = unname(tmp))
+  tmp = data.frame(date = unique(lubridate::date(flight_data_sub$start_time)), stratum = names(tmp), estimate = unname(tmp))
   effort_estimate_master = rbind(effort_estimate_master, tmp); rm(tmp)
 
   # obtain bootstrap harvest estimates
@@ -119,7 +125,7 @@ for (i in 1:length(u_dates)) {
       tmp = round(tmp)
 
       # build data frame and combine with other estimates
-      tmp = data.frame(date = u_dates[i], species = spp, stratum = strat, quantity = names(tmp), estimate = unname(tmp))
+      tmp = data.frame(date = unique(na.omit(lubridate::date(interview_data_sub$trip_start))), species = spp, stratum = strat, quantity = names(tmp), estimate = unname(tmp))
       harvest_estimate_master = rbind(harvest_estimate_master, tmp); rm(tmp)
     }
   }
