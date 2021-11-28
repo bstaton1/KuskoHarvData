@@ -181,3 +181,36 @@ prepare_predictor_vars = function(dates = NULL) {
 
   return(out)
 }
+
+#' Prepare a data set containing predictor and response variables for regression modeling
+#'
+#' A wrapper around [prepare_predictor_vars()] and [prepare_response_vars()] for one-line
+#' regression data preparation.
+#'
+#' @inheritParams prepare_response_vars
+#' @param na.omit Logical; if `TRUE` (the default), any rows with an `NA` value for any variable will be discarded.
+#' @return A data frame with rows for individual dates and columns for several variables to be used in regression modeling.
+#'   See [prepare_predictor_vars()] and [prepare_response_vars()] for variable definitions.
+#' @export
+
+prepare_regression_data = function(dates = NULL, comp_species = "chinook", cpt_species = "total", include_transformed = TRUE, na.omit = TRUE) {
+
+  # prepare predictor variables
+  predictors = prepare_predictor_vars(dates = dates)
+
+  # prepare response variables
+  responses = prepare_response_vars(dates = dates, comp_species = comp_species, cpt_species = cpt_species, include_transformed = include_transformed)
+
+  # merge them by the date
+  out = merge(responses, predictors, by = "date")
+
+  # drop out NA rows if requested
+  if (na.omit) {
+    na_rows = unique(unname(unlist(apply(out, 2, function(x) which(is.na(x))))))
+    out = out[-na_rows,]
+    rownames(out) = NULL
+  }
+
+  # return the output data set
+  return(out)
+}
