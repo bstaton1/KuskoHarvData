@@ -13,7 +13,6 @@
 #'   Effort and catch rate variables will be log-transformed and composition variables will be logit-transformed.
 #' @return A data frame with rows for individual dates and columns for date, effort, and composition/catch rate for the requested species.
 #'   All values are calculated for drift nets only, using the mean harvest estimates, and all geographic strata.
-#' @export
 
 prepare_response_vars = function(dates = NULL, comp_species = "chinook", cpt_species = "total", include_transformed = TRUE) {
 
@@ -114,7 +113,6 @@ prepare_response_vars = function(dates = NULL, comp_species = "chinook", cpt_spe
 #'   * `mean_temp`: daily average air temperature, in degrees Fahrenheit
 #'   * `mean_relh`: daily average percent relative humidity
 #'   * `precip`: total daily precipitation, in inches
-#' @export
 
 prepare_predictor_vars = function(dates = NULL) {
 
