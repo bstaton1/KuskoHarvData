@@ -9,11 +9,12 @@
 #'   Accepted options are any combinations of `"chinook"`, `"chum"`, and `"sockeye"`
 #' @param cpt_species Character; a vector specifying the species to calculate catch rate (catch/trip) for.
 #'   Accepted options are any combinations of `"chinook"`, `"chum"`, `"sockeye"`, and `"total"`.
+#' @param include_transformed Logical; if `TRUE` (the default), additional columns will be returned on a transformed scale.
+#'   Effort and catch rate variables will be log-transformed and composition variables will be logit-transformed.
 #' @return A data frame with rows for individual dates and columns for date, effort, and composition/catch rate for the requested species.
 #'   All values are calculated for drift nets only, using the mean harvest estimates, and all geographic strata.
-#' @export
 
-prepare_response_vars = function(dates = NULL, comp_species = "chinook", cpt_species = "total") {
+prepare_response_vars = function(dates = NULL, comp_species = "chinook", cpt_species = "total", include_transformed = TRUE) {
 
   # load the data
   data("harvest_estimate_master", package = "KuskoHarvData", envir = environment())
@@ -58,6 +59,36 @@ prepare_response_vars = function(dates = NULL, comp_species = "chinook", cpt_spe
   # merge harvest-based and effort response variables
   response = merge(eff, merge(cpt, comp, by = "date"), by = "date")
 
+  # perform transformations if requested
+  if (include_transformed) {
+
+    # extract the date and log-transform effort
+    t_response = data.frame(
+      date = response$date,
+      log_effort = log(response$effort)
+    )
+
+    # extract the variable names of all catch rate variables
+    cpt_vars = colnames(response)[stringr::str_detect(colnames(response), "cpt")]
+
+    # extract the variable names of all species composition variables
+    comp_vars = colnames(response)[stringr::str_detect(colnames(response), "comp")]
+
+    # create a data frame with log-transformed catch rate variables
+    t_cpt = data.frame(log(response[,cpt_vars])); colnames(t_cpt) = paste0("log_", cpt_vars)
+
+    # create a data frame with logit-transformed composition variables
+    t_comp = data.frame(response[,comp_vars])
+    t_comp = as.data.frame(apply(t_comp, 2, qlogis))
+    colnames(t_comp) = paste0("logit_", comp_vars)
+
+    # combine these transformed variables into one data frame
+    t_response = cbind(t_response, t_cpt, t_comp)
+
+    # combine transformed variables with non-transformed variables
+    response = merge(response, t_response, by = "date")
+  }
+
   # return the response data set
   return(response)
 }
@@ -82,7 +113,6 @@ prepare_response_vars = function(dates = NULL, comp_species = "chinook", cpt_spe
 #'   * `mean_temp`: daily average air temperature, in degrees Fahrenheit
 #'   * `mean_relh`: daily average percent relative humidity
 #'   * `precip`: total daily precipitation, in inches
-#' @export
 
 prepare_predictor_vars = function(dates = NULL) {
 
@@ -147,5 +177,38 @@ prepare_predictor_vars = function(dates = NULL) {
   }
   out = subset(out, date %in% keep_dates)
 
+  return(out)
+}
+
+#' Prepare a data set containing predictor and response variables for regression modeling
+#'
+#' A wrapper around [prepare_predictor_vars()] and [prepare_response_vars()] for one-line
+#' regression data preparation.
+#'
+#' @inheritParams prepare_response_vars
+#' @param na.omit Logical; if `TRUE` (the default), any rows with an `NA` value for any variable will be discarded.
+#' @return A data frame with rows for individual dates and columns for several variables to be used in regression modeling.
+#'   See [prepare_predictor_vars()] and [prepare_response_vars()] for variable definitions.
+#' @export
+
+prepare_regression_data = function(dates = NULL, comp_species = "chinook", cpt_species = "total", include_transformed = TRUE, na.omit = TRUE) {
+
+  # prepare predictor variables
+  predictors = prepare_predictor_vars(dates = dates)
+
+  # prepare response variables
+  responses = prepare_response_vars(dates = dates, comp_species = comp_species, cpt_species = cpt_species, include_transformed = include_transformed)
+
+  # merge them by the date
+  out = merge(responses, predictors, by = "date")
+
+  # drop out NA rows if requested
+  if (na.omit) {
+    na_rows = unique(unname(unlist(apply(out, 2, function(x) which(is.na(x))))))
+    out = out[-na_rows,]
+    rownames(out) = NULL
+  }
+
+  # return the output data set
   return(out)
 }
