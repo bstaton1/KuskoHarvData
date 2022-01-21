@@ -25,6 +25,13 @@ dat$valid = lubridate::with_tz(dat$valid, "US/Alaska")
 # keep only records with in June and July
 dat = subset(dat, lubridate::month(valid) %in% c(6, 7))
 
+# add wind variables: suggested by G. Decossas
+# NWind: (+) winds from the north, (-) winds from south, magnitude implies wind strength
+# EWind: (+) winds from the east, (-) winds from the west, magnitude implies wind strength
+# These are vector legs of a right triangle, the hypotenuse is total wind speed
+dat$NWind = dat$sknt * cos(pi * dat$drct/180)
+dat$EWind = dat$sknt * sin(pi * dat$drct/180)
+
 # calculate daily summaries: mean temp, max temp, min_temp, mean relative humidity, total daily precipitation
 # there are many other variables that could be summarized
 mean_temp = tapply(dat$tmpf, lubridate::date(dat$valid), mean, na.rm = TRUE)
@@ -32,6 +39,16 @@ max_temp = tapply(dat$tmpf, lubridate::date(dat$valid), max, na.rm = TRUE)
 min_temp = tapply(dat$tmpf, lubridate::date(dat$valid), min, na.rm = TRUE)
 mean_relh = tapply(dat$relh, lubridate::date(dat$valid), min, na.rm = TRUE)
 precip = tapply(dat$p01i, lubridate::date(dat$valid), sum, na.rm = TRUE)
+mean_Nwind = tapply(dat$NWind, lubridate::date(dat$valid), mean, na.rm = TRUE)
+mean_Ewind = tapply(dat$EWind, lubridate::date(dat$valid), mean, na.rm = TRUE)
+mean_wind = tapply(dat$sknt, lubridate::date(dat$valid), mean, na.rm = TRUE)
+mean_gust = tapply(dat$gust, lubridate::date(dat$valid), mean, na.rm = TRUE)
+
+# x = subset(dat, lubridate::year(valid) == "2016")[,c("valid", "drct", "sknt", "NWind", "EWind", "gust")]
+# range(sqrt(x$NWind^2 + x$EWind^2) - x$sknt)
+# x$drct
+#
+# pairs(x[,c("NWind", "EWind", "sknt", "drct", "gust")], col = scales::alpha("grey20", 0.2))
 
 # combine these into a data frame
 weather_data_master = data.frame(
@@ -40,7 +57,11 @@ weather_data_master = data.frame(
   min_temp = min_temp,
   max_temp = max_temp,
   mean_relh = mean_relh,
-  precip = precip
+  precip = precip,
+  mean_Nwind = mean_Nwind,
+  mean_Ewind = mean_Ewind,
+  mean_wind = mean_wind,
+  mean_gust = mean_gust
 )
 
 # remove rownames
