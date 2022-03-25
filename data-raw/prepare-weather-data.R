@@ -32,6 +32,10 @@ dat = subset(dat, lubridate::month(valid) %in% c(6, 7))
 dat$NWind = dat$sknt * cos(pi * dat$drct/180)
 dat$EWind = dat$sknt * sin(pi * dat$drct/180)
 
+# gust is only reported if it is > 14knts (https://www.weather.gov/media/asos/aum-toc.pdf; sec 3.2.2.2a)
+# convert all NA values to zero
+dat$gust[is.na(dat$gust)] = 0
+
 # calculate daily summaries: mean temp, max temp, min_temp, mean relative humidity, total daily precipitation
 # there are many other variables that could be summarized
 mean_temp = tapply(dat$tmpf, lubridate::date(dat$valid), mean, na.rm = TRUE)
@@ -42,7 +46,7 @@ precip = tapply(dat$p01i, lubridate::date(dat$valid), sum, na.rm = TRUE)
 mean_Nwind = tapply(dat$NWind, lubridate::date(dat$valid), mean, na.rm = TRUE)
 mean_Ewind = tapply(dat$EWind, lubridate::date(dat$valid), mean, na.rm = TRUE)
 mean_wind = tapply(dat$sknt, lubridate::date(dat$valid), mean, na.rm = TRUE)
-mean_gust = tapply(dat$gust, lubridate::date(dat$valid), mean, na.rm = TRUE)
+max_gust = tapply(dat$gust, lubridate::date(dat$valid), max, na.rm = TRUE)
 
 # x = subset(dat, lubridate::year(valid) == "2016")[,c("valid", "drct", "sknt", "NWind", "EWind", "gust")]
 # range(sqrt(x$NWind^2 + x$EWind^2) - x$sknt)
@@ -61,7 +65,7 @@ weather_data_master = data.frame(
   mean_Nwind = mean_Nwind,
   mean_Ewind = mean_Ewind,
   mean_wind = mean_wind,
-  mean_gust = mean_gust
+  max_gust = max_gust
 )
 
 # remove rownames

@@ -164,7 +164,7 @@ prepare_predictor_vars = function(dates = NULL) {
   weather_dat = weather_data_master[weather_data_master$date %in% out$date,]
 
   # keep only the average temperature, relh, and precipitation
-  weather_dat = weather_dat[,c("date", "mean_temp", "mean_relh", "precip", "mean_Nwind", "mean_Ewind", "mean_wind", "mean_gust")]
+  weather_dat = weather_dat[,c("date", "mean_temp", "mean_relh", "precip", "mean_Nwind", "mean_Ewind", "mean_wind", "max_gust")]
 
   # combine with other variables
   out = merge(out, weather_dat, by = "date")
