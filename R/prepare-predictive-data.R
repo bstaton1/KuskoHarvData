@@ -215,6 +215,9 @@ prepare_regression_data = function(dates = NULL, na.omit = TRUE, ...) {
     rownames(out) = NULL
   }
 
+  # obtain the period of the season each record occurred in
+  out = cbind(period = get_period(out$day), out)
+
   # obtain total harvest by species
   out$chinook_harv = round(out$effort * out$total_cpt * out$chinook_comp)
   out$chum_harv = round(out$effort * out$total_cpt * out$chum_comp)
