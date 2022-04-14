@@ -25,12 +25,16 @@ dat$valid = lubridate::with_tz(dat$valid, "US/Alaska")
 # keep only records with in June and July
 dat = subset(dat, lubridate::month(valid) %in% c(6, 7))
 
+# convert wind speed in knots to speed in miles per hour
+# more readily accessible in-season
+dat$smph = dat$sknt * 0.868976
+
 # add wind variables: suggested by G. Decossas
 # NWind: (+) winds from the north, (-) winds from south, magnitude implies wind strength
 # EWind: (+) winds from the east, (-) winds from the west, magnitude implies wind strength
 # These are vector legs of a right triangle, the hypotenuse is total wind speed
-dat$NWind = dat$sknt * cos(pi * dat$drct/180)
-dat$EWind = dat$sknt * sin(pi * dat$drct/180)
+dat$NWind = round(dat$smph * cos(pi * dat$drct/180), digits = 1)
+dat$EWind = round(dat$smph * sin(pi * dat$drct/180), digits = 1)
 
 # gust is only reported if it is > 14knts (https://www.weather.gov/media/asos/aum-toc.pdf; sec 3.2.2.2a)
 # convert all NA values to zero
@@ -45,14 +49,8 @@ mean_relh = tapply(dat$relh, lubridate::date(dat$valid), min, na.rm = TRUE)
 precip = tapply(dat$p01i, lubridate::date(dat$valid), sum, na.rm = TRUE)
 mean_Nwind = tapply(dat$NWind, lubridate::date(dat$valid), mean, na.rm = TRUE)
 mean_Ewind = tapply(dat$EWind, lubridate::date(dat$valid), mean, na.rm = TRUE)
-mean_wind = tapply(dat$sknt, lubridate::date(dat$valid), mean, na.rm = TRUE)
+mean_wind = tapply(dat$smph, lubridate::date(dat$valid), mean, na.rm = TRUE)
 max_gust = tapply(dat$gust, lubridate::date(dat$valid), max, na.rm = TRUE)
-
-# x = subset(dat, lubridate::year(valid) == "2016")[,c("valid", "drct", "sknt", "NWind", "EWind", "gust")]
-# range(sqrt(x$NWind^2 + x$EWind^2) - x$sknt)
-# x$drct
-#
-# pairs(x[,c("NWind", "EWind", "sknt", "drct", "gust")], col = scales::alpha("grey20", 0.2))
 
 # combine these into a data frame
 weather_data_master = data.frame(
