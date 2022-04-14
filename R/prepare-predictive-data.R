@@ -14,7 +14,7 @@
 #' @return A data frame with rows for individual dates and columns for date, effort, and composition/catch rate for the requested species.
 #'   All values are calculated for drift nets only, using the mean harvest estimates, and all geographic strata.
 
-prepare_response_vars = function(dates = NULL, comp_species = "chinook", cpt_species = "total", include_transformed = TRUE) {
+prepare_response_vars = function(dates = NULL, comp_species = c("chinook", "chum", "sockeye"), cpt_species = "total", include_transformed = TRUE) {
 
   # load the data
   data("harvest_estimate_master", package = "KuskoHarvData", envir = environment())
@@ -110,6 +110,8 @@ prepare_response_vars = function(dates = NULL, comp_species = "chinook", cpt_spe
 #'   * `p_before_noon`: fraction of the allowed fishing hours that occurred before noon that day
 #'   * `total_btf_cpue`: daily catch-per-unit-effort from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
 #'   * `chinook_btf_comp`: daily proportional composition of Chinook salmon from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
+#'   * `chum_btf_comp`: daily proportional composition of chum salmon from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
+#'   * `sockeye_btf_comp`: daily proportional composition of sockeye salmon from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
 #'   * `mean_temp`: daily average air temperature, in degrees Fahrenheit
 #'   * `mean_relh`: daily average percent relative humidity
 #'   * `precip`: total daily precipitation, in inches
@@ -154,6 +156,8 @@ prepare_predictor_vars = function(dates = NULL) {
   ### PREDICTOR DATA TYPE #2: BTF-BASED QUANTITIES ###
   out$total_btf_cpue = sapply(out$date, function(d) summarize_btf(d, "total_cpue", plus_minus = 1))
   out$chinook_btf_comp = sapply(out$date, function(d) summarize_btf(d, "chinook_comp", plus_minus = 1))
+  out$chum_btf_comp = sapply(out$date, function(d) summarize_btf(d, "chum_comp", plus_minus = 1))
+  out$sockeye_btf_comp = sapply(out$date, function(d) summarize_btf(d, "sockeye_comp", plus_minus = 1))
 
   ### PREDICTOR DATA TYPE #3: WEATHER-BASED QUANTITIES ###
 
@@ -185,19 +189,21 @@ prepare_predictor_vars = function(dates = NULL) {
 #' A wrapper around [prepare_predictor_vars()] and [prepare_response_vars()] for one-line
 #' regression data preparation.
 #'
-#' @inheritParams prepare_response_vars
+#' @param dates Date object
 #' @param na.omit Logical; if `TRUE` (the default), any rows with an `NA` value for any variable will be discarded.
+#' @param ... Optional arguments passed to [prepare_response_vars()]
 #' @return A data frame with rows for individual dates and columns for several variables to be used in regression modeling.
 #'   See [prepare_predictor_vars()] and [prepare_response_vars()] for variable definitions.
+#'   In addition to those variables, there is also a `period` variable (see [get_period()]).
 #' @export
 
-prepare_regression_data = function(dates = NULL, comp_species = "chinook", cpt_species = "total", include_transformed = TRUE, na.omit = TRUE) {
+prepare_regression_data = function(dates = NULL, na.omit = TRUE, ...) {
 
   # prepare predictor variables
   predictors = prepare_predictor_vars(dates = dates)
 
   # prepare response variables
-  responses = prepare_response_vars(dates = dates, comp_species = comp_species, cpt_species = cpt_species, include_transformed = include_transformed)
+  responses = prepare_response_vars(dates = dates, ...)
 
   # merge them by the date
   out = merge(responses, predictors, by = "date")
@@ -208,6 +214,11 @@ prepare_regression_data = function(dates = NULL, comp_species = "chinook", cpt_s
     out = out[-na_rows,]
     rownames(out) = NULL
   }
+
+  # obtain total harvest by species
+  out$chinook_harv = round(out$effort * out$total_cpt * out$chinook_comp)
+  out$chum_harv = round(out$effort * out$total_cpt * out$chum_comp)
+  out$sockeye_harv = round(out$effort * out$total_cpt * out$sockeye_comp)
 
   # return the output data set
   return(out)
