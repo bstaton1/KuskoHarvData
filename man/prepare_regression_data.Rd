@@ -4,32 +4,19 @@
 \alias{prepare_regression_data}
 \title{Prepare a data set containing predictor and response variables for regression modeling}
 \usage{
-prepare_regression_data(
-  dates = NULL,
-  comp_species = "chinook",
-  cpt_species = "total",
-  include_transformed = TRUE,
-  na.omit = TRUE
-)
+prepare_regression_data(dates = NULL, na.omit = TRUE, ...)
 }
 \arguments{
-\item{dates}{Datetime; a vector of historical fishing dates to include.
-If \code{NULL} (the default) all dates included in the meta data set will be included.}
-
-\item{comp_species}{Character; a vector specifying the species to calculate proportional contribution for.
-Accepted options are any combinations of \code{"chinook"}, \code{"chum"}, and \code{"sockeye"}}
-
-\item{cpt_species}{Character; a vector specifying the species to calculate catch rate (catch/trip) for.
-Accepted options are any combinations of \code{"chinook"}, \code{"chum"}, \code{"sockeye"}, and \code{"total"}.}
-
-\item{include_transformed}{Logical; if \code{TRUE} (the default), additional columns will be returned on a transformed scale.
-Effort and catch rate variables will be log-transformed and composition variables will be logit-transformed.}
+\item{dates}{Date object}
 
 \item{na.omit}{Logical; if \code{TRUE} (the default), any rows with an \code{NA} value for any variable will be discarded.}
+
+\item{...}{Optional arguments passed to \code{\link[=prepare_response_vars]{prepare_response_vars()}}}
 }
 \value{
 A data frame with rows for individual dates and columns for several variables to be used in regression modeling.
 See \code{\link[=prepare_predictor_vars]{prepare_predictor_vars()}} and \code{\link[=prepare_response_vars]{prepare_response_vars()}} for variable definitions.
+In addition to those variables, there is also a \code{period} variable (see \code{\link[=get_period]{get_period()}}).
 }
 \description{
 A wrapper around \code{\link[=prepare_predictor_vars]{prepare_predictor_vars()}} and \code{\link[=prepare_response_vars]{prepare_response_vars()}} for one-line

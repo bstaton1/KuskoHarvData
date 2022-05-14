@@ -14,6 +14,10 @@ Variables include:
 \item \code{max_temp}: the maximum of all temperature measurements available on that date, in degrees Fahrenheit
 \item \code{mean_relh}: the average of all relative humidity measurements on that date, in percent of maximum
 \item \code{precip}: the sum of all precipitation measurements on that date, in inches
+\item \code{mean_wind}: the average of all daily wind speed measurements, in miles per hour
+\item \code{mean_Nwind}: the average of all daily wind measurements (in miles per hour) after converting to a northerly speed vector. See \code{\link[=get_Nwind]{get_Nwind()}} for details.
+\item \code{mean_Ewind}: the average of all daily wind measurements (in miles per hour) after converting to a easterly speed vector. See \code{\link[=get_Ewind]{get_Ewind()}}
+\item \code{max_gust}: the daily maximum of all gust measurements. Note that gusts only register if they exceed 14 knots.
 }
 }
 \source{

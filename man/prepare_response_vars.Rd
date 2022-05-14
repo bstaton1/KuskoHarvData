@@ -6,7 +6,7 @@
 \usage{
 prepare_response_vars(
   dates = NULL,
-  comp_species = "chinook",
+  comp_species = c("chinook", "chum", "sockeye"),
   cpt_species = "total",
   include_transformed = TRUE
 )
