@@ -1,0 +1,73 @@
+date.start,date.end,stratum,trip.start,trip.end,soak.hrs,length,gear,mesh,chinook,chum,sockeye,sheefish,whitefish,chinook.goal,chum.goal,sockeye.goal,type,village
+6/22/2022,6/22/2022,D2,10:00,18:00,7:00,28,Driftnet,5.375,28,5,5,1,0,2,2,2,Fish camp,Tuluksak
+6/22/2022,6/22/2022,D2,10:00,18:00,7:00,270,Driftnet,6,12,1,8,0,0,1,1,1,Fish camp,Tuluksak
+6/22/2022,6/22/2022,D2,8:00,18:00,7:00,25,Driftnet,5.125,20,0,16,0,0,2,1,1,Fish camp,Tuluksak
+6/22/2022,6/22/2022,D2,8:00,18:00,6:00,300,Driftnet,6,38,6,2,1,0,2,2,1,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,D2,8:00,18:00,6:00,300,Driftnet,6,28,6,2,1,0,2,1,1,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,D2,8:00,18:00,6:00,300,Driftnet,5.25,15,0,15,0,0,2,1,1,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,D2,11:00,18:00,6:00,270,Driftnet,5.25,4,3,6,0,0,1,1,1,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,D2,7:00,18:00,8:00,270,Driftnet,6,32,1,6,0,0,2,1,1,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,D2,8:00,18:00,7:00,270,Driftnet,6,30,3,25,0,0,1,1,2,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,D2,8:00,18:00,7:00,60,Driftnet,5.5,11,4,5,0,0,1,1,1,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,D2,10:00,18:00,7:00,60,Driftnet,5.875,7,1,0,0,0,1,1,1,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,D2,10:00,18:00,7:00,300,Driftnet,6,15,4,7,0,0,2,2,2,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,D2,10:00,18:00,7:00,50,Driftnet,6,16,0,4,0,0,2,1,1,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,D2,9:00,18:00,8:30,270,Driftnet,5.5,9,4,13,0,0,1,1,1,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,D2,10:00,17:00,5:00,210,Driftnet,5.375,12,2,7,0,0,2,1,2,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,D2,11:00,18:00,5:00,210,Driftnet,5,17,0,7,0,0,2,1,2,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,D2,11:00,18:00,5:00,300,Driftnet,6,10,0,4,0,0,2,1,1,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,C,14:00,17:45,2:30,150,Driftnet,6,22,0,3,0,0,2,1,2,Village,Kwethluk
+6/22/2022,6/22/2022,D2,11:00,18:00,5:00,900,Driftnet,5.75,22,7,0,0,0,2,2,1,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,C,6:00,14:45,5:45,150,Driftnet,5.875,53,0,50,0,0,4,1,1,Village,Kwethluk
+6/22/2022,6/22/2022,C,14:00,18:00,3:15,150,Driftnet,6,12,2,4,0,0,2,1,1,Village,Kwethluk
+6/22/2022,6/22/2022,D2,12:00,18:00,3:30,50,Driftnet,6,4,0,2,0,0,1,1,2,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,C,7:00,14:15,5:45,150,Driftnet,6,18,0,8,0,0,1,1,2,Village,Kwethluk
+6/22/2022,6/22/2022,D2,12:00,18:00,3:00,45,Driftnet,6,8,2,2,0,0,2,1,1,Community boat launch,Tuluksak
+6/22/2022,6/22/2022,C,11:00,15:00,2:45,150,Driftnet,6,35,0,13,0,0,2,1,2,Village,Kwethluk
+6/22/2022,6/22/2022,C,9:00,15:00,4:45,150,Driftnet,6,25,0,17,0,0,5,5,5,Village,Kwethluk
+6/22/2022,6/22/2022,C,6:15,11:30,4:00,150,Driftnet,6,79,0,25,0,1,5,5,5,Village,Kwethluk
+6/22/2022,6/22/2022,B,9:00,14:00,4:30,270,Driftnet,5,25,4,42,0,17,1,1,1,Village,Napakiak
+6/22/2022,6/22/2022,B,12:00,16:00,3:45,300,Driftnet,5.5,16,1,4,0,0,1,1,1,Fish camp,Napakiak
+6/22/2022,6/22/2022,B,9:00,14:00,4:30,150,Driftnet,5.5,20,0,25,0,0,1,1,1,Fish camp,Napakiak
+6/22/2022,6/22/2022,B,10:00,16:00,5:30,300,Driftnet,5.5,23,0,10,0,0,1,1,1,Fish camp,Napakiak
+6/22/2022,6/22/2022,B,6:30,15:00,7:30,300,Driftnet,6,48,1,29,0,2,1,1,1,Fish camp,Napakiak
+6/22/2022,6/22/2022,B,9:30,16:00,6:00,300,Driftnet,5.5,32,0,22,0,0,1,1,1,Village,Napakiak
+6/22/2022,6/22/2022,B,10:30,17:00,5:30,300,Driftnet,5.5,33,3,19,0,1,1,1,1,Fish camp,Napakiak
+6/22/2022,6/22/2022,B,9:00,15:00,5:30,300,Driftnet,5.5,29,0,14,0,0,1,1,1,Village,Napakiak
+6/22/2022,6/22/2022,B,8:00,16:00,7:30,300,Driftnet,6,26,0,8,0,0,1,1,1,Village,Napakiak
+6/22/2022,6/22/2022,B,10:00,15:00,4:45,300,Driftnet,5.5,16,0,26,0,0,1,1,1,Village,Napakiak
+6/22/2022,6/22/2022,B,6:00,15:00,8:45,150,Driftnet,6,35,0,25,0,0,3,1,3,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,7:00,12:00,4:45,150,Driftnet,6,16,0,20,0,0,3,1,3,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:00,11:00,4:45,150,Driftnet,6,47,0,40,0,1,5,1,5,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:30,17:30,10:00,150,Driftnet,6,30,0,5,0,0,3,1,3,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:00,11:30,5:15,150,Driftnet,6,33,2,7,0,1,1,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,14:00,17:00,2:45,150,Driftnet,6,10,2,5,0,0,1,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,7:00,11:30,4:15,150,Driftnet,6,12,4,30,0,0,1,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:30,15:30,8:45,150,Driftnet,6,59,4,13,0,0,3,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,7:30,14:00,6:15,150,Driftnet,6,18,1,16,0,0,1,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:30,15:30,8:45,150,Driftnet,6,50,0,20,0,0,2,1,2,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:30,16:00,9:15,150,Driftnet,6,32,0,15,0,0,2,1,2,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,7:30,14:00,6:15,150,Driftnet,6,8,5,35,0,0,1,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,14:00,17:00,2:45,150,Driftnet,6,10,0,5,0,0,1,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:00,11:00,4:45,150,Driftnet,6,28,3,16,0,0,2,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:30,14:00,7:15,150,Driftnet,6,22,3,38,0,0,2,1,2,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:00,14:00,7:45,150,Driftnet,6,26,0,20,0,0,2,1,2,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:30,9:00,2:15,150,Driftnet,6,13,0,8,0,0,1,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,7:00,12:00,4:45,150,Driftnet,6,20,0,22,0,0,4,1,3,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,7:00,13:00,5:45,150,Driftnet,6,24,0,18,0,0,2,1,2,Village,Napaskiak
+6/22/2022,6/22/2022,B,8:30,15:00,6:00,150,Driftnet,6,13,2,6,1,0,2,1,2,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,8:30,15:00,6:00,150,Driftnet,6,17,2,4,0,0,2,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:30,14:30,7:30,150,Driftnet,6,12,0,15,0,0,2,1,2,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,9:00,15:00,5:30,150,Driftnet,6,22,0,24,0,0,2,1,2,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,7:30,15:30,7:30,150,Driftnet,6,20,2,30,1,5,1,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,10:00,17:00,6:30,150,Driftnet,6,8,19,0,0,0,2,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:00,12:30,6:00,150,Driftnet,6,12,4,20,0,0,2,1,2,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,7:00,14:30,7:00,150,Driftnet,6,41,1,30,0,0,3,1,2,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:00,14:00,7:30,150,Driftnet,6,41,0,20,0,0,4,1,2,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,7:00,10:30,3:00,150,Driftnet,6,31,0,18,0,0,2,1,2,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,9:30,13:00,3:00,150,Driftnet,6,12,0,4,0,0,1,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,8:00,16:30,8:00,60,Setnet,5.5,7,0,21,0,0,1,1,1,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,6:30,11:00,4:00,150,Driftnet,6,25,0,20,0,0,3,1,2,Fish camp,Napaskiak
+6/22/2022,6/22/2022,B,14:00,16:00,1:30,150,Driftnet,5.5,8,1,20,0,0,4,1,4,Fish camp,Napaskiak
+6/22/2022,6/22/2022,C,7:30,16:30,8:30,300,Driftnet,6,73,2,20,0,0,5,1,3,Fish camp,Napaskiak
+6/22/2022,6/22/2022,A,4:30,14:00,5:00,300,Driftnet,5.625,30,1,31,0,0,3,1,2,Fish camp,NA
