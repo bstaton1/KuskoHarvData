@@ -21,6 +21,7 @@ Imports:
     lubridate,
     riem
 Remotes:
+    bstaton1/KuskoHarvUtils
     bstaton1/KuskoHarvEst
 Encoding: UTF-8
 LazyData: true
