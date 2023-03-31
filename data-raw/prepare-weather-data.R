@@ -33,8 +33,8 @@ dat$smph = dat$sknt * 0.868976
 # NWind: (+) winds from the north, (-) winds from south, magnitude implies wind strength
 # EWind: (+) winds from the east, (-) winds from the west, magnitude implies wind strength
 # These are vector legs of a right triangle, the hypotenuse is total wind speed
-dat$NWind = round(dat$smph * cos(pi * dat$drct/180), digits = 1)
-dat$EWind = round(dat$smph * sin(pi * dat$drct/180), digits = 1)
+dat$Nwind = KuskoHarvUtils::get_Nwind(speed = dat$smph, angle = dat$drct, digits = 1)
+dat$EWind = KuskoHarvUtils::get_Ewind(speed = dat$smph, angle = dat$drct, digits = 1)
 
 # gust is only reported if it is > 14knts (https://www.weather.gov/media/asos/aum-toc.pdf; sec 3.2.2.2a)
 # convert all NA values to zero

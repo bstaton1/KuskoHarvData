@@ -130,7 +130,7 @@ prepare_predictor_vars = function(dates = NULL) {
   out$year = lubridate::year(out$date)
 
   # determine days past may 31st
-  out$day = to_days_past_may31(out$date)
+  out$day = KuskoHarvUtils::to_days_past_may31(out$date)
 
   # determine the duration of allowed fishing that day
   out$hours_open = ceiling(as.numeric(lubridate::as.period(lubridate::interval(meta$start, meta$end)), units = "hours"))
@@ -194,7 +194,7 @@ prepare_predictor_vars = function(dates = NULL) {
 #' @param ... Optional arguments passed to [prepare_response_vars()]
 #' @return A data frame with rows for individual dates and columns for several variables to be used in regression modeling.
 #'   See [prepare_predictor_vars()] and [prepare_response_vars()] for variable definitions.
-#'   In addition to those variables, there is also a `period` variable (see [get_period()]).
+#'   In addition to those variables, there is also a `period` variable (see [KuskoHarvUtils::get_period()]).
 #' @export
 
 prepare_regression_data = function(dates = NULL, na.omit = TRUE, ...) {
@@ -216,7 +216,7 @@ prepare_regression_data = function(dates = NULL, na.omit = TRUE, ...) {
   }
 
   # obtain the period of the season each record occurred in
-  out = cbind(period = get_period(out$day), out)
+  out = cbind(period = KuskoHarvUtils::get_period(out$day), out)
 
   # obtain total harvest by species
   out$chinook_harv = round(out$effort * out$total_cpt * out$chinook_comp)
