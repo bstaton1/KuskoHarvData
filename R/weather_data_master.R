@@ -11,8 +11,10 @@
 #'   * `mean_relh`: the average of all relative humidity measurements on that date, in percent of maximum
 #'   * `precip`: the sum of all precipitation measurements on that date, in inches
 #'   * `mean_wind`: the average of all daily wind speed measurements, in miles per hour
-#'   * `mean_Nwind`: the average of all daily wind measurements (in miles per hour) after converting to a northerly speed vector. See [get_Nwind()] for details.
-#'   * `mean_Ewind`: the average of all daily wind measurements (in miles per hour) after converting to a easterly speed vector. See [get_Ewind()]
+#'   * `mean_Nwind`: the average of all daily wind measurements (in miles per hour) after converting to a northerly speed vector.
+#'       See [KuskoHarvUtils::get_Nwind()] for details.
+#'   * `mean_Ewind`: the average of all daily wind measurements (in miles per hour) after converting to a easterly speed vector. Calculated as
+#'       See [KuskoHarvUtils::get_Ewind()] for details.
 #'   * `max_gust`: the daily maximum of all gust measurements. Note that gusts only register if they exceed 14 knots.
 #' @note This data set will need to be updated regularly (at least annually).
 #'   To do this, execute the script `data-raw/prepare-weather-data.R` and rebuild the package.
