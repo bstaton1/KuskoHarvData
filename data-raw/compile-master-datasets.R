@@ -29,7 +29,7 @@ for (i in 1:length(dirs)) {
 
   # extract and categorize file names for this opener
   files = list.files(dirs[i], full.names = TRUE)
-  interview_files = files[stringr::str_detect(files, "ADFG|BBH|CBM|FC|LE")]
+  interview_files = files[stringr::str_detect(files, "ADFG|BBH|CBM|FC")]
   flight_file = files[stringr::str_detect(files, "Flight")]
 
   # prepare raw interview data files for this opener
