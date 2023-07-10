@@ -6,9 +6,6 @@
 # clear the workspace
 rm(list = ls(all = TRUE))
 
-# set the necessary KuskoHarvEst options
-options(soak_sd_cut = 3, net_length_cut = 350, catch_per_trip_cut = 0.1, central_fn = mean, pooling_threshold = 10)
-
 # extract the names of all openers with data
 dirs = dir("data-raw", full.names = TRUE, pattern = "_[0-9][0-9]$")
 
@@ -45,7 +42,7 @@ for (i in 1:length(dirs)) {
   flight_raw = read.csv(flight_file)
   if (all(is.na(flight_raw$start))) {
     flight_data = KuskoHarvEst::prepare_flights(flight_file)
-    flight_data$start_time = flight_data$end_time = KuskoHarvEst:::combine_datetime(flight_raw$date[1], "0:00")
+    flight_data$start_time = flight_data$end_time = KuskoHarvUtils::combine_datetime(flight_raw$date[1], "0:00")
   } else {
     flight_data = KuskoHarvEst::prepare_flights(flight_file)
   }
