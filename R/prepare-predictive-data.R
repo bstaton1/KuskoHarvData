@@ -139,8 +139,10 @@ prepare_predictor_vars = function(dates = NULL) {
   # determine if drift fishing occurred the previous day
   # e.g., if the order of days open is 6/12 12:00-23:59; 6/16 12:00-23:59; 6/17 0:00-12:00, then 6/17 is a not first day
   out$fished_yesterday = logical(nrow(out))
-  if (lubridate::date(meta$start[d]) == lubridate::date(meta$start[d-1]) + 1) {
-    meta$fished_yesterday[d] = TRUE
+  for (d in 2:nrow(out)) {
+    if (lubridate::date(meta$start[d]) == lubridate::date(meta$start[d-1]) + 1) {
+      out$fished_yesterday[d] = TRUE
+    }
   }
 
   # determine if the fishing day is a weekend day
