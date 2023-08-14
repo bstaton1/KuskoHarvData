@@ -15,9 +15,9 @@ A data frame with rows for individual dates and columns for:
 \itemize{
 \item \code{date}: the date of the fishing day
 \item \code{year}: the year of the fishing day
-\item \code{day}: days past May 31st in the year of fishing
+\item \code{day}: days past May 31st in the year of fishing (see \code{\link[KuskoHarvUtils:to_days_past_may31]{KuskoHarvUtils::to_days_past_may31()}})
 \item \code{hours_open}: the number of hours that day fishing was allowed that day
-\item \code{not_first_day}: \code{TRUE} if the day is not the first day of fishing in a consecutive set of fishing days
+\item \code{fished_yesterday}: \code{TRUE} if drift fishing occurred the previous day
 \item \code{weekend}: \code{TRUE} if the fishing day occurred on Saturday or Sunday
 \item \code{p_before_noon}: fraction of the allowed fishing hours that occurred before noon that day
 \item \code{total_btf_cpue}: daily catch-per-unit-effort from the Bethel Test Fishery, averaged over a three day period where \code{date} is the second day
@@ -32,4 +32,7 @@ A data frame with rows for individual dates and columns for:
 \description{
 Quickly summarizes various date/time and Bethel Test Fishery summaries
 for fitting in regression models.
+}
+\note{
+All Bethel Test Fishery variables obtained using \code{\link[=summarize_btf]{summarize_btf()}}.
 }

@@ -103,9 +103,9 @@ prepare_response_vars = function(dates = NULL, comp_species = c("chinook", "chum
 #' @return A data frame with rows for individual dates and columns for:
 #'   * `date`: the date of the fishing day
 #'   * `year`: the year of the fishing day
-#'   * `day`: days past May 31st in the year of fishing
+#'   * `day`: days past May 31st in the year of fishing (see [KuskoHarvUtils::to_days_past_may31()])
 #'   * `hours_open`: the number of hours that day fishing was allowed that day
-#'   * `not_first_day`: `TRUE` if the day is not the first day of fishing in a consecutive set of fishing days
+#'   * `fished_yesterday`: `TRUE` if drift fishing occurred the previous day
 #'   * `weekend`: `TRUE` if the fishing day occurred on Saturday or Sunday
 #'   * `p_before_noon`: fraction of the allowed fishing hours that occurred before noon that day
 #'   * `total_btf_cpue`: daily catch-per-unit-effort from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
@@ -115,6 +115,7 @@ prepare_response_vars = function(dates = NULL, comp_species = c("chinook", "chum
 #'   * `mean_temp`: daily average air temperature, in degrees Fahrenheit
 #'   * `mean_relh`: daily average percent relative humidity
 #'   * `precip`: total daily precipitation, in inches
+#' @note All Bethel Test Fishery variables obtained using [KuskoHarvData::summarize_btf()].
 
 prepare_predictor_vars = function(dates = NULL) {
 
@@ -135,13 +136,11 @@ prepare_predictor_vars = function(dates = NULL) {
   # determine the duration of allowed fishing that day
   out$hours_open = ceiling(as.numeric(lubridate::as.period(lubridate::interval(meta$start, meta$end)), units = "hours"))
 
-  # determine if the fishing day is not the first of the opener
+  # determine if drift fishing occurred the previous day
   # e.g., if the order of days open is 6/12 12:00-23:59; 6/16 12:00-23:59; 6/17 0:00-12:00, then 6/17 is a not first day
-  out$not_first_day = logical(nrow(out))
-  for (d in 2:nrow(out)) {
-    if(lubridate::date(meta$start[d]) == (lubridate::date(meta$start[d-1])+1) & lubridate::hour(meta$start[d]) == 0 & lubridate::minute(meta$start[d]) == 0) {
-      out$not_first_day[d] = TRUE
-    }
+  out$fished_yesterday = logical(nrow(out))
+  if (lubridate::date(meta$start[d]) == lubridate::date(meta$start[d-1]) + 1) {
+    meta$fished_yesterday[d] = TRUE
   }
 
   # determine if the fishing day is a weekend day
