@@ -1,6 +1,6 @@
 Package: KuskoHarvData
 Title: Data Collected by the Kuskokwim River In-season Harvest Monitoring Program
-Version: 2022.9990
+Version: 2023.9990
 Authors@R: 
     person(given = "Ben",
            family = "Staton",
