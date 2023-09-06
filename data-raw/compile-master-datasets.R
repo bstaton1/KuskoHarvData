@@ -33,7 +33,15 @@ for (i in 1:length(dirs)) {
   flight_file = files[stringr::str_detect(files, "Flight")]
 
   # prepare raw interview data files for this opener
-  interview_data = suppressWarnings(KuskoHarvEst::prepare_interviews(interview_files))
+  interview_data = suppressWarnings({
+    KuskoHarvEst::prepare_interviews(
+      input_files = interview_files,
+      include_salmon = c("chinook", "chum", "sockeye"),
+      include_nonsalmon = "none",
+      include_village = TRUE,
+      include_goals = FALSE
+    )
+  })
 
   # add a UID variable to identify which opener the data came from
   interview_data = cbind(UID = basename(dirs[i]), interview_data)
@@ -47,6 +55,9 @@ for (i in 1:length(dirs)) {
     flight_data = KuskoHarvEst::prepare_flights(flight_file)
   }
 
+  # discard D2 counts if present
+  flight_data = flight_data[,!stringr::str_detect(colnames(flight_data), "D2")]
+
   # add a UID variable to identify which opener the data came from
   flight_data = cbind(UID = basename(dirs[i]), flight_data)
 
@@ -58,6 +69,9 @@ for (i in 1:length(dirs)) {
 # remove information about set nets
 interview_data_master = subset(interview_data_master, gear == "drift"); rownames(interview_data_master) = NULL
 flight_data_master = flight_data_master[,-which(stringr::str_detect(colnames(flight_data_master), "_set"))]
+
+# remove information about geographic stratum D2
+interview_data_master = subset(interview_data_master, stratum != "D2"); rownames(interview_data_master) = NULL
 
 # export these data objects
 # when package is installed, these are accessible using e.g., data(flight_data_master)
