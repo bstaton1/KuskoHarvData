@@ -34,7 +34,7 @@ dat$smph = dat$sknt * 0.868976
 # EWind: (+) winds from the east, (-) winds from the west, magnitude implies wind strength
 # These are vector legs of a right triangle, the hypotenuse is total wind speed
 dat$Nwind = KuskoHarvUtils::get_Nwind(speed = dat$smph, angle = dat$drct, digits = 1)
-dat$EWind = KuskoHarvUtils::get_Ewind(speed = dat$smph, angle = dat$drct, digits = 1)
+dat$Ewind = KuskoHarvUtils::get_Ewind(speed = dat$smph, angle = dat$drct, digits = 1)
 
 # gust is only reported if it is > 14knts (https://www.weather.gov/media/asos/aum-toc.pdf; sec 3.2.2.2a)
 # convert all NA values to zero
@@ -47,8 +47,8 @@ max_temp = tapply(dat$tmpf, lubridate::date(dat$valid), max, na.rm = TRUE)
 min_temp = tapply(dat$tmpf, lubridate::date(dat$valid), min, na.rm = TRUE)
 mean_relh = tapply(dat$relh, lubridate::date(dat$valid), min, na.rm = TRUE)
 precip = tapply(dat$p01i, lubridate::date(dat$valid), sum, na.rm = TRUE)
-mean_Nwind = tapply(dat$NWind, lubridate::date(dat$valid), mean, na.rm = TRUE)
-mean_Ewind = tapply(dat$EWind, lubridate::date(dat$valid), mean, na.rm = TRUE)
+mean_Nwind = tapply(dat$Nwind, lubridate::date(dat$valid), mean, na.rm = TRUE)
+mean_Ewind = tapply(dat$Ewind, lubridate::date(dat$valid), mean, na.rm = TRUE)
 mean_wind = tapply(dat$smph, lubridate::date(dat$valid), mean, na.rm = TRUE)
 max_gust = tapply(dat$gust, lubridate::date(dat$valid), max, na.rm = TRUE)
 
