@@ -12,7 +12,7 @@ dat_list = lapply(yr_range, function(yr) {
   riem::riem_measures(
     station = "PABE",
     date_start = stringr::str_replace("YYYY-06-01", "YYYY", as.character(yr)),
-    date_end = stringr::str_replace("YYYY-08-02", "YYYY", as.character(yr))
+    date_end = stringr::str_replace("YYYY-08-31", "YYYY", as.character(yr))
   )
 })
 
@@ -22,8 +22,8 @@ dat = do.call(rbind, dat_list)
 # convert the time zone to AK
 dat$valid = lubridate::with_tz(dat$valid, "US/Alaska")
 
-# keep only records with in June and July
-dat = subset(dat, lubridate::month(valid) %in% c(6, 7))
+# keep only records with in June, July, and August
+dat = subset(dat, lubridate::month(valid) %in% c(6, 7, 8))
 
 # convert wind speed in knots to speed in miles per hour
 # more readily accessible in-season
