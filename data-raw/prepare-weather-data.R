@@ -2,13 +2,19 @@
 # AND PREPARES THE HOURLY MEASUREMENTS INTO DAILY SUMMARIES
 # IT SAVES A DATA SET CALLED 'weather_data_master' THAT IS SUPPLIED BY THIS PACKAGE
 
+# print a message
+cat("\nPreparing Weather Data Set\n")
+
+# create a data directory in package if it doesn't exist already
+if (!dir.exists("data")) dir.create("data")
+
 # determine which years to get weather data for
 # include only years for which in-season harvest monitoring data are available
 yr_range = sort(unique(as.numeric(substr(list.files("data-raw", pattern = "^[0-9]"), 1, 4))))
 
 # loop through years and query PABE weather data for June and July
 dat_list = lapply(yr_range, function(yr) {
-  cat("\rDownloading PABE Weather Data:", yr)
+  cat("\r  Downloading PABE Weather Data:", yr)
   riem::riem_measures(
     station = "PABE",
     date_start = stringr::str_replace("YYYY-06-01", "YYYY", as.character(yr)),
@@ -71,3 +77,4 @@ rownames(weather_data_master) = NULL
 
 # export the dataset
 save(weather_data_master, file = "data/weather_data_master.rda")
+cat("\nOutput File Saved: data/weather_data_master.rda\n")

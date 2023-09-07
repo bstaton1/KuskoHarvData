@@ -1,5 +1,11 @@
 # THIS SCRIPT FORMATS THE RAW META DATA FILE AND SAVES IT AS A DATA SET TO EXPORT
 
+# print a message
+cat("\nProcessing Opener Meta Data")
+
+# create a data directory in package if it doesn't exist already
+if (!dir.exists("data")) dir.create("data")
+
 # load the meta-data file
 meta = read.csv("data-raw/opener-metadata.csv")
 
@@ -12,3 +18,4 @@ meta = meta[,c("start", "end", "flights_planned", "flights_flown", "announcement
 
 # save the output
 save(meta, file = "data/meta.rda")
+cat("\n  Output File Saved: data/meta.rda")
