@@ -16,7 +16,7 @@ prepare_regression_data(dates = NULL, na.omit = TRUE, ...)
 \value{
 A data frame with rows for individual dates and columns for several variables to be used in regression modeling.
 See \code{\link[=prepare_predictor_vars]{prepare_predictor_vars()}} and \code{\link[=prepare_response_vars]{prepare_response_vars()}} for variable definitions.
-In addition to those variables, there is also a \code{period} variable (see \code{\link[=get_period]{get_period()}}).
+In addition to those variables, there is also a \code{period} variable (see \code{\link[KuskoHarvUtils:get_period]{KuskoHarvUtils::get_period()}}).
 }
 \description{
 A wrapper around \code{\link[=prepare_predictor_vars]{prepare_predictor_vars()}} and \code{\link[=prepare_response_vars]{prepare_response_vars()}} for one-line

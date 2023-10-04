@@ -1,0 +1,18 @@
+date,stratum,trip.start,trip.end,soak.hrs,length,gear,mesh,chinook,chum,sockeye,coho,sheefish,whitefish,chinook.goal,chum.goal,sockeye.goal,type,village
+8/3/2023,C,13:30,15:30,1:30,60,Setnet,6,0,0,0,22,0,0,5,5,5,Village,Kwethluk
+8/3/2023,C,12:30,14:30,1:30,60,Driftnet,5.875,1,2,0,7,0,0,5,5,2,Village,Kwethluk
+8/3/2023,B,13:30,14:30,0:45,75,Driftnet,5.5,0,0,4,33,0,0,5,5,4,Village,Napakiak
+8/3/2023,B,13:00,16:00,2:45,150,Driftnet,5.5,0,0,5,55,0,1,5,5,5,Village,Napakiak
+8/3/2023,B,19:00,19:45,0:45,150,Driftnet,5.5,0,0,1,26,0,0,5,5,5,Village,Napakiak
+8/3/2023,B,17:00,19:30,2:15,150,Driftnet,5.5,0,0,0,32,0,1,5,5,5,Village,Napakiak
+8/3/2023,B,16:00,18:00,1:45,150,Driftnet,5.375,0,0,2,32,0,0,5,5,5,Fish camp,Napakiak
+8/3/2023,B,11:00,13:45,2:30,150,Driftnet,5.5,0,0,5,62,0,0,5,5,5,Village,Napakiak
+8/3/2023,C,14:00,16:00,1:45,150,Driftnet,6,0,0,0,49,0,0,1,1,1,Village,Akiachak
+8/3/2023,D1,9:00,21:00,11:45,270,Setnet,4,0,6,6,6,0,20,4,3,3,Fish camp,Tuluksak
+8/3/2023,B,10:00,16:00,5:00,150,Driftnet,6,0,2,0,30,0,0,5,3,5,Village,Napaskiak
+8/3/2023,B,14:00,16:30,2:15,60,Driftnet,6,0,0,0,31,0,0,5,3,4,Fish camp,Napaskiak
+8/3/2023,B,11:00,14:00,2:30,150,Driftnet,6,0,0,0,29,0,0,5,2,5,Village,Napaskiak
+8/3/2023,B,9:00,12:00,2:30,150,Driftnet,6,0,1,0,28,0,0,5,3,5,Village,Napaskiak
+8/3/2023,B,9:30,14:30,4:30,150,Driftnet,6,0,0,0,19,0,0,5,2,5,Village,Napaskiak
+8/3/2023,B,10:00,13:30,3:00,150,Driftnet,6,0,2,0,21,0,0,5,2,5,Village,Napaskiak
+8/3/2023,B,15:00,19:30,4:00,60,Setnet,6,0,0,0,23,0,0,5,3,5,Village,Napaskiak

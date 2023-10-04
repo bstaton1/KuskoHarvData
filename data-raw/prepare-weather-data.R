@@ -2,17 +2,23 @@
 # AND PREPARES THE HOURLY MEASUREMENTS INTO DAILY SUMMARIES
 # IT SAVES A DATA SET CALLED 'weather_data_master' THAT IS SUPPLIED BY THIS PACKAGE
 
+# print a message
+cat("\nPreparing Weather Data Set\n")
+
+# create a data directory in package if it doesn't exist already
+if (!dir.exists("data")) dir.create("data")
+
 # determine which years to get weather data for
 # include only years for which in-season harvest monitoring data are available
 yr_range = sort(unique(as.numeric(substr(list.files("data-raw", pattern = "^[0-9]"), 1, 4))))
 
 # loop through years and query PABE weather data for June and July
 dat_list = lapply(yr_range, function(yr) {
-  cat("\rDownloading PABE Weather Data:", yr)
+  cat("\r  Downloading PABE Weather Data:", yr)
   riem::riem_measures(
     station = "PABE",
     date_start = stringr::str_replace("YYYY-06-01", "YYYY", as.character(yr)),
-    date_end = stringr::str_replace("YYYY-08-02", "YYYY", as.character(yr))
+    date_end = stringr::str_replace("YYYY-08-31", "YYYY", as.character(yr))
   )
 })
 
@@ -22,8 +28,8 @@ dat = do.call(rbind, dat_list)
 # convert the time zone to AK
 dat$valid = lubridate::with_tz(dat$valid, "US/Alaska")
 
-# keep only records with in June and July
-dat = subset(dat, lubridate::month(valid) %in% c(6, 7))
+# keep only records with in June, July, and August
+dat = subset(dat, lubridate::month(valid) %in% c(6, 7, 8))
 
 # convert wind speed in knots to speed in miles per hour
 # more readily accessible in-season
@@ -33,8 +39,8 @@ dat$smph = dat$sknt * 0.868976
 # NWind: (+) winds from the north, (-) winds from south, magnitude implies wind strength
 # EWind: (+) winds from the east, (-) winds from the west, magnitude implies wind strength
 # These are vector legs of a right triangle, the hypotenuse is total wind speed
-dat$NWind = round(dat$smph * cos(pi * dat$drct/180), digits = 1)
-dat$EWind = round(dat$smph * sin(pi * dat$drct/180), digits = 1)
+dat$Nwind = KuskoHarvUtils::get_Nwind(speed = dat$smph, angle = dat$drct, digits = 1)
+dat$Ewind = KuskoHarvUtils::get_Ewind(speed = dat$smph, angle = dat$drct, digits = 1)
 
 # gust is only reported if it is > 14knts (https://www.weather.gov/media/asos/aum-toc.pdf; sec 3.2.2.2a)
 # convert all NA values to zero
@@ -47,8 +53,8 @@ max_temp = tapply(dat$tmpf, lubridate::date(dat$valid), max, na.rm = TRUE)
 min_temp = tapply(dat$tmpf, lubridate::date(dat$valid), min, na.rm = TRUE)
 mean_relh = tapply(dat$relh, lubridate::date(dat$valid), min, na.rm = TRUE)
 precip = tapply(dat$p01i, lubridate::date(dat$valid), sum, na.rm = TRUE)
-mean_Nwind = tapply(dat$NWind, lubridate::date(dat$valid), mean, na.rm = TRUE)
-mean_Ewind = tapply(dat$EWind, lubridate::date(dat$valid), mean, na.rm = TRUE)
+mean_Nwind = tapply(dat$Nwind, lubridate::date(dat$valid), mean, na.rm = TRUE)
+mean_Ewind = tapply(dat$Ewind, lubridate::date(dat$valid), mean, na.rm = TRUE)
 mean_wind = tapply(dat$smph, lubridate::date(dat$valid), mean, na.rm = TRUE)
 max_gust = tapply(dat$gust, lubridate::date(dat$valid), max, na.rm = TRUE)
 
@@ -71,3 +77,4 @@ rownames(weather_data_master) = NULL
 
 # export the dataset
 save(weather_data_master, file = "data/weather_data_master.rda")
+cat("\nOutput File Saved: data/weather_data_master.rda\n")
