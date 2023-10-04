@@ -1,0 +1,98 @@
+date,stratum,trip.start,trip.end,soak.hrs,length,gear,mesh,chinook,chum,sockeye,coho,sheefish,whitefish,chinook.goal,chum.goal,sockeye.goal,type,village
+6/23/2023,B,7:00,11:30,4:15,150,Driftnet,6,25,40,40,0,0,2,1,1,1,Village,Napakiak
+6/23/2023,B,7:00,12:00,4:30,150,Driftnet,5.875,6,13,12,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,7:00,11:30,4:00,150,Driftnet,6,5,2,8,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,8:30,12:30,3:45,150,Driftnet,6,20,8,40,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,7:30,11:30,3:45,150,Driftnet,6,8,1,30,0,0,0,1,1,1,Village,Napakiak
+6/23/2023,B,8:00,12:30,4:00,150,Driftnet,5.5,4,20,20,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,7:00,12:30,5:15,150,Driftnet,5.5,11,20,20,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,8:00,13:00,4:45,150,Driftnet,5.5,5,10,8,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,7:30,12:30,4:45,35,Setnet,6,2,2,22,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,7:30,15:00,7:00,75,Driftnet,6,12,10,5,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,11:00,14:00,2:45,150,Driftnet,5.5,4,25,15,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,8:30,14:00,5:00,150,Driftnet,6,14,2,1,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,9:00,14:30,5:00,75,Driftnet,5.5,10,3,23,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,9:00,14:30,5:00,50,Driftnet,5.5,10,5,11,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,7:00,15:00,7:30,150,Driftnet,6,15,20,30,0,0,0,1,1,1,Village,Napakiak
+6/23/2023,B,9:00,16:00,6:30,150,Driftnet,6,6,15,10,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,7:00,17:00,9:00,150,Driftnet,6,20,15,35,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,7:00,16:30,9:00,150,Driftnet,6,23,25,30,0,0,0,1,1,1,Community boat launch,Napakiak
+6/23/2023,B,8:00,17:30,9:00,150,Driftnet,5.5,26,3,14,0,0,0,1,1,1,Fish camp,Napakiak
+6/23/2023,B,9:00,18:00,8:30,150,Driftnet,5.875,12,13,27,0,0,0,1,1,1,Fish camp,Napakiak
+6/23/2023,B,10:00,18:30,8:00,150,Driftnet,6,14,19,28,0,0,0,1,1,1,Fish camp,Napakiak
+6/23/2023,D2,7:00,19:00,3:00,270,Driftnet,6,4,7,0,0,0,1,1,1,1,Community boat launch,Tuluksak
+6/23/2023,C,15:30,16:00,0:15,30,Driftnet,5.875,1,0,0,0,0,0,1,1,1,Village,Kwethluk
+6/23/2023,D1,7:00,19:00,3:00,270,Driftnet,5.875,30,10,10,0,0,0,2,2,2,Fish camp,Tuluksak
+6/23/2023,C,8:00,14:30,6:15,30,Setnet,5.875,3,0,0,0,0,0,1,1,1,Village,Kwethluk
+6/23/2023,C,7:30,13:45,5:45,150,Driftnet,6,9,1,30,0,0,0,2,1,3,Village,Kwethluk
+6/23/2023,D1,7:00,19:00,10:00,270,Setnet,6,8,10,10,0,0,0,1,1,1,Village,Tuluksak
+6/23/2023,C,7:00,12:00,4:00,150,Driftnet,6,15,4,2,0,0,0,1,1,1,Village,Kwethluk
+6/23/2023,D1,7:00,19:00,10:00,270,Setnet,6,8,10,10,0,0,0,1,1,1,Village,Tuluksak
+6/23/2023,C,7:00,13:00,4:15,150,Driftnet,6,4,2,15,0,0,0,1,1,1,Village,Kwethluk
+6/23/2023,D1,7:00,19:00,3:00,210,Driftnet,5.5,6,30,2,0,2,0,1,1,1,Fish camp,Tuluksak
+6/23/2023,C,7:00,19:00,11:00,270,Driftnet,6,30,20,20,0,0,0,1,1,1,Fish camp,Akiachak
+6/23/2023,C,7:00,12:00,4:30,270,Driftnet,6,25,2,11,0,0,0,1,1,1,Fish camp,Akiachak
+6/23/2023,D1,7:00,19:00,8:00,210,Driftnet,5.875,80,40,30,0,0,0,5,5,5,Fish camp,Tuluksak
+6/23/2023,C,14:30,16:00,1:00,270,Driftnet,5.75,3,6,10,0,0,0,1,1,1,Fish camp,Akiachak
+6/23/2023,C,8:00,17:30,9:00,270,Driftnet,5.75,10,12,10,0,0,0,1,1,1,Fish camp,Akiachak
+6/23/2023,C,7:00,17:30,9:30,270,Driftnet,5.75,28,8,8,0,0,0,1,1,1,Fish camp,Akiachak
+6/23/2023,C,9:00,11:00,1:45,270,Driftnet,6,3,3,12,0,0,0,1,1,1,Fish camp,Akiachak
+6/23/2023,C,7:00,17:30,8:00,270,Driftnet,6,15,12,5,0,0,0,1,1,1,Fish camp,Akiachak
+6/23/2023,C,8:00,11:00,2:45,270,Driftnet,6,14,12,9,0,0,0,1,1,2,Village,Akiachak
+6/23/2023,C,7:00,18:00,10:30,150,Driftnet,6,64,20,40,0,0,0,2,2,3,Village,Akiachak
+6/23/2023,C,10:00,17:00,5:30,270,Driftnet,6,4,14,14,0,0,0,1,1,1,Village,Akiachak
+6/23/2023,C,7:00,18:00,10:30,270,Driftnet,6,8,4,58,0,1,0,1,1,2,Village,Akiachak
+6/23/2023,C,7:00,15:00,4:30,270,Driftnet,6,5,44,44,0,0,0,1,2,2,Village,Akiachak
+6/23/2023,C,7:00,16:00,8:30,270,Driftnet,6,8,14,14,0,0,0,1,1,1,Village,Akiachak
+6/23/2023,C,7:15,18:00,7:30,150,Driftnet,6,17,12,12,0,0,0,2,2,1,Village,Kwethluk
+6/23/2023,C,7:00,13:00,3:00,150,Driftnet,5.75,10,10,15,0,0,0,1,1,2,Village,Kwethluk
+6/23/2023,C,11:00,16:45,4:30,150,Driftnet,6,8,8,12,0,0,0,1,1,1,Village,Kwethluk
+6/23/2023,C,7:15,18:30,10:00,150,Driftnet,6,14,2,1,0,0,0,1,1,1,Village,Kwethluk
+6/23/2023,C,7:00,18:30,11:00,150,Driftnet,6,21,13,15,0,0,0,3,3,3,Village,Kwethluk
+6/23/2023,C,10:30,17:00,5:00,150,Driftnet,6,9,3,5,0,0,0,1,1,1,Village,Kwethluk
+6/23/2023,C,7:00,16:00,5:30,150,Driftnet,6,20,15,14,0,0,0,2,1,2,Village,Kwethluk
+6/23/2023,C,9:15,13:45,4:00,150,Driftnet,5.875,18,10,12,0,0,0,2,2,2,Village,Kwethluk
+6/23/2023,C,7:15,15:00,4:15,150,Driftnet,6,43,22,16,0,0,0,4,4,4,Village,Kwethluk
+6/23/2023,C,7:00,18:45,11:00,270,Driftnet,6,30,41,40,0,0,0,1,1,1,Village,Akiachak
+6/23/2023,C,7:00,10:00,2:45,270,Driftnet,6,10,5,44,0,0,0,1,1,2,Village,Akiachak
+6/23/2023,C,7:00,19:00,11:30,270,Driftnet,6,10,25,46,0,1,0,1,1,3,Village,Akiachak
+6/23/2023,C,7:00,9:00,2:00,150,Driftnet,6,50,70,110,0,0,0,3,3,3,Village,Akiachak
+6/23/2023,C,7:00,19:00,11:00,270,Driftnet,6,50,14,14,0,0,0,3,1,2,Village,Akiachak
+6/23/2023,C,7:00,19:00,11:30,150,Driftnet,6,14,5,40,0,0,0,1,1,1,Village,Akiachak
+6/23/2023,C,7:00,14:00,6:30,150,Driftnet,6,12,30,60,0,0,0,1,1,3,Village,Akiachak
+6/23/2023,C,17:30,19:30,1:00,270,Driftnet,6,0,0,6,0,0,0,1,1,1,Village,Akiachak
+6/23/2023,C,7:00,12:00,4:45,270,Driftnet,6,13,10,23,0,0,0,1,1,1,Village,Akiachak
+6/23/2023,C,8:00,12:00,3:45,150,Driftnet,6,10,20,20,0,1,1,1,1,1,Village,Akiachak
+6/23/2023,C,7:00,10:00,2:45,150,Driftnet,6,2,5,43,0,0,0,1,1,3,Village,Akiachak
+6/23/2023,C,7:00,11:00,3:45,150,Driftnet,6,26,17,14,0,0,0,1,1,1,Village,Akiachak
+6/23/2023,B,7:00,16:00,8:30,150,Driftnet,6,16,4,17,0,0,0,2,1,1,Village,Napaskiak
+6/23/2023,B,7:30,17:00,9:00,150,Driftnet,6,15,0,16,0,0,0,2,1,1,Village,Napaskiak
+6/23/2023,B,8:30,13:00,4:00,150,Driftnet,6,10,14,42,0,0,0,2,1,2,Village,Napaskiak
+6/23/2023,B,14:00,18:30,4:00,150,Driftnet,6,9,10,4,0,0,0,2,1,1,Village,Napaskiak
+6/23/2023,B,7:00,16:30,9:00,150,Driftnet,6,12,12,24,0,0,0,2,1,2,Village,Napaskiak
+6/23/2023,B,7:30,11:00,3:00,150,Driftnet,6,10,3,6,0,0,0,1,1,1,Village,Napaskiak
+6/23/2023,B,7:00,18:00,10:30,150,Driftnet,6,15,11,40,0,0,0,2,1,3,Village,Napaskiak
+6/23/2023,B,7:30,16:00,8:00,150,Driftnet,6,10,6,20,0,1,0,3,1,3,Village,Napaskiak
+6/23/2023,B,8:00,17:30,8:45,150,Driftnet,6,30,5,25,0,0,0,3,1,2,Village,Napaskiak
+6/23/2023,B,7:00,18:00,10:30,150,Driftnet,6,7,0,45,0,0,0,2,1,3,Village,Napaskiak
+6/23/2023,B,18:00,19:00,0:45,150,Driftnet,6,2,1,1,0,0,0,1,1,1,Village,Napaskiak
+6/23/2023,B,8:00,14:00,5:30,150,Driftnet,6,5,0,20,0,1,0,1,1,1,Village,Napaskiak
+6/23/2023,B,7:30,17:00,9:00,150,Driftnet,6,7,0,20,0,0,0,2,1,2,Village,Napaskiak
+6/23/2023,B,8:00,12:30,4:00,150,Driftnet,6,7,7,11,0,0,0,2,1,1,Village,Napaskiak
+6/23/2023,B,7:00,16:30,9:00,150,Driftnet,6,16,12,13,0,0,0,2,1,2,Village,Napaskiak
+6/23/2023,B,7:15,12:00,4:30,150,Driftnet,6,14,3,11,0,0,0,2,1,2,Village,Napaskiak
+6/23/2023,B,7:00,15:00,7:30,150,Driftnet,6,13,7,16,0,0,0,2,1,3,Village,Napaskiak
+6/23/2023,B,7:30,18:00,10:00,150,Driftnet,6,11,10,19,0,0,0,2,1,2,Village,Napaskiak
+6/23/2023,B,9:00,18:30,8:30,150,Driftnet,6,35,10,45,0,0,0,3,1,3,Village,Napaskiak
+6/23/2023,A,9:00,18:30,8:30,300,Driftnet,6,20,8,12,0,1,0,2,1,2,Village,Tuntutuliak
+6/23/2023,B,7:30,16:15,8:30,300,Driftnet,6,9,6,22,0,0,0,2,2,4,Fish camp,Napaskiak
+6/23/2023,B,8:15,17:30,9:00,300,Driftnet,6,5,7,19,0,0,0,1,2,3,Fish camp,Napaskiak
+6/23/2023,B,11:30,16:45,5:00,300,Driftnet,6,7,5,12,0,0,0,3,1,2,Village,Napaskiak
+6/23/2023,B,10:00,18:30,8:15,300,Driftnet,6,11,11,24,0,0,0,4,3,3,Village,Napaskiak
+6/23/2023,B,12:15,18:00,5:30,300,Driftnet,6,8,9,15,0,0,0,2,1,3,Village,Napaskiak
+6/23/2023,B,15:00,18:45,3:30,300,Driftnet,6,6,8,9,0,0,0,1,2,1,Village,Napaskiak
+6/23/2023,D1,7:00,19:00,10:00,150,Driftnet,6,46,2,6,0,0,0,3,1,1,Fish camp,Tuluksak
+6/23/2023,D1,7:00,19:00,10:00,150,Driftnet,6,46,0,4,0,1,9,1,1,1,Village,Tuluksak
+6/23/2023,D1,7:00,19:00,10:00,150,Driftnet,6,52,6,6,0,0,0,1,1,1,Fish camp,Tuluksak
+6/23/2023,D1,7:00,19:00,10:00,150,Driftnet,5.875,20,0,12,0,0,0,1,1,1,Fish camp,Tuluksak
+6/23/2023,D1,7:00,19:00,10:00,150,Driftnet,5.875,2,5,6,0,0,0,1,1,1,Fish camp,Tuluksak

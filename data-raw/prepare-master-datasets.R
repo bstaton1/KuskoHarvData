@@ -19,13 +19,13 @@ interview_data_master = NULL
 flight_data_master = NULL
 
 # print a message
-cat("\nProcessing Raw Data Files into Master Data Sets\n")
+cat("\nPreparing Raw Data Files into Master Data Sets\n")
 
 # loop through openers
 for (i in 1:length(dirs)) {
 
   # print a progress message
-  cat("\rOpener: ", basename(dirs[i]), " (", stringr::str_pad(i, width = nchar(length(dirs)), pad = " "), "/", length(dirs), ")", sep = "")
+  cat("\r  Opener: ", basename(dirs[i]), " (", stringr::str_pad(i, width = nchar(length(dirs)), pad = " "), "/", length(dirs), ")", sep = "")
 
   # extract and categorize file names for this opener
   files = list.files(dirs[i], full.names = TRUE)
@@ -33,7 +33,15 @@ for (i in 1:length(dirs)) {
   flight_file = files[stringr::str_detect(files, "Flight")]
 
   # prepare raw interview data files for this opener
-  interview_data = suppressWarnings(KuskoHarvEst::prepare_interviews(interview_files))
+  interview_data = suppressWarnings({
+    KuskoHarvEst::prepare_interviews(
+      input_files = interview_files,
+      include_salmon = c("chinook", "chum", "sockeye"),
+      include_nonsalmon = "none",
+      include_village = TRUE,
+      include_goals = FALSE
+    )
+  })
 
   # add a UID variable to identify which opener the data came from
   interview_data = cbind(UID = basename(dirs[i]), interview_data)
@@ -47,6 +55,9 @@ for (i in 1:length(dirs)) {
     flight_data = KuskoHarvEst::prepare_flights(flight_file)
   }
 
+  # discard D2 counts if present
+  flight_data = flight_data[,!stringr::str_detect(colnames(flight_data), "D2")]
+
   # add a UID variable to identify which opener the data came from
   flight_data = cbind(UID = basename(dirs[i]), flight_data)
 
@@ -59,10 +70,15 @@ for (i in 1:length(dirs)) {
 interview_data_master = subset(interview_data_master, gear == "drift"); rownames(interview_data_master) = NULL
 flight_data_master = flight_data_master[,-which(stringr::str_detect(colnames(flight_data_master), "_set"))]
 
+# remove information about geographic stratum D2
+interview_data_master = subset(interview_data_master, stratum != "D2"); rownames(interview_data_master) = NULL
+
 # export these data objects
 # when package is installed, these are accessible using e.g., data(flight_data_master)
 save(flight_data_master, file = "data/flight_data_master.rda")
 save(interview_data_master, file = "data/interview_data_master.rda")
+cat("\n  Output File Saved: data/flight_data_master.rda")
+cat("\n  Output File Saved: data/interview_data_master.rda")
 
 ##### PART 2: OBTAIN HARVEST AND EFFORT ESTIMATES
 
@@ -70,8 +86,8 @@ save(interview_data_master, file = "data/interview_data_master.rda")
 UIDs = unique(interview_data_master$UID)
 
 # print a message
-cat("\nEstimating Harvest and Effort Estimates from Master Data Sets\n")
-cat("(This will take several minutes to run)\n")
+cat("\nRecompiling Harvest and Effort Estimates")
+cat("\n  (**This will take several minutes to run**)\n")
 
 # containers
 effort_estimate_master = NULL
@@ -82,7 +98,7 @@ starttime = Sys.time()
 for (i in 1:length(UIDs)) {
 
   # print a progress message
-  cat("\rOpener: ", UIDs[i], " (", stringr::str_pad(i, width = nchar(length(UIDs)), pad = " "), "/", length(UIDs), ")", sep = "")
+  cat("\r  Opener: ", UIDs[i], " (", stringr::str_pad(i, width = nchar(length(UIDs)), pad = " "), "/", length(UIDs), ")", sep = "")
 
   # subset flight/interview data for this opener
   flight_data_sub = subset(flight_data_master, UID == UIDs[i])
@@ -128,9 +144,11 @@ for (i in 1:length(UIDs)) {
   }
 }
 stoptime = Sys.time()
-cat("\nEstimation Time Elapsed:", format(round(stoptime - starttime, 2)))
+cat("\n  Estimation Time Elapsed:", format(round(stoptime - starttime, 2)))
 
 # export these data objects
 # when package is installed, these are accessible using e.g., data(flight_data_master)
 save(effort_estimate_master, file = "data/effort_estimate_master.rda")
 save(harvest_estimate_master, file = "data/harvest_estimate_master.rda")
+cat("\n  Output File Saved: data/effort_estimate_master.rda")
+cat("\n  Output File Saved: data/harvest_estimate_master.rda")

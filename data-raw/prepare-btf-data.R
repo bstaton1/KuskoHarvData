@@ -1,6 +1,12 @@
 # THIS SCRIPT PREPARES THE RAW BTF CPUE DATA FILE FOR USE BY OTHER FUNCTIONS IN THE PACKAGE
 # IT SAVES A DATA SET CALLED 'btf_master' THAT IS SUPPLIED BY THIS PACKAGE
 
+# print a message
+cat("\nPreparing Bethel Test Fishery Data Set")
+
+# create a data directory in package if it doesn't exist already
+if (!dir.exists("data")) dir.create("data")
+
 # load in the raw BTF data
 dat = read.csv("data-raw/PUB_Bethel Test Fish - Daily CPUE.csv")
 
@@ -68,3 +74,4 @@ btf_master = dat; rm(dat)
 # export these data objects
 # when package is installed, this data set is accessible using data(btf_master)
 save(btf_master, file = "data/btf_master.rda")
+cat("\n  Output File Saved: data/btf_master.rda")
