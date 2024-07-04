@@ -1,7 +1,7 @@
-# KuskoHarvData
+# KuskoHarvData <img src="man/figures/sticker/KuskoHarvData-logo.png" align="right" height=200px/>
 
 > R package that provides easy access to data collected by the Kuskokwim River in-season subsistence salmon harvest monitoring program. Includes compiled estimates of harvest (by species and area) and effort (by area) for each drift net subsistence fishing opportunity (estimates generated using the '[KuskoHarvEst](https://github.com/bstaton1/KuskoHarvEst)' R package).
-
+>
 > Prior to the construction of this package, these data had been stored in separate places and in various formats. This new standardized and comprehensive format facilitates analyses that may provide greater insights about the behavior of this fishery during short-duration block harvest periods. 
 
 ## Installation
