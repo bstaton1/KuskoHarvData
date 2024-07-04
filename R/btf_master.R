@@ -10,7 +10,7 @@
 #'   * `cpue`: the daily value of catch-per-unit-effort
 #'   * `ccpue`: the cumulative value of catch-per-unit effort
 #' @note This data set will need to be updated regularly (at least annually).
-#'   It can be found on (this ADF&G website)[https://www.adfg.alaska.gov/index.cfm?adfg=commercialbyareakuskokwim.btf].
+#'   It can be found on the [ADF&G Bethel Test Fishery website](https://www.adfg.alaska.gov/index.cfm?adfg=commercialbyareakuskokwim.btf).
 #'
 
 "btf_master"
