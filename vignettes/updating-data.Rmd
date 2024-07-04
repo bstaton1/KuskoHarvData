@@ -28,6 +28,7 @@ background-color: grey;
 
 img {
 border: none;
+background-color: transparent;
 }
 
 .caption {
