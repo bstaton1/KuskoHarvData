@@ -1,0 +1,247 @@
+---
+title: "Updating Data Sets"
+# subtitle: '<img src="../man/figures/sticker/KuskoHarvData-logo.png" align="right" height=200px style="border: none; margin-top: -75px;"/>'
+date: '`r readLines("../DESCRIPTION") |> paste(collapse = "\n") |> stringr::str_extract("Version\\: [:graph:]+")`'
+subtitle: '`r htmltools::img(src="../man/figures/sticker/KuskoHarvData-logo.png", align = "right", height = "200px", style = "margin-top: -75px;")`'
+output: 
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{updating-data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, collapse = TRUE, comment = "#>")
+options(rmarkdown.html_vignette.check_title = FALSE)
+library(fontawesome)
+```
+
+```{css}
+hr {
+margin-top: -5px;
+margin-bottom: -5px;
+border: none;
+height: 1.5px;
+background-color: grey;
+}
+
+img {
+border: none;
+}
+
+.caption {
+text-align: left;
+color: DimGray;
+font-size: 12px;
+}
+
+div.indent {
+margin-left: 30px;
+}
+
+div.describe {
+color: DimGray;
+}
+```
+
+
+## _Before You Begin: `r fa("git-alt")` Git and `r fa("github")` GitHub_
+
+:::{.indent}
+
+Updating the data sets in 'KuskoHarvData' requires basic operating knowledge of Git and GitHub (remote vs. local repositories, forking, pulling/pushing, committing, branching, and pull requests), and you are advised to use [GitHub Desktop](https://docs.github.com/en/desktop/installing-and-authenticating-to-github-desktop/installing-github-desktop) to interact with local and remote repositories.
+**If this makes you uncomfortable or if you have _any_ questions, please contact the package developer (<bstaton.qes@gmail.com>) and he will assist as he is able.**
+
+If you are unfamiliar with these topics but wish to proceed, you can learn about them by reading the articles on each topic linked below; ignore any content regarding the command line or GitHub CLI -- these topics are unnecessary for our purposes.
+
+* [`r fa("git-alt")` Git overview](https://docs.github.com/en/get-started/using-git/about-git)
+* [`r fa("github")` GitHub Desktop](https://docs.github.com/en/desktop/overview/getting-started-with-github-desktop)
+* [`r fa("code-fork")` Forking workflow](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project?tool=desktop)
+* [`r fa("code-commit")` Commits from GitHub Desktop](https://docs.github.com/en/desktop/making-changes-in-a-branch/committing-and-reviewing-changes-to-your-project-in-github-desktop#selecting-changes-to-include-in-a-commit)
+* [`r fa("arrow-up-from-bracket")` Pushing changes from GitHub Desktop](https://docs.github.com/en/desktop/making-changes-in-a-branch/pushing-changes-to-github-from-github-desktop)
+* [`r fa("code-pull-request")` Submitting a pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project?tool=desktop#making-a-pull-request)
+
+Specific instructions about how to perform the necessary GitHub tasks will not be described here, so please familiarize yourself before beginning.
+These instructions also assume you have installed [R](https://cran.rstudio.com/) and [RStudio Desktop](https://posit.co/download/rstudio-desktop/) (accept all defaults when prompted), and that you have installed the current version of 'KuskoHarvEst':
+
+```R
+install.packages("remotes")
+remotes::install_github("bstaton1/KuskoHarvEst")
+```
+
+:::
+
+```{r make-header-fn, echo = FALSE}
+# create a global section counter
+counter <<- -1
+
+# function to create the html tags to build the sectoin header
+make_header = function(text, icon) {
+  counter <<- counter + 1
+  '<font size="+3">NUM</font> ICON _TEXT_' |> 
+    stringr::str_replace("NUM", as.character(counter)) |> 
+    stringr::str_replace("ICON", as.character(fa(icon))) |> 
+    stringr::str_replace("TEXT", text)
+}
+```
+
+## `r make_header("Fork & Clone (One Time Only)", "code-fork")`
+
+:::{.indent}
+
+**Complete this step only if you have not already done so in a previous year.**
+
+This R package is contained in the GitHub repository: [bstaton1/KuskoHarvData](https://github.com/bstaton1/KuskoHarvData).
+
+Ensure you have a GitHub account, and fork the repository to your account.
+Clone your remote forked repository to a local repository.
+You will make changes to the local repository, then push them up to your remote repository.
+After you are done with changes, you will submit a pull request to have them reviewed before they are merged in with the centralized repository.
+
+:::
+
+## `r make_header("Sync/Fetch/Pull", "download")`
+
+:::{.indent}
+
+**This step is essential to make sure your repository is current with the centralized version.**
+
+First, make sure your remote forked repository is up-to-date with the centralized repository by [syncing your fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui).
+Then, from GitHub Desktop, fetch and pull any changes to your local repository.
+This should not occur, but if you have any errors about [merge conflicts](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts), they will need to be addressed before proceeding.
+
+:::
+
+## `r make_header("Create a New Branch", "code-branch")`
+
+:::{.indent}
+
+**Do not ever** make changes directly to the `main` (or `master`) branch -- instead, create a new branch in your local repository before proceeding.
+This will ensure that any changes you make will not interfere (_just in case_) with the current working version until they have been reviewed.
+Name the branch something like `add-20YY-data`.
+All changes you make from here forward should be on this branch.
+
+:::
+
+## `r make_header("Organize/Add Opener Data Files", "folder-open")`
+
+:::{.indent}
+
+**Only add data from openers in which drift gillnets were allowed.**
+It is okay to retain the set net data for these openers, but **do not add data from set net only openers.**
+
+Each opener should have at least these data files:
+
+* `BBH_20YY_0M_DD.csv`: completed trip interview data from the Bethel Boat Harbor
+* `CBM_20YY_0M_DD.csv`: completed trip interview data from the Community Based Harvest Monitoring Program
+* `Flight_counts_20YY_08_12.csv`: flight data
+
+Where the `YY`, `M`, and `DD` are replaced with the appropriate year, month, and day, respectively.
+The file `FC_20YY_0M_DD.csv` (ONC fish camp surveys) may also be available, include it as well if so.
+Please see [here](https://htmlpreview.github.io/?https://github.com/bstaton1/KuskoHarvEst/blob/main/inst/rstudio/templates/04-docs/01-raw-data.html) for the proper formatting of these files, but if they worked properly to produce estimates in-season using 'KuskoHarvEst', then they will work properly here.
+
+Within the `data-raw` subfolder of your local 'KuskoHarvData' repo, create a new subfolder for each driftnet opener with data you plan to add.
+Follow the example given by previous openers **exactly** (i.e., one subfolder per opener, named `20YY_0M_DD` with the appropriate date information) and place the data files for each opener in each subfolder.
+
+:::
+
+## `r make_header("Add Opener Metadata", "table")`
+
+:::{.indent}
+
+Within the `data-raw` subfolder, you will find a file called `opener-metadata.csv` -- open it in a spreadsheet editor.
+
+Add a new row for each drift opener following the examples from previous openers **exactly** (i.e., date/time formatting is essential).
+Ideally the USFWS or ADF&G announcement that authorized the opener would be added, but if this is not available, please enter `NA` for this column.
+
+:::
+
+## `r make_header("Update Bethel Test Fishery Data", "table")`
+
+:::{.indent}
+
+Navigate to the [ADF&G Bethel Test Fishery webpage](https://www.adfg.alaska.gov/index.cfm?adfg=commercialbyareakuskokwim.btf), click "Daily CPUE All Species", scroll to the bottom, click **Export** > **Data** > **CSV Format**.
+Place the downloaded file (will be named `PUB_Bethel Test Fish - Daily CPUE.csv`) in the `data-raw` subdirectory of your local repo.
+
+Because of the timeline of Bethel Test Fishery operations, **do not complete this step or proceed until after August 31 in the current year.**
+
+:::
+
+## `r make_header("Compile Exported Data Objects", "sync")`
+
+:::{.indent}
+
+From within your local repository, open the R project file (`KuskoHarvData.Rproj`) in RStudio.
+Then execute the following command:
+
+```R
+source("data-raw/execute-prep-scripts.R")
+```
+
+This step will take some time (could be a half hour or more).
+While the code runs, progress messages will be printed to the console -- **if you see any errors, you must stop and resolve them.**
+Please do not hesitate to contact the package developer (<bstaton.qes@gmail.com>) if needed.
+
+:::
+
+## `r make_header("Increment Package Version", "plus")`
+
+:::{.indent}
+
+From within your local repository, open the file named `DESCRIPTION` in RStudio Desktop, and change this field to reflect the year you just added:
+
+```
+Version: 20YY.0
+```
+
+For example, if the current version is `2023.1` this means data are current through 2023, and the package been patched 1 time (updated once after adding 2023 data to data through 2022).
+After adding the 2024 data, the version should be updated to `2024.0`.
+
+:::
+
+## `r make_header("Commit Changes", "code-commit")`
+
+:::{.indent}
+
+Open GitHub Desktop and commit the changes you've made as follows (except swap `YY`, `M`, and `DD` for the appropriate date information):
+
+1. Commit all changes to all opener data files (`data-raw/20YY_0M_DD/*.csv`).
+
+    <u>Commit message</u>: `Add 20YY harvest monitoring data`
+2. Commit all changes to the opener meta data file (`data-raw/opener-metadata.csv`).
+
+    <u>Commit message</u>: `Add 20YY opener meta data`
+3. Commit all changes to the Bethel Test Fishery data file (`data-raw/PUB_Bethel Test Fish - Daily CPUE.csv`).
+
+    <u>Commit message</u>: `Add 20YY BTF data`
+4. Commit all changes to all files with the extension `.rda` (found in the `data` subfolder).
+
+    <u>Commit message</u>:  `Update exported data objects`
+5. Commit all changes to the `DESCRIPTION` file.
+
+    <u>Commit message</u>: `Update package version (now 20YY.0)`
+
+There should be no remaining changes to commit now.
+
+:::
+
+## `r make_header("Submit Pull Request", "code-pull-request")`
+
+:::{.indent}
+
+You are now ready to push your branch to your forked remote repository and submit a pull request.
+
+Name your pull request something like "Add 20YY Data" and ensure you are requesting to **merge into `bstaton1/KuskoHarvData` from `YourUserName/KuskoHarvData`.**
+
+In the description, please note any quirks with the process or issues with the data that are of note.
+When you are done, submit the request -- this will notify the package developer that your changes are ready for review.
+
+:::
+
+<br>
+<br>
+
+<p style="text-align: center; font-size:18px;">
+  <b>THANK YOU for your contributions!!</b>
+</p>
