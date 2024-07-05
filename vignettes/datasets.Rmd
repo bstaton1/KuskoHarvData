@@ -89,12 +89,75 @@ data_table = function(x, FUN, n = 10) {
 }
 ```
 
+## `r fa("table")` Opener Metadata
+
+::::::{.indent}
+
+```{r meta-load, echo = TRUE}
+data(meta, package = "KuskoHarvData")
+```
+
+:::{.describe}
+Each row represents one drift gillnet opener.
+:::
+
+<details>
+<summary>Variable Descriptions</summary>
+
+```{r meta-vars}
+matrix(c(
+  # VARIABLE                              # DESCRIPTION
+  "start; end",        "Start and end dates/times of the opener",
+  "flights_planned",   "Number of aerial surveys planned for the day",
+  "flights_flown",     "Number of aerial surveys completed for the day",
+  "announcement",      "Identifier of the official agency announcement authorizing the opener (not always available)"
+), ncol = 2, byrow = TRUE) |> 
+vars_table()
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View First 10 Rows</summary>
+
+```{r meta-head}
+data_table(meta, head)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View Last 10 Rows</summary>
+
+```{r meta-tail}
+data_table(meta, tail)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>Variable Summary</summary>
+
+```{r meta-summary}
+summary(meta)
+```
+
+</details>
+
+::::::
+
 ## `r fa("table")` Compiled Harvest Estimates
 
 ::::::{.indent}
 
 ```{r harvest_estimate_master-load, echo = TRUE}
-data("harvest_estimate_master", package = "KuskoHarvData")
+data(harvest_estimate_master, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -158,7 +221,7 @@ summary(harvest_estimate_master)
 ::::::{.indent}
 
 ```{r effort_estimate_master-load, echo = TRUE}
-data("effort_estimate_master", package = "KuskoHarvData")
+data(effort_estimate_master, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -215,12 +278,12 @@ summary(effort_estimate_master)
 
 ::::::
 
-## `r fa("table")` Completed Trip Interview Records
+## `r fa("table")` Completed Trip Interviews
 
 ::::::{.indent}
 
 ```{r interview_data_master-load, echo = TRUE}
-data("interview_data_master", package = "KuskoHarvData")
+data(interview_data_master, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -292,12 +355,12 @@ summary(interview_data_master)
 
 ::::::
 
-## `r fa("table")` Flight Count Records
+## `r fa("table")` Aerial Drift Boat Counts
 
 ::::::{.indent}
 
 ```{r flight_data_master-load, echo = TRUE}
-data("flight_data_master", package = "KuskoHarvData")
+data(flight_data_master, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -349,6 +412,138 @@ data_table(flight_data_master, tail)
 
 ```{r flight_data_master-summary}
 summary(flight_data_master)
+```
+
+</details>
+
+::::::
+
+## `r fa("table")` Bethel Test Fishery CPUE Records
+
+::::::{.indent}
+
+```{r btf_master-load, echo = TRUE}
+data(btf_master, package = "KuskoHarvData")
+```
+
+:::{.describe}
+Each row represents the daily catch-per-unit-effort (CPUE) for one species, each day of BTF operations (`r paste(range(lubridate::year(btf_master$date)), collapse = "-")`).
+Data are available from the [Alaska Department of Fish and Game Bethel Test Fishery webpage](https://www.adfg.alaska.gov/index.cfm?adfg=commercialbyareakuskokwim.btf) -- see step 5 in `vignette("updating-data", package = "KuskoHarvData")` for details.
+:::
+
+<details>
+<summary>Variable Descriptions</summary>
+
+```{r btf_master-vars}
+matrix(c(
+  # VARIABLE    # DESCRIPTION
+  "date",       "Date of sampling",
+  "species",    "Species for which the CPUE values apply",
+  "cpue",       "Catch per unit effort (salmon &#183; fathom<sup>-1</sup> &#183; minute <sup>-1</sup>)",
+  "ccpue",      "Cumulative CPUE; the sum of all daily CPUE values up to and including the value in the `date` column"
+), ncol = 2, byrow = TRUE) |> 
+vars_table()
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View First 10 Rows</summary>
+
+```{r btf_master-head}
+data_table(btf_master, head)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View Last 10 Rows</summary>
+
+```{r btf_master-tail}
+data_table(btf_master, tail)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>Variable Summary</summary>
+
+```{r btf_master-summary}
+summary(btf_master)
+```
+
+</details>
+
+::::::
+
+## `r fa("table")` Daily PABE Weather Summaries
+
+::::::{.indent}
+
+```{r weather_data_master-load, echo = TRUE}
+data(weather_data_master, package = "KuskoHarvData")
+```
+
+:::{.describe}
+Each row represents a daily summary statistic of a weather variable.
+Data were accessed via the ['reim'](https://docs.ropensci.org/riem/index.html) R package to query the ASOS database (airports), hosted by the [Iowa State University Environmental Mesonet](https://mesonet.agron.iastate.edu/request/download.phtml?network=IN__ASOS).
+The weather station used was the Bethel Airport (`"PABE"`).
+:::
+
+<details>
+<summary>Variable Descriptions</summary>
+
+```{r weather_data_master-vars}
+matrix(c(
+  # VARIABLE                          # DESCRIPTION
+  "date",                             "Date the data correspond to; only dates between June 1 and August 30 in years after and including 2016 are included",
+  "mean_temp; min_temp; max_temp",    "Average, minimum, and maximum of all air temperature measurements for `date` (&deg;F)",
+  "mean_relh",                        "Average of all relative humidity measurements for `date` (% of maximum)",
+  "precip",                           "Sum of all precipitation measurements for `date` (inches)",
+  "mean_Nwind",                       "Average of all wind speed measurements  for `date` (miles &#183; hour<sup>-1</sup>) after converting to northerly and easterly speed vectors. See `?KuskoHarvUtils::get_Nwind()` and `?KuskoHarvUtils::get_Ewind()` for details.",
+  "mean_wind",                        "Average of all wind speed measurements for `date` (miles &#183; hour<sup>-1</sup>), regardless of direction",
+  "max_gust",                         "Maximum of all gust measurements for `date`; gusts only register if they exceed 14 knots"
+), ncol = 2, byrow = TRUE) |> 
+vars_table()
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View First 10 Rows</summary>
+
+```{r weather_data_master-head}
+data_table(weather_data_master, head)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View Last 10 Rows</summary>
+
+```{r weather_data_master-tail}
+data_table(weather_data_master, tail)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>Variable Summary</summary>
+
+```{r weather_data_master-summary}
+summary(weather_data_master)
 ```
 
 </details>

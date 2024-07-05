@@ -162,7 +162,7 @@ Ideally the USFWS or ADF&G announcement that authorized the opener would be adde
 
 :::{.indent}
 
-Navigate to the [ADF&G Bethel Test Fishery webpage](https://www.adfg.alaska.gov/index.cfm?adfg=commercialbyareakuskokwim.btf), click "Daily CPUE All Species", scroll to the bottom, click **Export** > **Data** > **CSV Format**.
+Navigate to the [Alaska Department of Fish and Game Bethel Test Fishery webpage](https://www.adfg.alaska.gov/index.cfm?adfg=commercialbyareakuskokwim.btf), click "Daily CPUE All Species", scroll to the bottom, click **Export** > **Data** > **CSV Format**.
 Place the downloaded file (will be named `PUB_Bethel Test Fish - Daily CPUE.csv`) in the `data-raw` subdirectory of your local repo.
 
 Because of the timeline of Bethel Test Fishery operations, **do not complete this step or proceed until after August 31 in the current year.**
