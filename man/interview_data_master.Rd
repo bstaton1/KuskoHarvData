@@ -3,16 +3,31 @@
 \docType{data}
 \name{interview_data_master}
 \alias{interview_data_master}
-\title{Interview Records}
+\title{Completed Trip Interviews}
 \format{
-A data frame with rows representing individual interviews as rows and question responses as columns.
-Also includes a set of logical flags that denote which records are suitable for which purposes from an estimation standpoint.
+See \code{vignette("datasets", package = "KuskoHarvData")}.
+}
+\source{
+Interviews have been conducted by several organizations and at various locations.
+This information is contained in the \code{source} variable:
+\itemize{
+\item \code{"ADFG"} -- Alaska Department of Fish and Game Division of Subsistence aided in sampling in 2018
+\item \code{"BBH"} -- Bethel Boat Harbor, primarily collected by the Orutsararmiut Native Council, but in recent years staff from the Kuskokwim Inter-Tribal Fish Commission and U.S. Fish and Wildlife Service (Yukon Delta National Wildlife Refuge) have aided in sampling.
+\item \code{"CBM"} -- Community-Based Harvest Monitoring Program, operated by the Kuskokwim River Inter-Tribal Fish Commission, stations staff to sample at fishery access points in various communities outside of Bethel each year.
+\item \code{"FC"} -- Bethel-area fish camp surveys conducted by the Orutsararmiut Native Council.
+}
+
+Interview methodology is described in Staton et al. (In Review).
 }
 \usage{
 interview_data_master
 }
 \description{
-A data set containing all drift net interview data collected by the Kuskokwim River
-in-season subsistence salmon harvest monitoring program.
+Data set containing all drift net interview data collected by the Lower Kuskokwim River
+In-season Subsistence Salmon Harvest Monitoring Program.
+}
+\note{
+This data set will be updated automatically when adding new interview and flight data,
+see Steps 3 and 6 in \code{vignette("updating-data", package = "KuskoHarvData")}.
 }
 \keyword{datasets}
