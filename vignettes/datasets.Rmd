@@ -1,6 +1,6 @@
 ---
 title: "Included Data Sets"
-date: '`r readLines("../DESCRIPTION") |> paste(collapse = "\n") |> stringr::str_extract("Version\\: [:graph:]+")`'
+date: '`r paste0("Version: ", packageVersion("KuskoHarvData"))`'
 subtitle: '`r htmltools::img(src="../man/figures/sticker/KuskoHarvData-logo.png", align = "right", height = "200px", style = "margin-top: -75px;")`'
 output: 
   rmarkdown::html_vignette
@@ -16,6 +16,17 @@ options(rmarkdown.html_vignette.check_title = FALSE)
 library(fontawesome)
 library(htmltools)
 ```
+
+```{r set-css}
+# select the CSS file
+css_file = system.file("templates/KuskoHarv-vignette-styles.css", package = "KuskoHarvUtils")
+
+# combine with style tags
+css = c("<style>", readLines(css_file), "</style>") |> 
+  paste(collapse = "\n")
+```
+
+`r css`
 
 This vignette gives an overview of the various data sets found in 'KuskoHarvData'.
 Each of these data sets (for example, the opener metadata) can be loaded by running:
@@ -36,35 +47,6 @@ knitr::include_graphics("C:/Users/bstaton/Desktop/Staton/5_qes/01-projects/2021_
 ```
 
 </details>
-
-```{css}
-hr {
-margin-top: -5px;
-margin-bottom: -5px;
-border: none;
-height: 1.5px;
-background-color: grey;
-}
-
-img {
-border: none;
-background-color: transparent;
-}
-
-.caption {
-text-align: left;
-color: DimGray;
-font-size: 12px;
-}
-
-div.indent {
-margin-left: 30px;
-}
-
-div.describe {
-color: DimGray;
-}
-```
 
 ```{r table-fns}
 vars_table = function(m, footnote_args = NULL) {
