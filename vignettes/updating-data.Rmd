@@ -1,6 +1,6 @@
 ---
 title: "Updating Data Sets"
-subtitle: '`r htmltools::tagList(paste0("Version: ", packageVersion("KuskoHarvData")), htmltools::img(src="../man/figures/sticker/KuskoHarvData-logo.png", align = "right", height = "200px", style = "margin-top: -75px;"))`'
+subtitle: '`r htmltools::tagList(paste0("Version: ", packageVersion("KuskoHarvData")), htmltools::img(src="../man/figures/sticker/KuskoHarvData-logo.png", align = "right", height = "200px", style = "margin-top: -50px;"))`'
 output: 
   rmarkdown::html_vignette
 vignette: >
