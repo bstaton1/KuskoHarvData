@@ -17,7 +17,7 @@ library(fontawesome)
 
 ```{r set-css}
 # select the CSS file
-css_file = system.file("templates/KuskoHarv-vignette-styles.css", package = "KuskoHarvUtils")
+css_file = system.file("resources/KuskoHarv-vignette-styles.css", package = "KuskoHarvUtils")
 
 # combine with style tags
 css = c("<style>", readLines(css_file), "</style>") |> 

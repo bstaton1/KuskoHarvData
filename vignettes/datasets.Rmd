@@ -18,7 +18,7 @@ library(htmltools)
 
 ```{r set-css}
 # select the CSS file
-css_file = system.file("templates/KuskoHarv-vignette-styles.css", package = "KuskoHarvUtils")
+css_file = system.file("resources/KuskoHarv-vignette-styles.css", package = "KuskoHarvUtils")
 
 # combine with style tags
 css = c("<style>", readLines(css_file), "</style>") |> 
@@ -42,7 +42,7 @@ Several of the data sets included have a spatial component (geographic strata A,
 <summary>Map of Study Area</summary>
 
 ```{r map, fig.align = "center", fig.cap = "**Lower Kuskokwim River showing the geographic strata of the study area for the in-season harvest monitoring program.** Strata A, B, C, and D1 boundaries are marked with alternating dark and light gray, whereas the lightest gray areas are not included in the study area. _Duplicated from Staton, B.A, Bechtol, W.R., Coggins, L.G., Jr., Decossas, G., and Esquible, J. (In Review). In-season monitoring of harvest and effort from a large-scale subsistence salmon fishery in western Alaska._", out.width = "80%"}
-knitr::include_graphics("C:/Users/bstaton/Desktop/Staton/5_qes/01-projects/2021_KuskoHarvPred_AYKSSI/03-manuscripts/KuskoHarvEst-ms/2-fig/map.png")
+knitr::include_graphics(system.file("resources/map.png", package = "KuskoHarvUtils"))
 ```
 
 </details>
