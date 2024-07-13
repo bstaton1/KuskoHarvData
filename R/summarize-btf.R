@@ -1,7 +1,7 @@
-#' Summarize Bethel Test Fishery CPUE Data
+#' Summarize Bethel Test Fishery CPUE data
 #'
 #' Obtains a species-specific summary in terms of either proportional composition or daily CPUE
-#' with the ability to average over a several day window to smooth out daily variability
+#' with the ability to average over a several day window to smooth out daily variability.
 #'
 #' @param date Datetime; the date to summarize. Must be of length 1.
 #'   If `plus_minus > 0`, becomes the center of window across which the average is calculated.

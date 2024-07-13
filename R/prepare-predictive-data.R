@@ -1,18 +1,18 @@
 #' Prepare a data set containing response variables for regression modeling
 #'
 #' Extracts total effort, species composition, and catch rate data from historical
-#' fishing days for fitting in regression models.
+#' openers, intended for fitting in regression models.
 #'
-#' @param dates Datetime; a vector of historical fishing dates to include.
-#'   If `NULL` (the default) all dates included in the meta data set will be included.
-#' @param comp_species Character; a vector specifying the species to calculate proportional contribution for.
-#'   Accepted options are any combinations of `"chinook"`, `"chum"`, and `"sockeye"`
+#' @param dates Object of class `"POSIXct/POSIXt"`; vector of historical fishing dates to include.
+#'   If `NULL` (the default) all dates included in the meta data set (`?KuskoHarvData::meta`) will be included.
+#' @param comp_species Character; vector specifying the species to calculate proportional contribution for.
+#'   Accepted options are any combinations of `"chinook"`, `"chum"`, and `"sockeye"`.
 #' @param cpt_species Character; a vector specifying the species to calculate catch rate (catch/trip) for.
 #'   Accepted options are any combinations of `"chinook"`, `"chum"`, `"sockeye"`, and `"total"`.
 #' @param include_transformed Logical; if `TRUE` (the default), additional columns will be returned on a transformed scale.
 #'   Effort and catch rate variables will be log-transformed and composition variables will be logit-transformed.
-#' @return A data frame with rows for individual dates and columns for date, effort, and composition/catch rate for the requested species.
-#'   All values are calculated for drift nets only, using the mean harvest estimates, and all geographic strata.
+#' @return Data frame with rows for individual dates and columns for date, effort, and composition/catch rate for the requested species.
+#'   All values are calculated for drift nets only, using the mean harvest estimates, and geographic strata A, B, C, and D1..
 
 prepare_response_vars = function(dates = NULL, comp_species = c("chinook", "chum", "sockeye"), cpt_species = "total", include_transformed = TRUE) {
 
@@ -95,19 +95,18 @@ prepare_response_vars = function(dates = NULL, comp_species = c("chinook", "chum
 
 #' Prepare a data set containing predictor variables for regression modeling
 #'
-#' Quickly summarizes various date/time and Bethel Test Fishery summaries
-#' for fitting in regression models.
+#' Quickly summarizes various date/time and Bethel Test Fishery summaries,
+#' intended for fitting in regression models.
 #'
-#' @param dates Datetime; a vector of historical fishing dates to include.
-#'   If `NULL` (the default) all dates included in the meta data set will be included.
-#' @return A data frame with rows for individual dates and columns for:
-#'   * `date`: the date of the fishing day
-#'   * `year`: the year of the fishing day
-#'   * `day`: days past May 31st in the year of fishing (see [KuskoHarvUtils::to_days_past_may31()])
-#'   * `hours_open`: the number of hours that day fishing was allowed that day
-#'   * `fished_yesterday`: `TRUE` if drift fishing occurred the previous day
+#' @inheritParams prepare_response_vars
+#' @return Data frame with rows for individual dates and columns for:
+#'   * `date`: the date of the opener
+#'   * `year`: the year of the opener
+#'   * `day`: days past May 31st in the year of the opener (see [KuskoHarvUtils::to_days_past_may31()])
+#'   * `hours_open`: the number of hours fishing was allowed that day
+#'   * `fished_yesterday`: `TRUE` if drift gillnet fishing occurred the previous day
 #'   * `weekend`: `TRUE` if the fishing day occurred on Saturday or Sunday
-#'   * `p_before_noon`: fraction of the allowed fishing hours that occurred before noon that day
+#'   * `p_before_noon`: fraction of the open hours that occurred before noon that day
 #'   * `total_btf_cpue`: daily catch-per-unit-effort from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
 #'   * `chinook_btf_comp`: daily proportional composition of Chinook salmon from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
 #'   * `chum_btf_comp`: daily proportional composition of chum salmon from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
@@ -190,10 +189,10 @@ prepare_predictor_vars = function(dates = NULL) {
 #' A wrapper around [prepare_predictor_vars()] and [prepare_response_vars()] for one-line
 #' regression data preparation.
 #'
-#' @param dates Date object
-#' @param na.omit Logical; if `TRUE` (the default), any rows with an `NA` value for any variable will be discarded.
+#' @inheritParams prepare_response_vars
+#' @param na.omit Logical; if `TRUE` (default), any rows with an `NA` value for any variable will be discarded.
 #' @param ... Optional arguments passed to [prepare_response_vars()]
-#' @return A data frame with rows for individual dates and columns for several variables to be used in regression modeling.
+#' @return Data frame with rows for individual dates and columns for several variables to be used in regression modeling.
 #'   See [prepare_predictor_vars()] and [prepare_response_vars()] for variable definitions.
 #'   In addition to those variables, there is also a `period` variable (see [KuskoHarvUtils::get_period()]).
 #' @export

@@ -80,7 +80,7 @@ save(interview_data_master, file = "data/interview_data_master.rda")
 cat("\n  Output File Saved: data/flight_data_master.rda")
 cat("\n  Output File Saved: data/interview_data_master.rda")
 
-##### PART 2: OBTAIN HARVEST AND EFFORT ESTIMATES
+##### PART 2: OBTAIN HARVEST AND EFFORT ESTIMATES #####
 
 # extract the unique IDs of all openers
 UIDs = unique(interview_data_master$UID)
