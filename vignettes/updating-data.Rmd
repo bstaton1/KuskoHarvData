@@ -26,6 +26,23 @@ css = c("<style>", readLines(css_file), "</style>") |>
 
 `r css`
 
+This vignette describes the process for updating all data sets in the package.
+These steps should only be completed after all in-season harvest data have been finalized and the Bethel Test Fishery has completed operations for the year (late August).
+
+Obtain the most current versions of the packages you will need:
+
+```R
+install.packages("devtools")
+remotes::install_github("bstaton1/KuskoHarvEst")
+remotes::install_github("bstaton1/KuskoHarvData")
+```
+
+The steps in this vignette only need to be completed if the most current version number year of the 'KuskoHarvData' package is behind that of the most recent year of completed monitoring:
+
+```{r, echo = TRUE}
+packageVersion("KuskoHarvData")
+```
+
 ## _Before You Begin: `r fa("git-alt")` Git and `r fa("github")` GitHub_
 
 :::{.indent}
@@ -43,12 +60,7 @@ If you are unfamiliar with these topics but wish to proceed, you can learn about
 * [`r fa("code-pull-request")` Submitting a pull request](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project?tool=desktop#making-a-pull-request)
 
 Specific instructions about how to perform the necessary GitHub tasks will not be described here, so please familiarize yourself before beginning.
-These instructions also assume you have installed [R](https://cran.rstudio.com/) and [RStudio Desktop](https://posit.co/download/rstudio-desktop/) (accept all defaults when prompted), and that you have installed the current version of 'KuskoHarvEst':
-
-```R
-install.packages("remotes")
-remotes::install_github("bstaton1/KuskoHarvEst")
-```
+These instructions also assume you have installed [R](https://cran.rstudio.com/) and [RStudio Desktop](https://posit.co/download/rstudio-desktop/) (accept all defaults when prompted).
 
 :::
 
