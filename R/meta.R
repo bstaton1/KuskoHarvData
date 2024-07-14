@@ -1,13 +1,11 @@
-#' Meta-data for each opener with monitoring data
+#' Opener Metadata
 #'
-#' A data set containing basic information about each opener with interview and/or flight data
+#' Data set containing basic information about each opener with interview and/or flight data
+# '  collected by the Lower Kuskokwim River In-season Subsistence Salmon Harvest Monitoring Program.
 #'
-#' @format A data frame with rows representing a unique day in which the fishery was open and monitoring occurred.
-#'   Variables include:
-#'   * `start`: the earliest time fishing was allowed that day (stored as a datetime class)
-#'   * `end`: the latest time fishing was allowed that day (stored as a datetime class)
-#'   * `flights_planned`: the number of flights planned to be flown that day
-#'   * `flights_flown`: the number of flights actually flown that day
-#'   * `announcement`: the identifier of the official document announcing that fishing would be allowed that day
+#' @format See `vignette("datasets", package = "KuskoHarvData")`.
+#' @note This data set must be updated manually,
+#'     see Step 4 in `vignette("updating-data", package = "KuskoHarvData")`.
+#'
 
 "meta"

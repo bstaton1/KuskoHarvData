@@ -1,21 +1,20 @@
 Package: KuskoHarvData
-Title: Data Collected by the Kuskokwim River In-season Harvest Monitoring Program
-Version: 2023.1
+Version: 2023.3
+Title: Data Collected by the Lower Kuskokwim River In-season Subsistence Salmon Harvest Monitoring Program
 Authors@R: 
     person(given = "Ben",
            family = "Staton",
            role = c("aut", "cre"),
            email = "bstaton.qes@gmail.com",
            comment = c(ORCID = "0000-0002-2342-3482"))
-Description: Contains data collected by the Kuskokwim River 
-    in-season subsistence salmon harvest monitoring program. Included are 
-    data sets that contain raw interview and flight data and compiled estimates
-    of harvest and effort as well as meta-data for each subsistence fishing opportunity.
-    Data and estimates are included for drift net opportunities and interviews/aerial counts only
-    (set net data are omitted).
+Description: Stores raw data sets (aerial flight counts, completed trip interviews), compiled estimates
+    of harvest and effort, and meta data for each monitored drift gillnet opener that has occurred since the initation of the 
+    Lower Kuskokwim River In-season Subsistence Salmon Harvest Monitoring Program in 2016.
+    Additionally, includes data sets for the Bethel Test Fishery catch-per-unit-effort and daily weather summaries
+    for investigation of predictive relationships.
 License: MIT + file LICENSE
 Depends:
-    R (>= 3.5)
+    R (>= 4.1)
 Imports:
     stringr (>= 1.3.1),
     lubridate,
@@ -29,3 +28,7 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

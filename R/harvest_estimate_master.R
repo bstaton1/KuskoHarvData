@@ -1,7 +1,7 @@
-#' Harvest Estimates
+#' Compiled Harvest Estimates
 #'
-#' A data set containing all compiled estimates of harvest by drift nets generated
-#'   by the Kuskokwim River in-season subsistence salmon harvest monitoring program.
+#' Data set containing all compiled estimates of harvest by drift gillnet boats generated
+#'  by the Lower Kuskokwim River In-season Subsistence Salmon Harvest Monitoring Program.
 #'
 #' @format A data frame with rows representing a unique date/species/area/summary statistic combination.
 #'

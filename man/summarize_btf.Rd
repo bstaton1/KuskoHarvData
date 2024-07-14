@@ -2,7 +2,7 @@
 % Please edit documentation in R/summarize-btf.R
 \name{summarize_btf}
 \alias{summarize_btf}
-\title{Summarize Bethel Test Fishery CPUE Data}
+\title{Summarize Bethel Test Fishery CPUE data}
 \usage{
 summarize_btf(date, stat, plus_minus = 0)
 }
@@ -28,5 +28,5 @@ Greater values of \code{plus_minus} will introduce more smoothing of between-day
 }
 \description{
 Obtains a species-specific summary in terms of either proportional composition or daily CPUE
-with the ability to average over a several day window to smooth out daily variability
+with the ability to average over a several day window to smooth out daily variability.
 }

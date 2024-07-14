@@ -3,37 +3,24 @@
 \docType{data}
 \name{weather_data_master}
 \alias{weather_data_master}
-\title{Bethel Airport Weather Data}
+\title{Daily PABE Weather Summaries}
 \format{
-A data frame with rows representing a unique date.
-Variables include:
-\itemize{
-\item \code{date}: the date the data correspond to; only dates between June 1 and July 31 in years after and including 2016 are included
-\item \code{mean_temp}: the average of all temperature measurements available on that date, in degrees Fahrenheit
-\item \code{min_temp}: the minimum of all temperature measurements available on that date, in degrees Fahrenheit
-\item \code{max_temp}: the maximum of all temperature measurements available on that date, in degrees Fahrenheit
-\item \code{mean_relh}: the average of all relative humidity measurements on that date, in percent of maximum
-\item \code{precip}: the sum of all precipitation measurements on that date, in inches
-\item \code{mean_wind}: the average of all daily wind speed measurements, in miles per hour
-\item \code{mean_Nwind}: the average of all daily wind measurements (in miles per hour) after converting to a northerly speed vector.
-See \code{\link[KuskoHarvUtils:get_Nwind]{KuskoHarvUtils::get_Nwind()}} for details.
-\item \code{mean_Ewind}: the average of all daily wind measurements (in miles per hour) after converting to a easterly speed vector. Calculated as
-See \code{\link[KuskoHarvUtils:get_Ewind]{KuskoHarvUtils::get_Ewind()}} for details.
-\item \code{max_gust}: the daily maximum of all gust measurements. Note that gusts only register if they exceed 14 knots.
-}
+See \code{vignette("datasets", package = "KuskoHarvData")}.
 }
 \source{
-This data set relies on the '\href{https://docs.ropensci.org/riem/index.html}{riem package}' to query the ASOS database (airports),
-hosted by the \href{https://mesonet.agron.iastate.edu/request/download.phtml?network=IN__ASOS}{Iowa State University Environmental Mesonet}.
+This data set relies on the R package \href{https://docs.ropensci.org/riem/index.html}{'riem'}' to query the ASOS
+database (airports), hosted by the \href{https://mesonet.agron.iastate.edu/request/download.phtml?network=IN__ASOS}{Iowa State University Environmental Mesonet}.
+The weather station used was the Bethel Airport (\code{"PABE"}).
 }
 \usage{
 weather_data_master
 }
 \description{
-A data set containing daily weather data summaries collected at the Bethel airport.
+Data set containing daily weather data summaries collected at the Bethel
+airport.
 }
 \note{
-This data set will need to be updated regularly (at least annually).
-To do this, execute the script \code{data-raw/prepare-weather-data.R} and rebuild the package.
+This data set will be updated automatically when compiling updating the exported data objects for the package,
+see Step 6 in \code{vignette("updating-data", package = "KuskoHarvData")}.
 }
 \keyword{datasets}

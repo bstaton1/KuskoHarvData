@@ -7,19 +7,19 @@
 prepare_predictor_vars(dates = NULL)
 }
 \arguments{
-\item{dates}{Datetime; a vector of historical fishing dates to include.
-If \code{NULL} (the default) all dates included in the meta data set will be included.}
+\item{dates}{Object of class \code{"POSIXct/POSIXt"}; vector of historical fishing dates to include.
+If \code{NULL} (the default) all dates included in the meta data set (\code{?KuskoHarvData::meta}) will be included.}
 }
 \value{
-A data frame with rows for individual dates and columns for:
+Data frame with rows for individual dates and columns for:
 \itemize{
-\item \code{date}: the date of the fishing day
-\item \code{year}: the year of the fishing day
-\item \code{day}: days past May 31st in the year of fishing (see \code{\link[KuskoHarvUtils:to_days_past_may31]{KuskoHarvUtils::to_days_past_may31()}})
-\item \code{hours_open}: the number of hours that day fishing was allowed that day
-\item \code{fished_yesterday}: \code{TRUE} if drift fishing occurred the previous day
+\item \code{date}: the date of the opener
+\item \code{year}: the year of the opener
+\item \code{day}: days past May 31st in the year of the opener (see \code{\link[KuskoHarvUtils:to_days_past_may31]{KuskoHarvUtils::to_days_past_may31()}})
+\item \code{hours_open}: the number of hours fishing was allowed that day
+\item \code{fished_yesterday}: \code{TRUE} if drift gillnet fishing occurred the previous day
 \item \code{weekend}: \code{TRUE} if the fishing day occurred on Saturday or Sunday
-\item \code{p_before_noon}: fraction of the allowed fishing hours that occurred before noon that day
+\item \code{p_before_noon}: fraction of the open hours that occurred before noon that day
 \item \code{total_btf_cpue}: daily catch-per-unit-effort from the Bethel Test Fishery, averaged over a three day period where \code{date} is the second day
 \item \code{chinook_btf_comp}: daily proportional composition of Chinook salmon from the Bethel Test Fishery, averaged over a three day period where \code{date} is the second day
 \item \code{chum_btf_comp}: daily proportional composition of chum salmon from the Bethel Test Fishery, averaged over a three day period where \code{date} is the second day
@@ -30,8 +30,8 @@ A data frame with rows for individual dates and columns for:
 }
 }
 \description{
-Quickly summarizes various date/time and Bethel Test Fishery summaries
-for fitting in regression models.
+Quickly summarizes various date/time and Bethel Test Fishery summaries,
+intended for fitting in regression models.
 }
 \note{
 All Bethel Test Fishery variables obtained using \code{\link[=summarize_btf]{summarize_btf()}}.

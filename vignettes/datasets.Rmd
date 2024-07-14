@@ -1,0 +1,532 @@
+---
+title: "Included Data Sets"
+subtitle: '`r htmltools::tagList(paste0("Version: ", packageVersion("KuskoHarvData")), htmltools::img(src="../man/figures/sticker/KuskoHarvData-logo.png", align = "right", height = "200px", style = "margin-top: -50px;"))`'
+output: 
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{datasets}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, collapse = TRUE, comment = "#>", warning = FALSE, message = FALSE)
+options(rmarkdown.html_vignette.check_title = FALSE)
+library(fontawesome)
+library(htmltools)
+```
+
+```{r set-css}
+# select the CSS file
+css_file = system.file("resources/KuskoHarv-vignette-styles.css", package = "KuskoHarvUtils")
+
+# combine with style tags
+css = c("<style>", readLines(css_file), "</style>") |> 
+  paste(collapse = "\n")
+```
+
+`r css`
+
+This vignette gives an overview of the various data sets found in 'KuskoHarvData'.
+Each of these data sets (for example, the opener metadata) can be loaded by running:
+
+```{r example-load, eval = FALSE, echo = TRUE}
+data(meta, package = "KuskoHarvData")
+```
+
+Then this data set can be used by simply referring to the object called `meta`.
+
+Several of the data sets included have a spatial component (geographic strata A, B, C, and D1) -- these are shown on the map below.
+
+<details>
+<summary>Map of Study Area</summary>
+
+```{r map, fig.align = "center", fig.cap = "**Lower Kuskokwim River showing the geographic strata of the study area for the in-season harvest monitoring program.** Strata A, B, C, and D1 boundaries are marked with alternating dark and light gray, whereas the lightest gray areas are not included in the study area. _Duplicated from Staton, B.A, Bechtol, W.R., Coggins, L.G., Jr., Decossas, G., and Esquible, J. (In Review). In-season monitoring of harvest and effort from a large-scale subsistence salmon fishery in western Alaska._", out.width = "80%"}
+knitr::include_graphics(system.file("resources/map.png", package = "KuskoHarvUtils"))
+```
+
+</details>
+
+```{r table-fns}
+vars_table = function(m, footnote_args = NULL) {
+  m[,1] = kableExtra::cell_spec(m[,1], monospace = TRUE)#, font_size = 12)
+  # m[,2] = kableExtra::cell_spec(m[,2], font_size = 12)
+  
+  out = knitr::kable(m, row.names = FALSE, col.names = c("Variable", "Description"), escape = FALSE) |> 
+  kableExtra::kable_styling(full_width = TRUE, bootstrap_options = c("condensed"), font_size = 12)
+  
+  if (!is.null(footnote_args)) {
+    out = do.call(kableExtra::footnote, append(list(kable_input = out), footnote_args))
+  }
+  
+  return(out)
+}
+
+data_table = function(x, FUN, n = 10) {
+  FUN(x, n = n) |> 
+    knitr::kable(row.names = TRUE) |> 
+    kableExtra::kable_styling(full_width = TRUE, bootstrap_options = c("condensed"), font_size = 12) |> 
+    kableExtra::column_spec(1, monospace = TRUE, color = "grey")
+}
+```
+
+## `r fa("table")` Opener Metadata
+
+::::::{.indent}
+
+```{r meta-load, echo = TRUE}
+data(meta, package = "KuskoHarvData")
+```
+
+:::{.describe}
+Each row represents one drift gillnet opener.
+:::
+
+<details>
+<summary>Variable Descriptions</summary>
+
+```{r meta-vars}
+matrix(c(
+  # VARIABLE                              # DESCRIPTION
+  "start; end",        "Start and end dates/times of the opener",
+  "flights_planned",   "Number of aerial surveys planned for the day",
+  "flights_flown",     "Number of aerial surveys completed for the day",
+  "announcement",      "Identifier of the official agency announcement authorizing the opener (not always available)"
+), ncol = 2, byrow = TRUE) |> 
+vars_table()
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View First 10 Rows</summary>
+
+```{r meta-head}
+data_table(meta, head)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View Last 10 Rows</summary>
+
+```{r meta-tail}
+data_table(meta, tail)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>Variable Summary</summary>
+
+```{r meta-summary}
+summary(meta)
+```
+
+</details>
+
+::::::
+
+## `r fa("table")` Compiled Harvest Estimates
+
+::::::{.indent}
+
+```{r harvest_estimate_master-load, echo = TRUE}
+data(harvest_estimate_master, package = "KuskoHarvData")
+```
+
+:::{.describe}
+Each row represents one summary statistic (mean, standard deviation, lower/upper 95% confidence limits) of harvest for one species, in one geographic stratum, in one day.
+:::
+
+<details>
+<summary>Variable Descriptions</summary>
+
+```{r harvest_estimate_master-vars}
+matrix(c(
+  # VARIABLE                              # DESCRIPTION
+  "date",        "The date to which the estimate applies",
+  "species",     "The species to which the estimate applies",
+  "stratum",     "The geographic stratum to which the estimate applies",
+  "quantity",    "The summary statistic of bootstrapped harvest estimates: point estimate (`mean`), standard deviation (`sd`), and 95% confidence limits (`lwr95` and `upr95`)",
+  "estimate",    "The estimated value of the harvest summary statistic"
+), ncol = 2, byrow = TRUE) |> 
+vars_table()
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View First 10 Rows</summary>
+
+```{r harvest_estimate_master-head}
+data_table(harvest_estimate_master, head)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View Last 10 Rows</summary>
+
+```{r harvest_estimate_master-tail}
+data_table(harvest_estimate_master, tail)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>Variable Summary</summary>
+
+```{r harvest_estimate_master-summary}
+summary(harvest_estimate_master)
+```
+
+</details>
+
+::::::
+
+## `r fa("table")` Compiled Effort Estimates
+
+::::::{.indent}
+
+```{r effort_estimate_master-load, echo = TRUE}
+data(effort_estimate_master, package = "KuskoHarvData")
+```
+
+:::{.describe}
+Each row represents one summary statistic (mean, standard deviation, lower/upper 95% confidence limits) of harvest for one species, in one geographic stratum, in one day.
+:::
+
+<details>
+<summary>Variable Descriptions</summary>
+
+```{r effort_estimate_master-vars}
+matrix(c(
+  # VARIABLE                              # DESCRIPTION
+  "date",        "The date to which the estimate applies",
+  "stratum",     "The geographic stratum to which the estimate applies",
+  "estimate",    "The estimated number of drift boat trips that occured in that stratum in that day."
+), ncol = 2, byrow = TRUE) |> 
+vars_table()
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View First 10 Rows</summary>
+
+```{r effort_estimate_master-head}
+data_table(effort_estimate_master, head)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View Last 10 Rows</summary>
+
+```{r effort_estimate_master-tail}
+data_table(effort_estimate_master, tail)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>Variable Summary</summary>
+
+```{r effort_estimate_master-summary}
+summary(effort_estimate_master)
+```
+
+</details>
+
+::::::
+
+## `r fa("table")` Completed Trip Interviews
+
+::::::{.indent}
+
+```{r interview_data_master-load, echo = TRUE}
+data(interview_data_master, package = "KuskoHarvData")
+```
+
+:::{.describe}
+Each row represents one completed trip interview.
+:::
+
+<details>
+<summary>Variable Descriptions</summary>
+
+```{r interview_data_master-vars}
+matrix(c(
+  # VARIABLE                     # DESCRIPTION
+  "UID",                         "Unique identifer of the opener (`YYYY_MM_DD` format)",
+  "source",                      "Interview data source (BBH = Bethel Boat Harbor, CBM = Community-Based Harvest Monitoring, FC = Bethel-area Fish Camps, ADFG = ADF&G Division of Subsistence Surveys)",
+  "stratum",                     "Geographic stratum in which trip occurred (see the map)",
+  "gear",                        "Gillnet type: drift for set",
+  "net_length",                  "Length of gillnet (feet)",
+  "mesh_size",                   "Gillnet stretched mesh size (inches)",
+  "trip_start; trip_end",        "Fisher-reported departure/return times",
+  "trip_duration",               "The time elapsed between `trip_start` and `trip_end`",
+  "soak_duration",               "Fisher-reported time spent with net soaking",
+  "chinook; chum; sockeye",      "Fisher-reported salmon harvest by species",
+  "village",                     "Location of the interview",
+  "suit_effort",                 "<sup>a</sup>Logical flag for whether all information is available for estimating effort.",
+  "suit_cr_info",                "<sup>a</sup>Logical flag for whether all information is available for estimating catch rate (`fish/(soak_duration * net_length`))",
+  "suit_cr_reliable",            "<sup>a</sup>Logical flag for whether data passed QA/QC checks for calculating catch rate",
+  "suit_avg_soak",               "<sup>a</sup>Logical flag for whether soak duration data passed QA/QC checks",
+  "suit_avg_net",                "<sup>a</sup>Logical flag for whether the net length data passed QA/QC checks",
+  "note",                        "Auto-generated description of QA/QC issues identified"
+), ncol = 2, byrow = TRUE) |> 
+
+vars_table(footnote_args = list(alphabet = c("Complete details of QA/QC checks performed found [here](https://htmlpreview.github.io/?https://github.com/bstaton1/KuskoHarvEst/blob/main/inst/rstudio/templates/04-docs/06-data-checks.html).")))
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>First 10 Rows</summary>
+
+```{r interview_data_master-head}
+data_table(interview_data_master, head)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>Last 10 Rows</summary>
+
+```{r interview_data_master-tail}
+data_table(interview_data_master, tail)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>Variable Summary</summary>
+
+```{r interview_data_master-summary}
+summary(interview_data_master)
+```
+
+</details>
+
+::::::
+
+## `r fa("table")` Aerial Drift Boat Counts
+
+::::::{.indent}
+
+```{r flight_data_master-load, echo = TRUE}
+data(flight_data_master, package = "KuskoHarvData")
+```
+
+:::{.describe}
+Each row represents one completed aerial survey.
+:::
+
+<details>
+<summary>Variable Descriptions</summary>
+
+```{r flight_data_master-vars}
+matrix(c(
+  # VARIABLE                              # DESCRIPTION
+  "UID",                                  "Unique identifer of the opener (`YYYY_MM_DD` format)",
+  "flight",                               "N^th^ survey in day",
+  "start_time; endtime",                  "Beginning and ending times of the survey",
+  "A_drift; B_drift; C_drift; D1_drift",  "Count of drift boats in each geographic stratum (see the map)"
+), ncol = 2, byrow = TRUE) |> 
+vars_table()
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View First 10 Rows</summary>
+
+```{r flight_data_master-head}
+data_table(flight_data_master, head)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View Last 10 Rows</summary>
+
+```{r flight_data_master-tail}
+data_table(flight_data_master, tail)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>Variable Summary</summary>
+
+```{r flight_data_master-summary}
+summary(flight_data_master)
+```
+
+</details>
+
+::::::
+
+## `r fa("table")` Bethel Test Fishery CPUE Records
+
+::::::{.indent}
+
+```{r btf_master-load, echo = TRUE}
+data(btf_master, package = "KuskoHarvData")
+```
+
+:::{.describe}
+Each row represents the daily catch-per-unit-effort (CPUE) for one species, each day of BTF operations (`r paste(range(lubridate::year(btf_master$date)), collapse = "-")`).
+Data are available from the [Alaska Department of Fish and Game Bethel Test Fishery webpage](https://www.adfg.alaska.gov/index.cfm?adfg=commercialbyareakuskokwim.btf) -- see step 5 in `vignette("updating-data", package = "KuskoHarvData")` for details.
+:::
+
+<details>
+<summary>Variable Descriptions</summary>
+
+```{r btf_master-vars}
+matrix(c(
+  # VARIABLE    # DESCRIPTION
+  "date",       "Date of sampling",
+  "species",    "Species for which the CPUE values apply",
+  "cpue",       "Catch per unit effort (salmon &#183; fathom<sup>-1</sup> &#183; minute <sup>-1</sup>)",
+  "ccpue",      "Cumulative CPUE; the sum of all daily CPUE values up to and including the value in the `date` column"
+), ncol = 2, byrow = TRUE) |> 
+vars_table()
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View First 10 Rows</summary>
+
+```{r btf_master-head}
+data_table(btf_master, head)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View Last 10 Rows</summary>
+
+```{r btf_master-tail}
+data_table(btf_master, tail)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>Variable Summary</summary>
+
+```{r btf_master-summary}
+summary(btf_master)
+```
+
+</details>
+
+::::::
+
+## `r fa("table")` Daily PABE Weather Summaries
+
+::::::{.indent}
+
+```{r weather_data_master-load, echo = TRUE}
+data(weather_data_master, package = "KuskoHarvData")
+```
+
+:::{.describe}
+Each row represents a daily summary statistic of a weather variable.
+Data were accessed via the ['reim'](https://docs.ropensci.org/riem/index.html) R package to query the ASOS database (airports), hosted by the [Iowa State University Environmental Mesonet](https://mesonet.agron.iastate.edu/request/download.phtml?network=IN__ASOS).
+The weather station used was the Bethel Airport (`"PABE"`).
+:::
+
+<details>
+<summary>Variable Descriptions</summary>
+
+```{r weather_data_master-vars}
+matrix(c(
+  # VARIABLE                          # DESCRIPTION
+  "date",                             "Date the data correspond to; only dates between June 1 and August 30 in years after and including 2016 are included",
+  "mean_temp; min_temp; max_temp",    "Average, minimum, and maximum of all air temperature measurements for `date` (&deg;F)",
+  "mean_relh",                        "Average of all relative humidity measurements for `date` (% of maximum)",
+  "precip",                           "Sum of all precipitation measurements for `date` (inches)",
+  "mean_Nwind",                       "Average of all wind speed measurements  for `date` (miles &#183; hour<sup>-1</sup>) after converting to northerly and easterly speed vectors. See `?KuskoHarvUtils::get_Nwind()` and `?KuskoHarvUtils::get_Ewind()` for details.",
+  "mean_wind",                        "Average of all wind speed measurements for `date` (miles &#183; hour<sup>-1</sup>), regardless of direction",
+  "max_gust",                         "Maximum of all gust measurements for `date`; gusts only register if they exceed 14 knots"
+), ncol = 2, byrow = TRUE) |> 
+vars_table()
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View First 10 Rows</summary>
+
+```{r weather_data_master-head}
+data_table(weather_data_master, head)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View Last 10 Rows</summary>
+
+```{r weather_data_master-tail}
+data_table(weather_data_master, tail)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>Variable Summary</summary>
+
+```{r weather_data_master-summary}
+summary(weather_data_master)
+```
+
+</details>
+
+::::::

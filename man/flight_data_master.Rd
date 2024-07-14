@@ -3,15 +3,24 @@
 \docType{data}
 \name{flight_data_master}
 \alias{flight_data_master}
-\title{Aerial Count Records}
+\title{Aerial Drift Boat Counts}
 \format{
-A data frame with rows representing individual flights and columns representing variables like the start/end times of the flight and the area-specific counts.
+See \code{vignette("datasets", package = "KuskoHarvData")}.
+}
+\source{
+Flights have generally been operated by the U.S. Fish and Wildlife Service Yukon Delta National Wildlife Refuge,
+however, in more recent years it has been common to charter pilots and planes due to high demand for Refuge aviation resources during the summer months.
+The flight path and counting methodology is described in Staton et al. (In Review).
 }
 \usage{
 flight_data_master
 }
 \description{
-A data set containing all aerial counts of drift net boats collected by the Kuskokwim River
-in-season subsistence salmon harvest monitoring program.
+Data set containing all aerial counts of drift gillnet boats collected by the Lower Kuskokwim River
+In-season Subsistence Salmon Harvest Monitoring Program.
+}
+\note{
+This data set will be updated automatically when adding new interview and flight data,
+see Steps 3 and 6 in \code{vignette("updating-data", package = "KuskoHarvData")}.
 }
 \keyword{datasets}

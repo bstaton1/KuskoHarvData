@@ -3,22 +3,18 @@
 \docType{data}
 \name{meta}
 \alias{meta}
-\title{Meta-data for each opener with monitoring data}
+\title{Opener Metadata}
 \format{
-A data frame with rows representing a unique day in which the fishery was open and monitoring occurred.
-Variables include:
-\itemize{
-\item \code{start}: the earliest time fishing was allowed that day (stored as a datetime class)
-\item \code{end}: the latest time fishing was allowed that day (stored as a datetime class)
-\item \code{flights_planned}: the number of flights planned to be flown that day
-\item \code{flights_flown}: the number of flights actually flown that day
-\item \code{announcement}: the identifier of the official document announcing that fishing would be allowed that day
-}
+See \code{vignette("datasets", package = "KuskoHarvData")}.
 }
 \usage{
 meta
 }
 \description{
-A data set containing basic information about each opener with interview and/or flight data
+Data set containing basic information about each opener with interview and/or flight data
+}
+\note{
+This data set must be updated manually,
+see Step 4 in \code{vignette("updating-data", package = "KuskoHarvData")}.
 }
 \keyword{datasets}

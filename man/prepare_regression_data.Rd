@@ -7,14 +7,15 @@
 prepare_regression_data(dates = NULL, na.omit = TRUE, ...)
 }
 \arguments{
-\item{dates}{Date object}
+\item{dates}{Object of class \code{"POSIXct/POSIXt"}; vector of historical fishing dates to include.
+If \code{NULL} (the default) all dates included in the meta data set (\code{?KuskoHarvData::meta}) will be included.}
 
-\item{na.omit}{Logical; if \code{TRUE} (the default), any rows with an \code{NA} value for any variable will be discarded.}
+\item{na.omit}{Logical; if \code{TRUE} (default), any rows with an \code{NA} value for any variable will be discarded.}
 
 \item{...}{Optional arguments passed to \code{\link[=prepare_response_vars]{prepare_response_vars()}}}
 }
 \value{
-A data frame with rows for individual dates and columns for several variables to be used in regression modeling.
+Data frame with rows for individual dates and columns for several variables to be used in regression modeling.
 See \code{\link[=prepare_predictor_vars]{prepare_predictor_vars()}} and \code{\link[=prepare_response_vars]{prepare_response_vars()}} for variable definitions.
 In addition to those variables, there is also a \code{period} variable (see \code{\link[KuskoHarvUtils:get_period]{KuskoHarvUtils::get_period()}}).
 }

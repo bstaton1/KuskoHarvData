@@ -3,7 +3,7 @@
 \docType{data}
 \name{harvest_estimate_master}
 \alias{harvest_estimate_master}
-\title{Harvest Estimates}
+\title{Compiled Harvest Estimates}
 \format{
 A data frame with rows representing a unique date/species/area/summary statistic combination.
 }
@@ -11,7 +11,7 @@ A data frame with rows representing a unique date/species/area/summary statistic
 harvest_estimate_master
 }
 \description{
-A data set containing all compiled estimates of harvest by drift nets generated
-by the Kuskokwim River in-season subsistence salmon harvest monitoring program.
+Data set containing all compiled estimates of harvest by drift gillnet boats generated
+by the Lower Kuskokwim River In-season Subsistence Salmon Harvest Monitoring Program.
 }
 \keyword{datasets}
