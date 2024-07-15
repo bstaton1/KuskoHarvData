@@ -263,8 +263,8 @@ summary(effort_estimate_master)
 
 ::::::{.indent}
 
-```{r interview_data_master-load, echo = TRUE}
-data(interview_data_master, package = "KuskoHarvData")
+```{r interview_data_all-load, echo = TRUE}
+data(interview_data_all, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -274,7 +274,7 @@ Each row represents one completed trip interview.
 <details>
 <summary>Variable Descriptions</summary>
 
-```{r interview_data_master-vars}
+```{r interview_data_all-vars}
 matrix(c(
   # VARIABLE                     # DESCRIPTION
   "UID",                         "Unique identifer of the opener (`YYYY_MM_DD` format)",
@@ -306,8 +306,8 @@ vars_table(footnote_args = list(alphabet = c("Complete details of QA/QC checks p
 <details>
 <summary>First 10 Rows</summary>
 
-```{r interview_data_master-head}
-data_table(interview_data_master, head)
+```{r interview_data_all-head}
+data_table(interview_data_all, head)
 ```
 
 </details>
@@ -317,8 +317,8 @@ data_table(interview_data_master, head)
 <details>
 <summary>Last 10 Rows</summary>
 
-```{r interview_data_master-tail}
-data_table(interview_data_master, tail)
+```{r interview_data_all-tail}
+data_table(interview_data_all, tail)
 ```
 
 </details>
@@ -328,8 +328,8 @@ data_table(interview_data_master, tail)
 <details>
 <summary>Variable Summary</summary>
 
-```{r interview_data_master-summary}
-summary(interview_data_master)
+```{r interview_data_all-summary}
+summary(interview_data_all)
 ```
 
 </details>
