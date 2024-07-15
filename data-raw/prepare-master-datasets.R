@@ -1,6 +1,6 @@
 # THIS SCRIPT COMBINES ALL RAW DATA FILES INTO MASTER DATA SETS AND PRODUCES HARVEST/EFFORT ESTIMATES
 # FOUR FILES TOTAL:
-# interview_data_all, flight_data_master
+# interview_data_all, flight_data_all
 # harvest_estimate_master, effort_estimate_master
 
 # clear the workspace
@@ -16,7 +16,7 @@ if (!dir.exists("data")) dir.create("data")
 
 # containers
 interview_data_all = NULL
-flight_data_master = NULL
+flight_data_all = NULL
 
 # print a message
 cat("\nPreparing Raw Data Files into Master Data Sets\n")
@@ -63,21 +63,21 @@ for (i in 1:length(dirs)) {
 
   # combine prepared data for this opener with data from other openers
   interview_data_all = rbind(interview_data_all, interview_data)
-  flight_data_master = rbind(flight_data_master, flight_data)
+  flight_data_all = rbind(flight_data_all, flight_data)
 }
 
 # remove information about set nets
 interview_data_all = subset(interview_data_all, gear == "drift"); rownames(interview_data_all) = NULL
-flight_data_master = flight_data_master[,-which(stringr::str_detect(colnames(flight_data_master), "_set"))]
+flight_data_all = flight_data_all[,-which(stringr::str_detect(colnames(flight_data_all), "_set"))]
 
 # remove information about geographic stratum D2
 interview_data_all = subset(interview_data_all, stratum != "D2"); rownames(interview_data_all) = NULL
 
 # export these data objects
-# when package is installed, these are accessible using e.g., data(flight_data_master)
-save(flight_data_master, file = "data/flight_data_master.rda")
+# when package is installed, these are accessible using e.g., data(flight_data_all)
+save(flight_data_all, file = "data/flight_data_all.rda")
 save(interview_data_all, file = "data/interview_data_all.rda")
-cat("\n  Output File Saved: data/flight_data_master.rda")
+cat("\n  Output File Saved: data/flight_data_all.rda")
 cat("\n  Output File Saved: data/interview_data_all.rda")
 
 ##### PART 2: OBTAIN HARVEST AND EFFORT ESTIMATES #####
@@ -101,7 +101,7 @@ for (i in 1:length(UIDs)) {
   cat("\r  Opener: ", UIDs[i], " (", stringr::str_pad(i, width = nchar(length(UIDs)), pad = " "), "/", length(UIDs), ")", sep = "")
 
   # subset flight/interview data for this opener
-  flight_data_sub = subset(flight_data_master, UID == UIDs[i])
+  flight_data_sub = subset(flight_data_all, UID == UIDs[i])
   interview_data_sub = subset(interview_data_all, UID == UIDs[i])
 
   # produce effort estimate for this opener
@@ -147,7 +147,7 @@ stoptime = Sys.time()
 cat("\n  Estimation Time Elapsed:", format(round(stoptime - starttime, 2)))
 
 # export these data objects
-# when package is installed, these are accessible using e.g., data(flight_data_master)
+# when package is installed, these are accessible using e.g., data(flight_data_all)
 save(effort_estimate_master, file = "data/effort_estimate_master.rda")
 save(harvest_estimate_master, file = "data/harvest_estimate_master.rda")
 cat("\n  Output File Saved: data/effort_estimate_master.rda")
