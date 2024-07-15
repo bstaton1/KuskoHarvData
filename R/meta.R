@@ -8,4 +8,4 @@
 #'     see Step 4 in `vignette("updating-data", package = "KuskoHarvData")`.
 #'
 
-"meta"
+"openers_all"

@@ -35,7 +35,7 @@ Briefly, these include:
 
 | Data Set                  	| Description                                                                                                                                                              	|
 |---------------------------	|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| `meta`                    	| Meta data for each drift gillnet subsistence fishery opener.                                                                                                             	|
+| `openers_all`                    	| Meta data for each drift gillnet subsistence fishery opener.                                                                                                             	|
 | `harv_est_all` 	| Compiled estimates of salmon harvest by drift gillnet boats by opener, species, and geographic stratum. Includes point estimates and bootstrap 95% confidence intervals. 	|
 | `effort_est_all`  	| Compiled estimates of the number of drift gillnet trips by opener and geographic stratum.                                                                                	|
 | `interview_data_all`   	| Completed trip interview records documenting interview location, start/end times of the trip, gear and drift characteristics, and salmon catch by species.               	|

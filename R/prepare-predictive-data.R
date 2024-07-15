@@ -4,7 +4,7 @@
 #' openers, intended for fitting in regression models.
 #'
 #' @param dates Object of class `"POSIXct/POSIXt"`; vector of historical fishing dates to include.
-#'   If `NULL` (the default) all dates included in the meta data set (`?KuskoHarvData::meta`) will be included.
+#'   If `NULL` (the default) all dates included in the meta data set (`?KuskoHarvData::openers_all`) will be included.
 #' @param comp_species Character; vector specifying the species to calculate proportional contribution for.
 #'   Accepted options are any combinations of `"chinook"`, `"chum"`, and `"sockeye"`.
 #' @param cpt_species Character; a vector specifying the species to calculate catch rate (catch/trip) for.
@@ -121,10 +121,10 @@ prepare_predictor_vars = function(dates = NULL) {
   ### PREDICTOR DATA TYPE #1: BASED ON META-DATA ONLY ###
 
   # load the meta data
-  data("meta", package = "KuskoHarvData", envir = environment())
+  data("openers_all", package = "KuskoHarvData", envir = environment())
 
   # start the output object with the date
-  out = data.frame(date = lubridate::date(meta$start))
+  out = data.frame(date = lubridate::date(openers_all$start))
 
   # add a year variable
   out$year = lubridate::year(out$date)
@@ -133,13 +133,13 @@ prepare_predictor_vars = function(dates = NULL) {
   out$day = KuskoHarvUtils::to_days_past_may31(out$date)
 
   # determine the duration of allowed fishing that day
-  out$hours_open = ceiling(as.numeric(lubridate::as.period(lubridate::interval(meta$start, meta$end)), units = "hours"))
+  out$hours_open = ceiling(as.numeric(lubridate::as.period(lubridate::interval(openers_all$start, openers_all$end)), units = "hours"))
 
   # determine if drift fishing occurred the previous day
   # e.g., if the order of days open is 6/12 12:00-23:59; 6/16 12:00-23:59; 6/17 0:00-12:00, then 6/17 is a not first day
   out$fished_yesterday = logical(nrow(out))
   for (d in 2:nrow(out)) {
-    if (lubridate::date(meta$start[d]) == lubridate::date(meta$start[d-1]) + 1) {
+    if (lubridate::date(openers_all$start[d]) == lubridate::date(openers_all$start[d-1]) + 1) {
       out$fished_yesterday[d] = TRUE
     }
   }
@@ -148,8 +148,8 @@ prepare_predictor_vars = function(dates = NULL) {
   out$weekend = lubridate::wday(out$date, label = TRUE) %in% c("Sat", "Sun")
 
   # determine the fraction of the fishing period before noon
-  noon = meta$start; lubridate::hour(noon) = 12; lubridate::minute(noon) = 0; lubridate::second(noon) = 0
-  hrs_before_noon = as.numeric(lubridate::as.period(lubridate::interval(meta$start, noon)), units = "hours")
+  noon = openers_all$start; lubridate::hour(noon) = 12; lubridate::minute(noon) = 0; lubridate::second(noon) = 0
+  hrs_before_noon = as.numeric(lubridate::as.period(lubridate::interval(openers_all$start, noon)), units = "hours")
   hrs_before_noon[hrs_before_noon < 0] = 0
   out$p_before_noon = hrs_before_noon/out$hours_open
 
@@ -175,7 +175,7 @@ prepare_predictor_vars = function(dates = NULL) {
 
   ### RETURN ONLY REQUESTED DATES
   if (is.null(dates)) {
-    keep_dates = unique(lubridate::date(meta$start))
+    keep_dates = unique(lubridate::date(openers_all$start))
   } else {
     keep_dates = dates
   }

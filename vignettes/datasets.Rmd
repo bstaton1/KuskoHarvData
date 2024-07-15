@@ -31,10 +31,10 @@ This vignette gives an overview of the various data sets found in 'KuskoHarvData
 Each of these data sets (for example, the opener metadata) can be loaded by running:
 
 ```{r example-load, eval = FALSE, echo = TRUE}
-data(meta, package = "KuskoHarvData")
+data(openers_all, package = "KuskoHarvData")
 ```
 
-Then this data set can be used by simply referring to the object called `meta`.
+Then this data set can be used by simply referring to the object called `openers_all`.
 
 Several of the data sets included have a spatial component (geographic strata A, B, C, and D1) -- these are shown on the map below.
 
@@ -74,8 +74,8 @@ data_table = function(x, FUN, n = 10) {
 
 ::::::{.indent}
 
-```{r meta-load, echo = TRUE}
-data(meta, package = "KuskoHarvData")
+```{r openers_all-load, echo = TRUE}
+data(openers_all, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -85,7 +85,7 @@ Each row represents one drift gillnet opener.
 <details>
 <summary>Variable Descriptions</summary>
 
-```{r meta-vars}
+```{r openers_all-vars}
 matrix(c(
   # VARIABLE                              # DESCRIPTION
   "start; end",        "Start and end dates/times of the opener",
@@ -103,8 +103,8 @@ vars_table()
 <details>
 <summary>View First 10 Rows</summary>
 
-```{r meta-head}
-data_table(meta, head)
+```{r openers_all-head}
+data_table(openers_all, head)
 ```
 
 </details>
@@ -114,8 +114,8 @@ data_table(meta, head)
 <details>
 <summary>View Last 10 Rows</summary>
 
-```{r meta-tail}
-data_table(meta, tail)
+```{r openers_all-tail}
+data_table(openers_all, tail)
 ```
 
 </details>
@@ -125,8 +125,8 @@ data_table(meta, tail)
 <details>
 <summary>Variable Summary</summary>
 
-```{r meta-summary}
-summary(meta)
+```{r openers_all-summary}
+summary(openers_all)
 ```
 
 </details>
