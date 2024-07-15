@@ -8,7 +8,7 @@ prepare_predictor_vars(dates = NULL)
 }
 \arguments{
 \item{dates}{Object of class \code{"POSIXct/POSIXt"}; vector of historical fishing dates to include.
-If \code{NULL} (the default) all dates included in the meta data set (\code{?KuskoHarvData::meta}) will be included.}
+If \code{NULL} (the default) all dates included in the meta data set (\code{?KuskoHarvData::openers_all}) will be included.}
 }
 \value{
 Data frame with rows for individual dates and columns for:

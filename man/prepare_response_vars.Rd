@@ -13,7 +13,7 @@ prepare_response_vars(
 }
 \arguments{
 \item{dates}{Object of class \code{"POSIXct/POSIXt"}; vector of historical fishing dates to include.
-If \code{NULL} (the default) all dates included in the meta data set (\code{?KuskoHarvData::meta}) will be included.}
+If \code{NULL} (the default) all dates included in the meta data set (\code{?KuskoHarvData::openers_all}) will be included.}
 
 \item{comp_species}{Character; vector specifying the species to calculate proportional contribution for.
 Accepted options are any combinations of \code{"chinook"}, \code{"chum"}, and \code{"sockeye"}.}

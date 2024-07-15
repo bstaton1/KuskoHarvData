@@ -8,7 +8,7 @@ prepare_regression_data(dates = NULL, na.omit = TRUE, ...)
 }
 \arguments{
 \item{dates}{Object of class \code{"POSIXct/POSIXt"}; vector of historical fishing dates to include.
-If \code{NULL} (the default) all dates included in the meta data set (\code{?KuskoHarvData::meta}) will be included.}
+If \code{NULL} (the default) all dates included in the meta data set (\code{?KuskoHarvData::openers_all}) will be included.}
 
 \item{na.omit}{Logical; if \code{TRUE} (default), any rows with an \code{NA} value for any variable will be discarded.}
 
