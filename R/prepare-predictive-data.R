@@ -17,11 +17,11 @@
 prepare_response_vars = function(dates = NULL, comp_species = c("chinook", "chum", "sockeye"), cpt_species = "total", include_transformed = TRUE) {
 
   # load the data
-  data("harvest_estimate_master", package = "KuskoHarvData", envir = environment())
+  data("harv_est_all", package = "KuskoHarvData", envir = environment())
   data("effort_estimate_master", package = "KuskoHarvData", envir = environment())
 
   # rename for shorthand
-  H_ests = harvest_estimate_master
+  H_ests = harv_est_all
   E_ests = effort_estimate_master
 
   # handle dates if not specified

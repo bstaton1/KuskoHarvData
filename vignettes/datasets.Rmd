@@ -137,8 +137,8 @@ summary(meta)
 
 ::::::{.indent}
 
-```{r harvest_estimate_master-load, echo = TRUE}
-data(harvest_estimate_master, package = "KuskoHarvData")
+```{r harv_est_all-load, echo = TRUE}
+data(harv_est_all, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -148,7 +148,7 @@ Each row represents one summary statistic (mean, standard deviation, lower/upper
 <details>
 <summary>Variable Descriptions</summary>
 
-```{r harvest_estimate_master-vars}
+```{r harv_est_all-vars}
 matrix(c(
   # VARIABLE                              # DESCRIPTION
   "date",        "The date to which the estimate applies",
@@ -167,8 +167,8 @@ vars_table()
 <details>
 <summary>View First 10 Rows</summary>
 
-```{r harvest_estimate_master-head}
-data_table(harvest_estimate_master, head)
+```{r harv_est_all-head}
+data_table(harv_est_all, head)
 ```
 
 </details>
@@ -178,8 +178,8 @@ data_table(harvest_estimate_master, head)
 <details>
 <summary>View Last 10 Rows</summary>
 
-```{r harvest_estimate_master-tail}
-data_table(harvest_estimate_master, tail)
+```{r harv_est_all-tail}
+data_table(harv_est_all, tail)
 ```
 
 </details>
@@ -189,8 +189,8 @@ data_table(harvest_estimate_master, tail)
 <details>
 <summary>Variable Summary</summary>
 
-```{r harvest_estimate_master-summary}
-summary(harvest_estimate_master)
+```{r harv_est_all-summary}
+summary(harv_est_all)
 ```
 
 </details>

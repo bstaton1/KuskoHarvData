@@ -1,7 +1,7 @@
 # THIS SCRIPT COMBINES ALL RAW DATA FILES INTO MASTER DATA SETS AND PRODUCES HARVEST/EFFORT ESTIMATES
 # FOUR FILES TOTAL:
 # interview_data_all, flight_data_all
-# harvest_estimate_master, effort_estimate_master
+# harv_est_all, effort_estimate_master
 
 # clear the workspace
 rm(list = ls(all = TRUE))
@@ -91,7 +91,7 @@ cat("\n  (**This will take several minutes to run**)\n")
 
 # containers
 effort_estimate_master = NULL
-harvest_estimate_master = NULL
+harv_est_all = NULL
 
 # loop through openers and generate harvest and effort estimates for each
 starttime = Sys.time()
@@ -139,7 +139,7 @@ for (i in 1:length(UIDs)) {
 
       # build data frame and combine with other estimates
       tmp = data.frame(date = unique(na.omit(lubridate::date(interview_data_sub$trip_start))), species = spp, stratum = strat, quantity = names(tmp), estimate = unname(tmp))
-      harvest_estimate_master = rbind(harvest_estimate_master, tmp); rm(tmp)
+      harv_est_all = rbind(harv_est_all, tmp); rm(tmp)
     }
   }
 }
@@ -149,6 +149,6 @@ cat("\n  Estimation Time Elapsed:", format(round(stoptime - starttime, 2)))
 # export these data objects
 # when package is installed, these are accessible using e.g., data(flight_data_all)
 save(effort_estimate_master, file = "data/effort_estimate_master.rda")
-save(harvest_estimate_master, file = "data/harvest_estimate_master.rda")
+save(harv_est_all, file = "data/harv_est_all.rda")
 cat("\n  Output File Saved: data/effort_estimate_master.rda")
-cat("\n  Output File Saved: data/harvest_estimate_master.rda")
+cat("\n  Output File Saved: data/harv_est_all.rda")
