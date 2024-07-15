@@ -5,8 +5,8 @@
   # run the opener meta data script
   source("data-raw/prepare-opener-metadata.R")
 
-  # run the script to prepare master interview/flight data sets and recompile all harvest/effort estimates
-  source("data-raw/prepare-master-datasets.R")
+  # run the script to prepare interview/flight data sets and recompile all harvest/effort estimates
+  source("data-raw/prepare-harvest-effort-datasets.R")
 
   # run the script to prepare Bethel Test Fishery Data
   source("data-raw/prepare-btf-data.R")

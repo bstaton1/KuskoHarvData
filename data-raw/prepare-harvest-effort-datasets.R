@@ -1,4 +1,4 @@
-# THIS SCRIPT COMBINES ALL RAW DATA FILES INTO MASTER DATA SETS AND PRODUCES HARVEST/EFFORT ESTIMATES
+# THIS SCRIPT COMBINES ALL RAW DATA FILES INTO MAIN DATA SETS AND PRODUCES HARVEST/EFFORT ESTIMATES
 # FOUR FILES TOTAL:
 # interview_data_all, flight_data_all
 # harv_est_all, effort_est_all
@@ -19,7 +19,7 @@ interview_data_all = NULL
 flight_data_all = NULL
 
 # print a message
-cat("\nPreparing Raw Data Files into Master Data Sets\n")
+cat("\nPreparing Raw Data Files into Main Data Sets\n")
 
 # loop through openers
 for (i in 1:length(dirs)) {
@@ -76,8 +76,8 @@ interview_data_all = subset(interview_data_all, stratum != "D2"); rownames(inter
 # export these data objects
 # when package is installed, these are accessible using e.g., data(flight_data_all)
 save(flight_data_all, file = "data/flight_data_all.rda")
-save(interview_data_all, file = "data/interview_data_all.rda")
 cat("\n  Output File Saved: data/flight_data_all.rda")
+save(interview_data_all, file = "data/interview_data_all.rda")
 cat("\n  Output File Saved: data/interview_data_all.rda")
 
 ##### PART 2: OBTAIN HARVEST AND EFFORT ESTIMATES #####
@@ -147,8 +147,8 @@ stoptime = Sys.time()
 cat("\n  Estimation Time Elapsed:", format(round(stoptime - starttime, 2)))
 
 # export these data objects
-# when package is installed, these are accessible using e.g., data(flight_data_all)
+# when package is installed, these are accessible using e.g., data(harv_est_all)
 save(effort_est_all, file = "data/effort_est_all.rda")
-save(harv_est_all, file = "data/harv_est_all.rda")
 cat("\n  Output File Saved: data/effort_est_all.rda")
+save(harv_est_all, file = "data/harv_est_all.rda")
 cat("\n  Output File Saved: data/harv_est_all.rda")
