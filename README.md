@@ -41,7 +41,7 @@ Briefly, these include:
 | `interview_data_all`   	| Completed trip interview records documenting interview location, start/end times of the trip, gear and drift characteristics, and salmon catch by species.               	|
 | `flight_data_all`      	| Instantaneous aerial counts of active drift gillnet trips by geographic stratum.                                                                                         	|
 | `btf_data_all`              	| Daily Bethel Test Fishery catch-per-unit-effort by species.                                                                                                              	|
-| `weather_data_master`     	| Daily summaries of weather variables, as measured at the Bethel Airport (PABE).                                                                                          	|
+| `PABE_data_all`     	| Daily summaries of weather variables, as measured at the Bethel Airport (PABE).                                                                                          	|
 Source information for each data set can be found in the package help files, for example, to learn about where the interview data come from, run:
 
 ```R

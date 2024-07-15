@@ -12,4 +12,4 @@
 #'     The weather station used was the Bethel Airport (`"PABE"`).
 #'
 
-"weather_data_master"
+"PABE_data_all"

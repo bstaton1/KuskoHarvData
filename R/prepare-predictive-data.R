@@ -162,10 +162,10 @@ prepare_predictor_vars = function(dates = NULL) {
   ### PREDICTOR DATA TYPE #3: WEATHER-BASED QUANTITIES ###
 
   # load the weather data
-  data("weather_data_master", package = "KuskoHarvData", envir = environment())
+  data("PABE_data_all", package = "KuskoHarvData", envir = environment())
 
   # keep only dates that are within the harvest data
-  weather_dat = weather_data_master[weather_data_master$date %in% out$date,]
+  weather_dat = PABE_data_all[PABE_data_all$date %in% out$date,]
 
   # keep only the average temperature, relh, and precipitation
   weather_dat = weather_dat[,c("date", "mean_temp", "mean_relh", "precip", "mean_Nwind", "mean_Ewind", "mean_wind", "max_gust")]

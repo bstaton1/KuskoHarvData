@@ -467,8 +467,8 @@ summary(btf_data_all)
 
 ::::::{.indent}
 
-```{r weather_data_master-load, echo = TRUE}
-data(weather_data_master, package = "KuskoHarvData")
+```{r PABE_data_all-load, echo = TRUE}
+data(PABE_data_all, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -480,7 +480,7 @@ The weather station used was the Bethel Airport (`"PABE"`).
 <details>
 <summary>Variable Descriptions</summary>
 
-```{r weather_data_master-vars}
+```{r PABE_data_all-vars}
 matrix(c(
   # VARIABLE                          # DESCRIPTION
   "date",                             "Date the data correspond to; only dates between June 1 and August 30 in years after and including 2016 are included",
@@ -501,8 +501,8 @@ vars_table()
 <details>
 <summary>View First 10 Rows</summary>
 
-```{r weather_data_master-head}
-data_table(weather_data_master, head)
+```{r PABE_data_all-head}
+data_table(PABE_data_all, head)
 ```
 
 </details>
@@ -512,8 +512,8 @@ data_table(weather_data_master, head)
 <details>
 <summary>View Last 10 Rows</summary>
 
-```{r weather_data_master-tail}
-data_table(weather_data_master, tail)
+```{r PABE_data_all-tail}
+data_table(PABE_data_all, tail)
 ```
 
 </details>
@@ -523,8 +523,8 @@ data_table(weather_data_master, tail)
 <details>
 <summary>Variable Summary</summary>
 
-```{r weather_data_master-summary}
-summary(weather_data_master)
+```{r PABE_data_all-summary}
+summary(PABE_data_all)
 ```
 
 </details>
