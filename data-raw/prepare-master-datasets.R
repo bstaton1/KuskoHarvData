@@ -1,7 +1,7 @@
 # THIS SCRIPT COMBINES ALL RAW DATA FILES INTO MASTER DATA SETS AND PRODUCES HARVEST/EFFORT ESTIMATES
 # FOUR FILES TOTAL:
 # interview_data_all, flight_data_all
-# harv_est_all, effort_estimate_master
+# harv_est_all, effort_est_all
 
 # clear the workspace
 rm(list = ls(all = TRUE))
@@ -90,7 +90,7 @@ cat("\nRecompiling Harvest and Effort Estimates")
 cat("\n  (**This will take several minutes to run**)\n")
 
 # containers
-effort_estimate_master = NULL
+effort_est_all = NULL
 harv_est_all = NULL
 
 # loop through openers and generate harvest and effort estimates for each
@@ -114,7 +114,7 @@ for (i in 1:length(UIDs)) {
   # combine effort estimates with those from other openers
   tmp = c(effort_info$effort_est_stratum, total = effort_info$effort_est_total)
   tmp = data.frame(date = unique(lubridate::date(flight_data_sub$start_time)), stratum = names(tmp), estimate = unname(tmp))
-  effort_estimate_master = rbind(effort_estimate_master, tmp); rm(tmp)
+  effort_est_all = rbind(effort_est_all, tmp); rm(tmp)
 
   # obtain bootstrap harvest estimates
   boot_out = KuskoHarvEst::bootstrap_harvest(
@@ -148,7 +148,7 @@ cat("\n  Estimation Time Elapsed:", format(round(stoptime - starttime, 2)))
 
 # export these data objects
 # when package is installed, these are accessible using e.g., data(flight_data_all)
-save(effort_estimate_master, file = "data/effort_estimate_master.rda")
+save(effort_est_all, file = "data/effort_est_all.rda")
 save(harv_est_all, file = "data/harv_est_all.rda")
-cat("\n  Output File Saved: data/effort_estimate_master.rda")
+cat("\n  Output File Saved: data/effort_est_all.rda")
 cat("\n  Output File Saved: data/harv_est_all.rda")

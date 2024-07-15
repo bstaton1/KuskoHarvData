@@ -18,11 +18,11 @@ prepare_response_vars = function(dates = NULL, comp_species = c("chinook", "chum
 
   # load the data
   data("harv_est_all", package = "KuskoHarvData", envir = environment())
-  data("effort_estimate_master", package = "KuskoHarvData", envir = environment())
+  data("effort_est_all", package = "KuskoHarvData", envir = environment())
 
   # rename for shorthand
   H_ests = harv_est_all
-  E_ests = effort_estimate_master
+  E_ests = effort_est_all
 
   # handle dates if not specified
   if (is.null(dates)) {

@@ -201,8 +201,8 @@ summary(harv_est_all)
 
 ::::::{.indent}
 
-```{r effort_estimate_master-load, echo = TRUE}
-data(effort_estimate_master, package = "KuskoHarvData")
+```{r effort_est_all-load, echo = TRUE}
+data(effort_est_all, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -212,7 +212,7 @@ Each row represents one summary statistic (mean, standard deviation, lower/upper
 <details>
 <summary>Variable Descriptions</summary>
 
-```{r effort_estimate_master-vars}
+```{r effort_est_all-vars}
 matrix(c(
   # VARIABLE                              # DESCRIPTION
   "date",        "The date to which the estimate applies",
@@ -229,8 +229,8 @@ vars_table()
 <details>
 <summary>View First 10 Rows</summary>
 
-```{r effort_estimate_master-head}
-data_table(effort_estimate_master, head)
+```{r effort_est_all-head}
+data_table(effort_est_all, head)
 ```
 
 </details>
@@ -240,8 +240,8 @@ data_table(effort_estimate_master, head)
 <details>
 <summary>View Last 10 Rows</summary>
 
-```{r effort_estimate_master-tail}
-data_table(effort_estimate_master, tail)
+```{r effort_est_all-tail}
+data_table(effort_est_all, tail)
 ```
 
 </details>
@@ -251,8 +251,8 @@ data_table(effort_estimate_master, tail)
 <details>
 <summary>Variable Summary</summary>
 
-```{r effort_estimate_master-summary}
-summary(effort_estimate_master)
+```{r effort_est_all-summary}
+summary(effort_est_all)
 ```
 
 </details>

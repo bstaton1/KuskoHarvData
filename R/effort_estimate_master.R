@@ -13,4 +13,4 @@
 #'     The estimator is described in Staton et al. (In Review).
 #'
 
-"effort_estimate_master"
+"effort_est_all"
