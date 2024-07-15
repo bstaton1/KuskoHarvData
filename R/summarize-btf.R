@@ -22,7 +22,7 @@
 summarize_btf = function(date, stat, plus_minus = 0) {
 
   # load BTF data
-  data("btf_master", package = "KuskoHarvData", envir = environment())
+  data("btf_data_all", package = "KuskoHarvData", envir = environment())
 
   # list of acceptable summary statistics
   accepted_stats = c("chinook_comp", "chum_comp", "sockeye_comp", "chinook_cpue", "chum_cpue", "sockeye_cpue", "total_cpue")
@@ -53,13 +53,13 @@ summarize_btf = function(date, stat, plus_minus = 0) {
 
   # if the stat type is CPUE, calculate the average daily CPUE
   if (type_stat == "cpue") {
-    btf_sub = subset(btf_master, date %in% keep_dates & species == spp_stat)
+    btf_sub = subset(btf_data_all, date %in% keep_dates & species == spp_stat)
     out = sum(btf_sub$cpue)/length(keep_dates)
   }
 
   # if the stat type is comp, calculate the average daily proportional contribution of the species to total CPUE
   if (type_stat == "comp") {
-    btf_sub = subset(btf_master, date %in% keep_dates)
+    btf_sub = subset(btf_data_all, date %in% keep_dates)
     numerator_total = sum(btf_sub$cpue[btf_sub$species == spp_stat])
     denominator_total = sum(btf_sub$cpue[btf_sub$species == "total"])
     out = numerator_total/denominator_total

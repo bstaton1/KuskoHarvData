@@ -403,19 +403,19 @@ summary(flight_data_all)
 
 ::::::{.indent}
 
-```{r btf_master-load, echo = TRUE}
-data(btf_master, package = "KuskoHarvData")
+```{r btf_data_all-load, echo = TRUE}
+data(btf_data_all, package = "KuskoHarvData")
 ```
 
 :::{.describe}
-Each row represents the daily catch-per-unit-effort (CPUE) for one species, each day of BTF operations (`r paste(range(lubridate::year(btf_master$date)), collapse = "-")`).
+Each row represents the daily catch-per-unit-effort (CPUE) for one species, each day of BTF operations (`r paste(range(lubridate::year(btf_data_all$date)), collapse = "-")`).
 Data are available from the [Alaska Department of Fish and Game Bethel Test Fishery webpage](https://www.adfg.alaska.gov/index.cfm?adfg=commercialbyareakuskokwim.btf) -- see step 5 in `vignette("updating-data", package = "KuskoHarvData")` for details.
 :::
 
 <details>
 <summary>Variable Descriptions</summary>
 
-```{r btf_master-vars}
+```{r btf_data_all-vars}
 matrix(c(
   # VARIABLE    # DESCRIPTION
   "date",       "Date of sampling",
@@ -433,8 +433,8 @@ vars_table()
 <details>
 <summary>View First 10 Rows</summary>
 
-```{r btf_master-head}
-data_table(btf_master, head)
+```{r btf_data_all-head}
+data_table(btf_data_all, head)
 ```
 
 </details>
@@ -444,8 +444,8 @@ data_table(btf_master, head)
 <details>
 <summary>View Last 10 Rows</summary>
 
-```{r btf_master-tail}
-data_table(btf_master, tail)
+```{r btf_data_all-tail}
+data_table(btf_data_all, tail)
 ```
 
 </details>
@@ -455,8 +455,8 @@ data_table(btf_master, tail)
 <details>
 <summary>Variable Summary</summary>
 
-```{r btf_master-summary}
-summary(btf_master)
+```{r btf_data_all-summary}
+summary(btf_data_all)
 ```
 
 </details>

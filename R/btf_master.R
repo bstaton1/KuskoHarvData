@@ -11,4 +11,4 @@
 #'     Sampling methods are described in Bue and Lipka ([2016](http://www.adfg.alaska.gov/FedAidPDFs/FDS16-05.pdf)).
 #'
 
-"btf_master"
+"btf_data_all"
