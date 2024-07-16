@@ -1,7 +1,7 @@
-# THIS SCRIPT COMBINES ALL RAW DATA FILES INTO MASTER DATA SETS AND PRODUCES HARVEST/EFFORT ESTIMATES
+# THIS SCRIPT COMBINES ALL RAW DATA FILES INTO MAIN DATA SETS AND PRODUCES HARVEST/EFFORT ESTIMATES
 # FOUR FILES TOTAL:
-# interview_data_master, flight_data_master
-# harvest_estimate_master, effort_estimate_master
+# interview_data_all, flight_data_all
+# harv_est_all, effort_est_all
 
 # clear the workspace
 rm(list = ls(all = TRUE))
@@ -15,11 +15,11 @@ if (!dir.exists("data")) dir.create("data")
 ##### PART 1: COMPILE RAW DATA INTO MASTER DATA SETS TO BE INCLUDED WITH PACKAGE #####
 
 # containers
-interview_data_master = NULL
-flight_data_master = NULL
+interview_data_all = NULL
+flight_data_all = NULL
 
 # print a message
-cat("\nPreparing Raw Data Files into Master Data Sets\n")
+cat("\nPreparing Raw Data Files into Main Data Sets\n")
 
 # loop through openers
 for (i in 1:length(dirs)) {
@@ -62,36 +62,36 @@ for (i in 1:length(dirs)) {
   flight_data = cbind(UID = basename(dirs[i]), flight_data)
 
   # combine prepared data for this opener with data from other openers
-  interview_data_master = rbind(interview_data_master, interview_data)
-  flight_data_master = rbind(flight_data_master, flight_data)
+  interview_data_all = rbind(interview_data_all, interview_data)
+  flight_data_all = rbind(flight_data_all, flight_data)
 }
 
 # remove information about set nets
-interview_data_master = subset(interview_data_master, gear == "drift"); rownames(interview_data_master) = NULL
-flight_data_master = flight_data_master[,-which(stringr::str_detect(colnames(flight_data_master), "_set"))]
+interview_data_all = subset(interview_data_all, gear == "drift"); rownames(interview_data_all) = NULL
+flight_data_all = flight_data_all[,-which(stringr::str_detect(colnames(flight_data_all), "_set"))]
 
 # remove information about geographic stratum D2
-interview_data_master = subset(interview_data_master, stratum != "D2"); rownames(interview_data_master) = NULL
+interview_data_all = subset(interview_data_all, stratum != "D2"); rownames(interview_data_all) = NULL
 
 # export these data objects
-# when package is installed, these are accessible using e.g., data(flight_data_master)
-save(flight_data_master, file = "data/flight_data_master.rda")
-save(interview_data_master, file = "data/interview_data_master.rda")
-cat("\n  Output File Saved: data/flight_data_master.rda")
-cat("\n  Output File Saved: data/interview_data_master.rda")
+# when package is installed, these are accessible using e.g., data(flight_data_all)
+save(flight_data_all, file = "data/flight_data_all.rda")
+cat("\n  Output File Saved: data/flight_data_all.rda")
+save(interview_data_all, file = "data/interview_data_all.rda")
+cat("\n  Output File Saved: data/interview_data_all.rda")
 
 ##### PART 2: OBTAIN HARVEST AND EFFORT ESTIMATES #####
 
 # extract the unique IDs of all openers
-UIDs = unique(interview_data_master$UID)
+UIDs = unique(interview_data_all$UID)
 
 # print a message
 cat("\nRecompiling Harvest and Effort Estimates")
 cat("\n  (**This will take several minutes to run**)\n")
 
 # containers
-effort_estimate_master = NULL
-harvest_estimate_master = NULL
+effort_est_all = NULL
+harv_est_all = NULL
 
 # loop through openers and generate harvest and effort estimates for each
 starttime = Sys.time()
@@ -101,8 +101,8 @@ for (i in 1:length(UIDs)) {
   cat("\r  Opener: ", UIDs[i], " (", stringr::str_pad(i, width = nchar(length(UIDs)), pad = " "), "/", length(UIDs), ")", sep = "")
 
   # subset flight/interview data for this opener
-  flight_data_sub = subset(flight_data_master, UID == UIDs[i])
-  interview_data_sub = subset(interview_data_master, UID == UIDs[i])
+  flight_data_sub = subset(flight_data_all, UID == UIDs[i])
+  interview_data_sub = subset(interview_data_all, UID == UIDs[i])
 
   # produce effort estimate for this opener
   effort_info = KuskoHarvEst::estimate_effort(
@@ -114,7 +114,7 @@ for (i in 1:length(UIDs)) {
   # combine effort estimates with those from other openers
   tmp = c(effort_info$effort_est_stratum, total = effort_info$effort_est_total)
   tmp = data.frame(date = unique(lubridate::date(flight_data_sub$start_time)), stratum = names(tmp), estimate = unname(tmp))
-  effort_estimate_master = rbind(effort_estimate_master, tmp); rm(tmp)
+  effort_est_all = rbind(effort_est_all, tmp); rm(tmp)
 
   # obtain bootstrap harvest estimates
   boot_out = KuskoHarvEst::bootstrap_harvest(
@@ -139,7 +139,7 @@ for (i in 1:length(UIDs)) {
 
       # build data frame and combine with other estimates
       tmp = data.frame(date = unique(na.omit(lubridate::date(interview_data_sub$trip_start))), species = spp, stratum = strat, quantity = names(tmp), estimate = unname(tmp))
-      harvest_estimate_master = rbind(harvest_estimate_master, tmp); rm(tmp)
+      harv_est_all = rbind(harv_est_all, tmp); rm(tmp)
     }
   }
 }
@@ -147,8 +147,8 @@ stoptime = Sys.time()
 cat("\n  Estimation Time Elapsed:", format(round(stoptime - starttime, 2)))
 
 # export these data objects
-# when package is installed, these are accessible using e.g., data(flight_data_master)
-save(effort_estimate_master, file = "data/effort_estimate_master.rda")
-save(harvest_estimate_master, file = "data/harvest_estimate_master.rda")
-cat("\n  Output File Saved: data/effort_estimate_master.rda")
-cat("\n  Output File Saved: data/harvest_estimate_master.rda")
+# when package is installed, these are accessible using e.g., data(harv_est_all)
+save(effort_est_all, file = "data/effort_est_all.rda")
+cat("\n  Output File Saved: data/effort_est_all.rda")
+save(harv_est_all, file = "data/harv_est_all.rda")
+cat("\n  Output File Saved: data/harv_est_all.rda")

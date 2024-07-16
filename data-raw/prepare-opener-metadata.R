@@ -7,15 +7,15 @@ cat("\nProcessing Opener Meta Data")
 if (!dir.exists("data")) dir.create("data")
 
 # load the meta-data file
-meta = read.csv("data-raw/opener-metadata.csv")
+openers_all = read.csv("data-raw/opener-metadata.csv")
 
 # format start and end times for each opener
-meta$start = KuskoHarvUtils::combine_datetime(meta$date, meta$start_time)
-meta$end = KuskoHarvUtils::combine_datetime(meta$date, meta$end_time)
+openers_all$start = KuskoHarvUtils::combine_datetime(openers_all$date, openers_all$start_time)
+openers_all$end = KuskoHarvUtils::combine_datetime(openers_all$date, openers_all$end_time)
 
 # re-order and keep only relevant columns
-meta = meta[,c("start", "end", "flights_planned", "flights_flown", "announcement")]
+openers_all = openers_all[,c("start", "end", "flights_planned", "flights_flown", "announcement")]
 
 # save the output
-save(meta, file = "data/meta.rda")
-cat("\n  Output File Saved: data/meta.rda")
+save(openers_all, file = "data/openers_all.rda")
+cat("\n  Output File Saved: data/openers_all.rda")

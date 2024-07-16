@@ -1,6 +1,6 @@
 # THIS SCRIPT DOWNLOADS WEATHER DATA FROM THE BETHEL AIRPORT
 # AND PREPARES THE HOURLY MEASUREMENTS INTO DAILY SUMMARIES
-# IT SAVES A DATA SET CALLED 'weather_data_master' THAT IS SUPPLIED BY THIS PACKAGE
+# IT SAVES A DATA SET CALLED 'PABE_data_all' THAT IS SUPPLIED BY THIS PACKAGE
 
 # print a message
 cat("\nPreparing Weather Data Set\n")
@@ -59,7 +59,7 @@ mean_wind = tapply(dat$smph, lubridate::date(dat$valid), mean, na.rm = TRUE)
 max_gust = tapply(dat$gust, lubridate::date(dat$valid), max, na.rm = TRUE)
 
 # combine these into a data frame
-weather_data_master = data.frame(
+PABE_data_all = data.frame(
   date = lubridate::as_date(names(mean_temp)),
   mean_temp = mean_temp,
   min_temp = min_temp,
@@ -73,8 +73,8 @@ weather_data_master = data.frame(
 )
 
 # remove rownames
-rownames(weather_data_master) = NULL
+rownames(PABE_data_all) = NULL
 
 # export the dataset
-save(weather_data_master, file = "data/weather_data_master.rda")
-cat("\nOutput File Saved: data/weather_data_master.rda\n")
+save(PABE_data_all, file = "data/PABE_data_all.rda")
+cat("\nOutput File Saved: data/PABE_data_all.rda\n")

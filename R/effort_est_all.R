@@ -8,9 +8,9 @@
 #' @note This data set will be updated automatically when adding new interview and flight data,
 #'     see Steps 3 and 6 in `vignette("updating-data", package = "KuskoHarvData")`.
 #' @source The number of trips is estimated by combining aerial boat counts
-#'     (found in `data("flight_data_master", package = "KuskoHarvData"`) and
-#'     access point completed trip interviews (found in `data("interview_data_master")`).
+#'     (found in `data("flight_data_all", package = "KuskoHarvData"`) and
+#'     access point completed trip interviews (found in `data("interview_data_all")`).
 #'     The estimator is described in Staton et al. (In Review).
 #'
 
-"effort_estimate_master"
+"effort_est_all"

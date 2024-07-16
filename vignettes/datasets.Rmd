@@ -31,10 +31,10 @@ This vignette gives an overview of the various data sets found in 'KuskoHarvData
 Each of these data sets (for example, the opener metadata) can be loaded by running:
 
 ```{r example-load, eval = FALSE, echo = TRUE}
-data(meta, package = "KuskoHarvData")
+data(openers_all, package = "KuskoHarvData")
 ```
 
-Then this data set can be used by simply referring to the object called `meta`.
+Then this data set can be used by simply referring to the object called `openers_all`.
 
 Several of the data sets included have a spatial component (geographic strata A, B, C, and D1) -- these are shown on the map below.
 
@@ -74,8 +74,8 @@ data_table = function(x, FUN, n = 10) {
 
 ::::::{.indent}
 
-```{r meta-load, echo = TRUE}
-data(meta, package = "KuskoHarvData")
+```{r openers_all-load, echo = TRUE}
+data(openers_all, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -85,7 +85,7 @@ Each row represents one drift gillnet opener.
 <details>
 <summary>Variable Descriptions</summary>
 
-```{r meta-vars}
+```{r openers_all-vars}
 matrix(c(
   # VARIABLE                              # DESCRIPTION
   "start; end",        "Start and end dates/times of the opener",
@@ -103,8 +103,8 @@ vars_table()
 <details>
 <summary>View First 10 Rows</summary>
 
-```{r meta-head}
-data_table(meta, head)
+```{r openers_all-head}
+data_table(openers_all, head)
 ```
 
 </details>
@@ -114,8 +114,8 @@ data_table(meta, head)
 <details>
 <summary>View Last 10 Rows</summary>
 
-```{r meta-tail}
-data_table(meta, tail)
+```{r openers_all-tail}
+data_table(openers_all, tail)
 ```
 
 </details>
@@ -125,8 +125,8 @@ data_table(meta, tail)
 <details>
 <summary>Variable Summary</summary>
 
-```{r meta-summary}
-summary(meta)
+```{r openers_all-summary}
+summary(openers_all)
 ```
 
 </details>
@@ -137,8 +137,8 @@ summary(meta)
 
 ::::::{.indent}
 
-```{r harvest_estimate_master-load, echo = TRUE}
-data(harvest_estimate_master, package = "KuskoHarvData")
+```{r harv_est_all-load, echo = TRUE}
+data(harv_est_all, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -148,7 +148,7 @@ Each row represents one summary statistic (mean, standard deviation, lower/upper
 <details>
 <summary>Variable Descriptions</summary>
 
-```{r harvest_estimate_master-vars}
+```{r harv_est_all-vars}
 matrix(c(
   # VARIABLE                              # DESCRIPTION
   "date",        "The date to which the estimate applies",
@@ -167,8 +167,8 @@ vars_table()
 <details>
 <summary>View First 10 Rows</summary>
 
-```{r harvest_estimate_master-head}
-data_table(harvest_estimate_master, head)
+```{r harv_est_all-head}
+data_table(harv_est_all, head)
 ```
 
 </details>
@@ -178,8 +178,8 @@ data_table(harvest_estimate_master, head)
 <details>
 <summary>View Last 10 Rows</summary>
 
-```{r harvest_estimate_master-tail}
-data_table(harvest_estimate_master, tail)
+```{r harv_est_all-tail}
+data_table(harv_est_all, tail)
 ```
 
 </details>
@@ -189,8 +189,8 @@ data_table(harvest_estimate_master, tail)
 <details>
 <summary>Variable Summary</summary>
 
-```{r harvest_estimate_master-summary}
-summary(harvest_estimate_master)
+```{r harv_est_all-summary}
+summary(harv_est_all)
 ```
 
 </details>
@@ -201,8 +201,8 @@ summary(harvest_estimate_master)
 
 ::::::{.indent}
 
-```{r effort_estimate_master-load, echo = TRUE}
-data(effort_estimate_master, package = "KuskoHarvData")
+```{r effort_est_all-load, echo = TRUE}
+data(effort_est_all, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -212,7 +212,7 @@ Each row represents one summary statistic (mean, standard deviation, lower/upper
 <details>
 <summary>Variable Descriptions</summary>
 
-```{r effort_estimate_master-vars}
+```{r effort_est_all-vars}
 matrix(c(
   # VARIABLE                              # DESCRIPTION
   "date",        "The date to which the estimate applies",
@@ -229,8 +229,8 @@ vars_table()
 <details>
 <summary>View First 10 Rows</summary>
 
-```{r effort_estimate_master-head}
-data_table(effort_estimate_master, head)
+```{r effort_est_all-head}
+data_table(effort_est_all, head)
 ```
 
 </details>
@@ -240,8 +240,8 @@ data_table(effort_estimate_master, head)
 <details>
 <summary>View Last 10 Rows</summary>
 
-```{r effort_estimate_master-tail}
-data_table(effort_estimate_master, tail)
+```{r effort_est_all-tail}
+data_table(effort_est_all, tail)
 ```
 
 </details>
@@ -251,8 +251,8 @@ data_table(effort_estimate_master, tail)
 <details>
 <summary>Variable Summary</summary>
 
-```{r effort_estimate_master-summary}
-summary(effort_estimate_master)
+```{r effort_est_all-summary}
+summary(effort_est_all)
 ```
 
 </details>
@@ -263,8 +263,8 @@ summary(effort_estimate_master)
 
 ::::::{.indent}
 
-```{r interview_data_master-load, echo = TRUE}
-data(interview_data_master, package = "KuskoHarvData")
+```{r interview_data_all-load, echo = TRUE}
+data(interview_data_all, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -274,7 +274,7 @@ Each row represents one completed trip interview.
 <details>
 <summary>Variable Descriptions</summary>
 
-```{r interview_data_master-vars}
+```{r interview_data_all-vars}
 matrix(c(
   # VARIABLE                     # DESCRIPTION
   "UID",                         "Unique identifer of the opener (`YYYY_MM_DD` format)",
@@ -306,8 +306,8 @@ vars_table(footnote_args = list(alphabet = c("Complete details of QA/QC checks p
 <details>
 <summary>First 10 Rows</summary>
 
-```{r interview_data_master-head}
-data_table(interview_data_master, head)
+```{r interview_data_all-head}
+data_table(interview_data_all, head)
 ```
 
 </details>
@@ -317,8 +317,8 @@ data_table(interview_data_master, head)
 <details>
 <summary>Last 10 Rows</summary>
 
-```{r interview_data_master-tail}
-data_table(interview_data_master, tail)
+```{r interview_data_all-tail}
+data_table(interview_data_all, tail)
 ```
 
 </details>
@@ -328,8 +328,8 @@ data_table(interview_data_master, tail)
 <details>
 <summary>Variable Summary</summary>
 
-```{r interview_data_master-summary}
-summary(interview_data_master)
+```{r interview_data_all-summary}
+summary(interview_data_all)
 ```
 
 </details>
@@ -340,8 +340,8 @@ summary(interview_data_master)
 
 ::::::{.indent}
 
-```{r flight_data_master-load, echo = TRUE}
-data(flight_data_master, package = "KuskoHarvData")
+```{r flight_data_all-load, echo = TRUE}
+data(flight_data_all, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -351,7 +351,7 @@ Each row represents one completed aerial survey.
 <details>
 <summary>Variable Descriptions</summary>
 
-```{r flight_data_master-vars}
+```{r flight_data_all-vars}
 matrix(c(
   # VARIABLE                              # DESCRIPTION
   "UID",                                  "Unique identifer of the opener (`YYYY_MM_DD` format)",
@@ -369,8 +369,8 @@ vars_table()
 <details>
 <summary>View First 10 Rows</summary>
 
-```{r flight_data_master-head}
-data_table(flight_data_master, head)
+```{r flight_data_all-head}
+data_table(flight_data_all, head)
 ```
 
 </details>
@@ -380,8 +380,8 @@ data_table(flight_data_master, head)
 <details>
 <summary>View Last 10 Rows</summary>
 
-```{r flight_data_master-tail}
-data_table(flight_data_master, tail)
+```{r flight_data_all-tail}
+data_table(flight_data_all, tail)
 ```
 
 </details>
@@ -391,8 +391,8 @@ data_table(flight_data_master, tail)
 <details>
 <summary>Variable Summary</summary>
 
-```{r flight_data_master-summary}
-summary(flight_data_master)
+```{r flight_data_all-summary}
+summary(flight_data_all)
 ```
 
 </details>
@@ -403,19 +403,19 @@ summary(flight_data_master)
 
 ::::::{.indent}
 
-```{r btf_master-load, echo = TRUE}
-data(btf_master, package = "KuskoHarvData")
+```{r btf_data_all-load, echo = TRUE}
+data(btf_data_all, package = "KuskoHarvData")
 ```
 
 :::{.describe}
-Each row represents the daily catch-per-unit-effort (CPUE) for one species, each day of BTF operations (`r paste(range(lubridate::year(btf_master$date)), collapse = "-")`).
+Each row represents the daily catch-per-unit-effort (CPUE) for one species, each day of BTF operations (`r paste(range(lubridate::year(btf_data_all$date)), collapse = "-")`).
 Data are available from the [Alaska Department of Fish and Game Bethel Test Fishery webpage](https://www.adfg.alaska.gov/index.cfm?adfg=commercialbyareakuskokwim.btf) -- see step 5 in `vignette("updating-data", package = "KuskoHarvData")` for details.
 :::
 
 <details>
 <summary>Variable Descriptions</summary>
 
-```{r btf_master-vars}
+```{r btf_data_all-vars}
 matrix(c(
   # VARIABLE    # DESCRIPTION
   "date",       "Date of sampling",
@@ -433,8 +433,8 @@ vars_table()
 <details>
 <summary>View First 10 Rows</summary>
 
-```{r btf_master-head}
-data_table(btf_master, head)
+```{r btf_data_all-head}
+data_table(btf_data_all, head)
 ```
 
 </details>
@@ -444,8 +444,8 @@ data_table(btf_master, head)
 <details>
 <summary>View Last 10 Rows</summary>
 
-```{r btf_master-tail}
-data_table(btf_master, tail)
+```{r btf_data_all-tail}
+data_table(btf_data_all, tail)
 ```
 
 </details>
@@ -455,8 +455,8 @@ data_table(btf_master, tail)
 <details>
 <summary>Variable Summary</summary>
 
-```{r btf_master-summary}
-summary(btf_master)
+```{r btf_data_all-summary}
+summary(btf_data_all)
 ```
 
 </details>
@@ -467,8 +467,8 @@ summary(btf_master)
 
 ::::::{.indent}
 
-```{r weather_data_master-load, echo = TRUE}
-data(weather_data_master, package = "KuskoHarvData")
+```{r PABE_data_all-load, echo = TRUE}
+data(PABE_data_all, package = "KuskoHarvData")
 ```
 
 :::{.describe}
@@ -480,7 +480,7 @@ The weather station used was the Bethel Airport (`"PABE"`).
 <details>
 <summary>Variable Descriptions</summary>
 
-```{r weather_data_master-vars}
+```{r PABE_data_all-vars}
 matrix(c(
   # VARIABLE                          # DESCRIPTION
   "date",                             "Date the data correspond to; only dates between June 1 and August 30 in years after and including 2016 are included",
@@ -501,8 +501,8 @@ vars_table()
 <details>
 <summary>View First 10 Rows</summary>
 
-```{r weather_data_master-head}
-data_table(weather_data_master, head)
+```{r PABE_data_all-head}
+data_table(PABE_data_all, head)
 ```
 
 </details>
@@ -512,8 +512,8 @@ data_table(weather_data_master, head)
 <details>
 <summary>View Last 10 Rows</summary>
 
-```{r weather_data_master-tail}
-data_table(weather_data_master, tail)
+```{r PABE_data_all-tail}
+data_table(PABE_data_all, tail)
 ```
 
 </details>
@@ -523,8 +523,8 @@ data_table(weather_data_master, tail)
 <details>
 <summary>Variable Summary</summary>
 
-```{r weather_data_master-summary}
-summary(weather_data_master)
+```{r PABE_data_all-summary}
+summary(PABE_data_all)
 ```
 
 </details>
