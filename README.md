@@ -6,14 +6,6 @@
 > Prior to the development of 'KuskoHarvData', these data had been stored in separate places and in various formats.
 > This new standardized and comprehensive format facilitates analyses that may provide greater insights about fishery management in the lower Kuskokwim River, such as those contained in the ['KuskoHarvPred'](https://github.com/bstaton1/KuskoHarvPred) R package. 
 
-A description of the sampling methodology and estimation framework can be found in the manuscript:
-
-> Staton, B.A., Bechtol, W.R., Coggins, L.G., Jr., and Decossas, G., and Esquible, J. (In Review). _In-season monitoring of harvest and effort from a large-scale subsistence salmon fishery in western Alaska._ Submitted to _Canadian Journal of Fisheries and Aquatic Sciences_, December 2023.
-
-An example application of these data to inform management decisions can be found in the manuscript:
-
-> Staton, B.A., Bechtol, W.R., Coggins, L.G., Jr., and Decossas, G. (In Review). _In-season predictions of daily harvest for lower Kuskokwim River subsistence salmon fisheries._ Submitted to _North American Journal of Fisheries Management_, July 2024.
-
 ## Installation
 
 After installing [R](https://cran.rstudio.com/) and [RStudio Desktop](https://posit.co/download/rstudio-desktop/) (accept all defaults when prompted), run this code from the R console:
@@ -64,7 +56,7 @@ Another useful feature is the `KuskoHarvData::prepare_regression_data()` functio
 ## Updating the Data
 
 It is the intent of the package developer that the data sets be updated with the most current data.
-Following the conclusion of each season and after the data sets are finalized for each monitored, the package should be updated such that it contains the same information as is used in the season-wide final report.
+Following the conclusion of each season and after the data sets are finalized, the package should be updated such that it contains the same information as is used in the season-wide final report.
 
 Please see the vignette for instructions about how this should be done.
 
@@ -72,9 +64,27 @@ Please see the vignette for instructions about how this should be done.
 vignette("updating-data", package = "KuskoHarvData")
 ```
 
+## Related Packages  <img src="man/figures/sticker/KuskoHarvData-logo-grouped.png" align="right" height=250px/>
+
+'KuskoHarvData' is a member of a family of packages:
+
+* ['KuskoHarvEst'](https://www.github.com/bstaton1/KuskoHarvEst) contains tools for producing estimates (and PDF reports for distribution) for a single opener.
+* ['KuskoHarvPred'](https://www.github.com/bstaton1/KuskoHarvPred) contains tools for predicting outcomes of future openers based on past data. 
+* ['KuskoHarvUtils'](https://www.github.com/bstaton1/KuskoHarvUtils) contains features that support the other packages.
+
+## Publications
+
+A description of the sampling methodology and estimation framework can be found in the manuscript:
+
+>_In-season monitoring of harvest and effort from a large-scale subsistence salmon fishery in western Alaska_ by B. A. Staton, W. R. Bechtol, L. G. Coggins Jr., G. Decossas, and J. Esquible, submitted to the _Canadian Journal of Fisheries and Aquatic Sciences_ (analysis repository: [bstaton1/KuskoHarvEst-ms-analysis](https://github.com/bstaton1/KuskoHarvEst-ms-analysis); archived under DOI [10.5281/zenodo.10369148](https://doi.org/10.5281/zenodo.10369148)).
+
+An approach for predicting outcomes of future openers based on past data can be found in the manuscript:
+
+>_In-season predictions of daily harvest for lower Kuskokwim River subsistence salmon fisheries_ by B. A. Staton, W. R. Bechtol, L. G. Coggins Jr., and G. Decossas, submitted to the _North American Journal of Fisheries Management_ (analysis repository: [bstaton1/KuskoHarvPred-ms-analysis](https://www.github.com/bstaton1/KuskoHarvPred-ms-analysis); archived under DOI [10.5281/zenodo.13293677](https://doi.org/10.5281/zenodo.13293677)). 
+
 ## Contact
 
-Questions or feedback about the data sets or how to use the 'KuskoHarvPred' package may be directed to [Ben Staton](https://github.com/bstaton1) (<bstaton.qes@gmail.com>).
+Questions or feedback about the data sets or how to use the 'KuskoHarvData' package may be directed to [Ben Staton](https://github.com/bstaton1) (<bstaton.qes@gmail.com>).
 
 ## Acknowledgements
 
