@@ -1,5 +1,5 @@
 Package: KuskoHarvData
-Version: 2023.4
+Version: 2023.5
 Title: Data Collected by the Lower Kuskokwim River In-season Subsistence Salmon Harvest Monitoring Program
 Authors@R: 
     person(given = "Ben",
