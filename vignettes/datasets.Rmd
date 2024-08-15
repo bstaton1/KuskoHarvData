@@ -49,11 +49,13 @@ knitr::include_graphics(system.file("resources/map.png", package = "KuskoHarvUti
 
 ```{r table-fns}
 vars_table = function(m, footnote_args = NULL) {
-  m[,1] = kableExtra::cell_spec(m[,1], monospace = TRUE)#, font_size = 12)
-  # m[,2] = kableExtra::cell_spec(m[,2], font_size = 12)
   
-  out = knitr::kable(m, row.names = FALSE, col.names = c("Variable", "Description"), escape = FALSE) |> 
-  kableExtra::kable_styling(full_width = TRUE, bootstrap_options = c("condensed"), font_size = 12)
+  # make variable names italic
+  m[,1] = kableExtra::cell_spec(m[,1], monospace = TRUE)
+
+  # build the kable
+  out = kableExtra::kbl(m, row.names = FALSE, col.names = c("Variable", "Description"), escape = FALSE) |> 
+    kableExtra::kable_styling(full_width = TRUE, bootstrap_options = c("condensed"), font_size = 12)
   
   if (!is.null(footnote_args)) {
     out = do.call(kableExtra::footnote, append(list(kable_input = out), footnote_args))
@@ -64,7 +66,7 @@ vars_table = function(m, footnote_args = NULL) {
 
 data_table = function(x, FUN, n = 10) {
   FUN(x, n = n) |> 
-    knitr::kable(row.names = TRUE) |> 
+    kableExtra::kbl(row.names = TRUE) |> 
     kableExtra::kable_styling(full_width = TRUE, bootstrap_options = c("condensed"), font_size = 12) |> 
     kableExtra::column_spec(1, monospace = TRUE, color = "grey")
 }
