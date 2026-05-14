@@ -149,14 +149,25 @@ Ideally the USFWS or ADF&G announcement that authorized the opener would be adde
 
 :::
 
-## `r make_header("Update Bethel Test Fishery Data", "table")`
+## `r make_header("Update Kuskokwim Sonar Data", "table")`
 
 :::{.indent}
 
-Navigate to the [Alaska Department of Fish and Game Bethel Test Fishery webpage](https://www.adfg.alaska.gov/index.cfm?adfg=commercialbyareakuskokwim.btf), click "Daily CPUE All Species", scroll to the bottom, click **Export** > **Data** > **CSV Format**.
-Place the downloaded file (will be named `PUB_Bethel Test Fish - Daily CPUE.csv`) in the `data-raw` subdirectory of your local repo.
+Navigate to the [ADF&G Kuskokwim Escapement Fish Counts website](https://www.adfg.alaska.gov/index.cfm?adfg=commercialbyareakuskokwim.emihd), and follow these steps:
 
-Because of the timeline of Bethel Test Fishery operations, **do not complete this step or proceed until after August 31 in the current year.**
+1. Select **Kuskokwim River Sonar** as the "Project"
+2. Select **2018** as the first year
+3. Select **the most recent _completed_ year** as the last year
+4. Leave the "Optional End Date" field blank
+5. Select **Chinook** as the species
+6. Click **Apply**
+7. Scroll to the **Daily Escapement Table** section and click to expand it
+8. At the bottom of this section, click **Export** > **Data** > **CSV**
+9. The downloaded file will be named `PUB Kusko Escapement Daily.csv`, **rename it** to `PUB Kusko Escapement Daily-Chinook.csv`
+10. **Place this file** in the `data-raw` subdirectory of your local repo, choosing to write over the existing file with the same name
+11. **Repeat** steps 5-10 above for both Chum and Sockeye salmon
+
+Because of the timeline of Kuskokwim Sonar operations, **do not complete this step or proceed until after August 31 in the current year.**
 
 :::
 

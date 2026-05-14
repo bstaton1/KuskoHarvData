@@ -11,6 +11,9 @@
   # run the script to prepare Bethel Test Fishery Data
   source("data-raw/prepare-btf-data.R")
 
+  # run the script to prepare the sonar data
+  source("data-raw/prepare-sonar-data.R")
+
   # run the script to compile all weather data
   source("data-raw/prepare-weather-data.R")
 
