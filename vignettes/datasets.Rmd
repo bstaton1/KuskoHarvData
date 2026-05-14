@@ -41,7 +41,7 @@ Several of the data sets included have a spatial component (geographic strata A,
 <details>
 <summary>Map of Study Area</summary>
 
-```{r map, fig.align = "center", fig.cap = "**Lower Kuskokwim River showing the geographic strata of the study area for the in-season harvest monitoring program.** Strata A, B, C, and D1 boundaries are marked with alternating dark and light gray, whereas the lightest gray areas are not included in the study area. _Duplicated from Staton, B.A, Bechtol, W.R., Coggins, L.G., Jr., Decossas, G., and Esquible, J. (In Review). In-season monitoring of harvest and effort from a large-scale subsistence salmon fishery in western Alaska._", out.width = "80%"}
+```{r map, fig.align = "center", fig.cap = "**Lower Kuskokwim River showing the geographic strata of the study area for the in-season harvest monitoring program.** Strata A, B, C, and D1 boundaries are marked with alternating dark and light gray, whereas the lightest gray areas are not included in the study area. _Duplicated from Staton, B.A, Bechtol, W.R., Coggins, L.G., Jr., Decossas, G., and Esquible, J. (2025). [In-season monitoring of harvest and effort from a large-scale subsistence salmon fishery in western Alaska](https://cdnsciencepub.com/doi/10.1139/cjfas-2023-0369)._", out.width = "80%"}
 knitr::include_graphics(system.file("resources/map.png", package = "KuskoHarvUtils"))
 ```
 
@@ -412,6 +412,8 @@ data(btf_data_all, package = "KuskoHarvData")
 :::{.describe}
 Each row represents the daily catch-per-unit-effort (CPUE) for one species, each day of BTF operations (`r paste(range(lubridate::year(btf_data_all$date)), collapse = "-")`).
 Data are available from the [Alaska Department of Fish and Game Bethel Test Fishery webpage](https://www.adfg.alaska.gov/index.cfm?adfg=commercialbyareakuskokwim.btf) -- see step 5 in `vignette("updating-data", package = "KuskoHarvData")` for details.
+
+**NOTE:** BTF operations concluded in 2024 and new data are `r htmltools::tags$u("unlikely")` to be available in future years. 
 :::
 
 <details>
@@ -459,6 +461,72 @@ data_table(btf_data_all, tail)
 
 ```{r btf_data_all-summary}
 summary(btf_data_all)
+```
+
+</details>
+
+::::::
+
+## `r fa("table")` Kuskokwim Sonar Count Records
+
+::::::{.indent}
+
+```{r sonar_data_all-load, echo = TRUE}
+data(sonar_data_all, package = "KuskoHarvData")
+```
+
+:::{.describe}
+Each row represents the daily count for one species, each day of sonar operations (`r paste(range(lubridate::year(sonar_data_all$date)), collapse = "-")`).
+Data are available from the [ADF&G Kuskokwim Escapement Fish Counts website](https://www.adfg.alaska.gov/index.cfm?adfg=commercialbyareakuskokwim.emihd). -- see step 5 in `vignette("updating-data", package = "KuskoHarvData")` for details on updating this data set.
+
+**NOTE:** Sonar operations began in 2018 and new data are `r htmltools::tags$u("likely")` to be available in future years. 
+:::
+
+<details>
+<summary>Variable Descriptions</summary>
+
+```{r sonar_data_all-vars}
+matrix(c(
+  # VARIABLE    # DESCRIPTION
+  "date",       "Date of sampling",
+  "species",    "Species for which the count applies",
+  "count",      "Count of fish -- the estimated daily passage of that species past the sonar site",
+  "ccount",      "Cumulative count; the sum of all daily counts up to and including the value in the `date` column"
+), ncol = 2, byrow = TRUE) |> 
+vars_table()
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View First 10 Rows</summary>
+
+```{r sonar_data_all-head}
+data_table(sonar_data_all, head)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>View Last 10 Rows</summary>
+
+```{r sonar_data_all-tail}
+data_table(sonar_data_all, tail)
+```
+
+</details>
+
+`r hr()`
+
+<details>
+<summary>Variable Summary</summary>
+
+```{r sonar_data_all-summary}
+summary(sonar_data_all)
 ```
 
 </details>
