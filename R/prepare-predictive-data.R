@@ -4,7 +4,7 @@
 #' openers, intended for fitting in regression models.
 #'
 #' @param dates Object of class `"POSIXct/POSIXt"`; vector of historical fishing dates to include.
-#'   If `NULL` (the default) all dates included in the meta data set (`?KuskoHarvData::openers_all`) will be included.
+#'   If `NULL` (the default) all dates included in the harvest estimate data set (`?KuskoHarvData::harv_est_all`) will be included.
 #' @param comp_species Character; vector specifying the species to calculate proportional contribution for.
 #'   Accepted options are any combinations of `"chinook"`, `"chum"`, and `"sockeye"`.
 #' @param cpt_species Character; a vector specifying the species to calculate catch rate (catch/trip) for.
@@ -107,14 +107,14 @@ prepare_response_vars = function(dates = NULL, comp_species = c("chinook", "chum
 #'   * `fished_yesterday`: `TRUE` if drift gillnet fishing occurred the previous day
 #'   * `weekend`: `TRUE` if the fishing day occurred on Saturday or Sunday
 #'   * `p_before_noon`: fraction of the open hours that occurred before noon that day
-#'   * `total_btf_cpue`: daily catch-per-unit-effort from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
-#'   * `chinook_btf_comp`: daily proportional composition of Chinook salmon from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
-#'   * `chum_btf_comp`: daily proportional composition of chum salmon from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
-#'   * `sockeye_btf_comp`: daily proportional composition of sockeye salmon from the Bethel Test Fishery, averaged over a three day period where `date` is the second day
+#'   * `total_sonar_count`: daily count (Chinook+chum+sockeye) from the Kuskokwim River sonar
+#'   * `chinook_sonar_comp`: daily proportional composition of Chinook salmon from the Kuskokwim River sonar
+#'   * `chum_sonar_comp`: daily proportional composition of chum salmon from the Kuskokwim River sonar
+#'   * `sockeye_sonar_comp`: daily proportional composition of sockeye salmon from the Kuskokwim River sonar
 #'   * `mean_temp`: daily average air temperature, in degrees Fahrenheit
 #'   * `mean_relh`: daily average percent relative humidity
 #'   * `precip`: total daily precipitation, in inches
-#' @note All Bethel Test Fishery variables obtained using [KuskoHarvData::summarize_btf()].
+#' @note All sonar variables obtained using [KuskoHarvData::summarize_sonar()].
 
 prepare_predictor_vars = function(dates = NULL) {
 
@@ -122,9 +122,13 @@ prepare_predictor_vars = function(dates = NULL) {
 
   # load the meta data
   data("openers_all", package = "KuskoHarvData", envir = environment())
+  data("harv_est_all", package = "KuskoHarvData", envir = environment())
+
+  # extract all dates in the opener meta data
+  opener_dates = lubridate::date(openers_all$start)
 
   # start the output object with the date
-  out = data.frame(date = lubridate::date(openers_all$start))
+  out = data.frame(date = opener_dates)
 
   # add a year variable
   out$year = lubridate::year(out$date)
@@ -153,11 +157,20 @@ prepare_predictor_vars = function(dates = NULL) {
   hrs_before_noon[hrs_before_noon < 0] = 0
   out$p_before_noon = hrs_before_noon/out$hours_open
 
-  ### PREDICTOR DATA TYPE #2: BTF-BASED QUANTITIES ###
-  out$total_btf_cpue = sapply(out$date, function(d) summarize_btf(d, "total_cpue", plus_minus = 1))
-  out$chinook_btf_comp = sapply(out$date, function(d) summarize_btf(d, "chinook_comp", plus_minus = 1))
-  out$chum_btf_comp = sapply(out$date, function(d) summarize_btf(d, "chum_comp", plus_minus = 1))
-  out$sockeye_btf_comp = sapply(out$date, function(d) summarize_btf(d, "sockeye_comp", plus_minus = 1))
+  # trim these to those found in the harvest estimate file
+  out = out[out$date %in% harv_est_all$date,]
+
+  ### PREDICTOR DATA TYPE #2a: BTF-BASED QUANTITIES ###
+  # out$total_btf_cpue = sapply(out$date, function(d) summarize_btf(d, "total_cpue", plus_minus = 1))
+  # out$chinook_btf_comp = sapply(out$date, function(d) summarize_btf(d, "chinook_comp", plus_minus = 1))
+  # out$chum_btf_comp = sapply(out$date, function(d) summarize_btf(d, "chum_comp", plus_minus = 1))
+  # out$sockeye_btf_comp = sapply(out$date, function(d) summarize_btf(d, "sockeye_comp", plus_minus = 1))
+
+  ### PREDICTOR DATA TYPE #2b: SONAR-BASED QUANTITIES ###
+  out$total_sonar_count = sapply(out$date, function(d) summarize_sonar(d, "total_count", plus_minus = 0))
+  out$chinook_sonar_comp = sapply(out$date, function(d) summarize_sonar(d, "chinook_comp", plus_minus = 0))
+  out$chum_sonar_comp = sapply(out$date, function(d) summarize_sonar(d, "chum_comp", plus_minus = 0))
+  out$sockeye_sonar_comp = sapply(out$date, function(d) summarize_sonar(d, "sockeye_comp", plus_minus = 0))
 
   ### PREDICTOR DATA TYPE #3: WEATHER-BASED QUANTITIES ###
 
@@ -175,7 +188,7 @@ prepare_predictor_vars = function(dates = NULL) {
 
   ### RETURN ONLY REQUESTED DATES
   if (is.null(dates)) {
-    keep_dates = unique(lubridate::date(openers_all$start))
+    keep_dates = unique(harv_est_all$date)
   } else {
     keep_dates = dates
   }

@@ -8,7 +8,7 @@ prepare_predictor_vars(dates = NULL)
 }
 \arguments{
 \item{dates}{Object of class \code{"POSIXct/POSIXt"}; vector of historical fishing dates to include.
-If \code{NULL} (the default) all dates included in the meta data set (\code{?KuskoHarvData::openers_all}) will be included.}
+If \code{NULL} (the default) all dates included in the harvest estimate data set (\code{?KuskoHarvData::harv_est_all}) will be included.}
 }
 \value{
 Data frame with rows for individual dates and columns for:
@@ -20,10 +20,10 @@ Data frame with rows for individual dates and columns for:
 \item \code{fished_yesterday}: \code{TRUE} if drift gillnet fishing occurred the previous day
 \item \code{weekend}: \code{TRUE} if the fishing day occurred on Saturday or Sunday
 \item \code{p_before_noon}: fraction of the open hours that occurred before noon that day
-\item \code{total_btf_cpue}: daily catch-per-unit-effort from the Bethel Test Fishery, averaged over a three day period where \code{date} is the second day
-\item \code{chinook_btf_comp}: daily proportional composition of Chinook salmon from the Bethel Test Fishery, averaged over a three day period where \code{date} is the second day
-\item \code{chum_btf_comp}: daily proportional composition of chum salmon from the Bethel Test Fishery, averaged over a three day period where \code{date} is the second day
-\item \code{sockeye_btf_comp}: daily proportional composition of sockeye salmon from the Bethel Test Fishery, averaged over a three day period where \code{date} is the second day
+\item \code{total_sonar_count}: daily count (Chinook+chum+sockeye) from the Kuskokwim River sonar
+\item \code{chinook_sonar_comp}: daily proportional composition of Chinook salmon from the Kuskokwim River sonar
+\item \code{chum_sonar_comp}: daily proportional composition of chum salmon from the Kuskokwim River sonar
+\item \code{sockeye_sonar_comp}: daily proportional composition of sockeye salmon from the Kuskokwim River sonar
 \item \code{mean_temp}: daily average air temperature, in degrees Fahrenheit
 \item \code{mean_relh}: daily average percent relative humidity
 \item \code{precip}: total daily precipitation, in inches
@@ -34,5 +34,5 @@ Quickly summarizes various date/time and Bethel Test Fishery summaries,
 intended for fitting in regression models.
 }
 \note{
-All Bethel Test Fishery variables obtained using \code{\link[=summarize_btf]{summarize_btf()}}.
+All sonar variables obtained using \code{\link[=summarize_sonar]{summarize_sonar()}}.
 }
